@@ -10,11 +10,37 @@ using System.Windows.Forms;
 
 namespace Task_Manager_System
 {
-    public partial class Form1 : Form
+    public partial class MainMenu : Form
     {
-        public Form1()
+        public MainMenu()
         {
             InitializeComponent();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Tasks_Click(object sender, EventArgs e)
+        {
+            TasksForm tasksForm = new TasksForm();
+            tasksForm.Show();
+            this.Hide();
+        }
+
+        private void Developers_Click(object sender, EventArgs e)
+        {
+            DevelopersForm developersForm = new DevelopersForm();
+            developersForm.Show();
+            this.Hide();
+        }
+
+        private void Projects_Click(object sender, EventArgs e)
+        {
+            ProjectsForm projectsForm = new ProjectsForm();
+            projectsForm.Show();
+            this.Hide();
         }
     }
 }
