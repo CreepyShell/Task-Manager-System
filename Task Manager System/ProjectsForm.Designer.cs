@@ -42,6 +42,7 @@ namespace Task_Manager_System
             this.addProjectButton.TabIndex = 0;
             this.addProjectButton.Text = "Add Project";
             this.addProjectButton.UseVisualStyleBackColor = true;
+            this.addProjectButton.Click += new System.EventHandler(this.addProjectButton_Click);
             // 
             // updateProjectButton
             // 
@@ -51,6 +52,7 @@ namespace Task_Manager_System
             this.updateProjectButton.TabIndex = 1;
             this.updateProjectButton.Text = "Update Project";
             this.updateProjectButton.UseVisualStyleBackColor = true;
+            this.updateProjectButton.Click += new System.EventHandler(this.updateProjectButton_Click);
             // 
             // viewProjectProfileButton
             // 

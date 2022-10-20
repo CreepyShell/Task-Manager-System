@@ -58,6 +58,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IBasicInterface.cs" />
+    <Compile Include="Interfaces\IDeveloperInterface.cs" />
+    <Compile Include="Interfaces\ITaskService.cs" />
+    <Compile Include="Interfaces\IProjectService.cs" />
+    <Compile Include="Models\Developer.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Task.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectsForm.cs">
       <SubType>Form</SubType>
