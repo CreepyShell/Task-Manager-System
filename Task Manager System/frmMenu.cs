@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Task_Manager_System
 {
-    public partial class MainMenu : Form
+    public partial class frmMenu : Form
     {
-        public MainMenu()
+        public frmMenu()
         {
             InitializeComponent();
         }
@@ -22,23 +22,23 @@ namespace Task_Manager_System
 
         }
 
-        private void Tasks_Click(object sender, EventArgs e)
+        private void tasksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TasksForm tasksForm = new TasksForm();
+            frmTasks tasksForm = new frmTasks();
             tasksForm.Show();
             this.Hide();
         }
 
-        private void Developers_Click(object sender, EventArgs e)
+        private void developersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DevelopersForm developersForm = new DevelopersForm();
+            frmDevelopers developersForm = new frmDevelopers();
             developersForm.Show();
             this.Hide();
         }
 
-        private void Projects_Click(object sender, EventArgs e)
+        private void projectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjectsForm projectsForm = new ProjectsForm();
+            frmProjects projectsForm = new frmProjects();
             projectsForm.Show();
             this.Hide();
         }

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Task_Manager_System.Interfaces
+namespace TMS_BLL.Interfaces
 {
     public interface ITaskService : IBasicInterface<Models.Task>
     {

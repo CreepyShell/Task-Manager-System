@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace Task_Manager_System
 {
-    public partial class ProjectsForm : Form
+    public partial class frmProjects : Form
     {
-        public ProjectsForm()
+        public frmProjects()
         {
             InitializeComponent();
         }

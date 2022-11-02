@@ -1,4 +1,4 @@
-﻿namespace Task_Manager_System.Models
+﻿namespace TMS_BLL.Models
 {
     public enum Status
     {

@@ -1,7 +1,7 @@
 ﻿
 namespace Task_Manager_System
 {
-    partial class TasksForm
+    partial class frmTasks
     {
         /// <summary>
         /// Required designer variable.

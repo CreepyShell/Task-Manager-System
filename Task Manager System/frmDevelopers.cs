@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Task_Manager_System
 {
-    public partial class DevelopersForm : Form
+    public partial class frmDevelopers : Form
     {
-        public DevelopersForm()
+        public frmDevelopers()
         {
             InitializeComponent();
         }

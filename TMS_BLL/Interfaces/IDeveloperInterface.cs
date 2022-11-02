@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Task_Manager_System.Models;
+using TMS_BLL.Models;
 
-namespace Task_Manager_System.Interfaces
+namespace TMS_BLL.Interfaces
 {
     public interface IDeveloperInterface : IBasicInterface<Developer>
     {

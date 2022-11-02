@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task_Manager_System.Interfaces
+namespace TMS_BLL.Interfaces
 {
     public interface IBasicInterface<T>
         where T: class

@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Task_Manager_System.Models
+namespace TMS_BLL.Models
 {
-    public class Task
+    public class Project
     {
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
-        public int Hours { get; set; }
+        public DateTime Endline { get; set; }
         public Status Status { get; set; }
+        public List<Developer> Developers { get; set; }
+        public List<Task> Tasks { get; set; }
     }
 }
