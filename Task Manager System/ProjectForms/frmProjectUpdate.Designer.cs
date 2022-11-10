@@ -1,7 +1,7 @@
 ﻿
-namespace Task_Manager_System
+namespace Task_Manager_System.ProjectForms
 {
-    partial class frmDevelopers
+    partial class frmProjectUpdate
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,18 @@ namespace Task_Manager_System
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // frmProjectUpdate
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "DevelopersForm";
+            this.Name = "frmProjectUpdate";
+            this.Text = "frmProjectUpdate";
+            this.Load += new System.EventHandler(this.frmProjectUpdate_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

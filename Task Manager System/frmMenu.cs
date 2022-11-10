@@ -22,25 +22,16 @@ namespace Task_Manager_System
 
         }
 
-        private void tasksToolStripMenuItem_Click(object sender, EventArgs e)
+        private void frmMenu_Load(object sender, EventArgs e)
         {
-            frmTasks tasksForm = new frmTasks();
-            tasksForm.Show();
-            this.Hide();
+
         }
 
-        private void developersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmDevelopers developersForm = new frmDevelopers();
-            developersForm.Show();
             this.Hide();
-        }
-
-        private void projectsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmProjects projectsForm = new frmProjects();
-            projectsForm.Show();
-            this.Hide();
+            frmProjectAdd projectAdd = new frmProjectAdd(this);
+            projectAdd.Show();
         }
     }
 }

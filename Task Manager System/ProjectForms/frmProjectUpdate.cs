@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Task_Manager_System
+namespace Task_Manager_System.ProjectForms
 {
-    public partial class frmDevelopers : Form
+    public partial class frmProjectUpdate : Form
     {
-        public frmDevelopers()
+        public frmProjectUpdate()
         {
             InitializeComponent();
+        }
+
+        private void frmProjectUpdate_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

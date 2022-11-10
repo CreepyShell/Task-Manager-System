@@ -7,6 +7,7 @@ namespace TMS_BLL.Interfaces
     {
         Task<bool> AddProject(Project newProject);
         Task<Project> UpdateProject(string idOldProject, Project newProject);
-        Task<string> ViewProjectProjectProfile(Project project);
+        Task<bool> CompleteProject(Project project);
+        Task<bool> AssignDeveloperToProject(string projId, string devId);
     }
 }
