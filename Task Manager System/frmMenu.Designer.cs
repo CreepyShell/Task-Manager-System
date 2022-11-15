@@ -60,8 +60,8 @@ namespace Task_Manager_System
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1187, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1583, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -73,32 +73,33 @@ namespace Task_Manager_System
             this.assignDeveloperToAProjectToolStripMenuItem,
             this.completeAProjectToolStripMenuItem});
             this.projectsToolStripMenuItem.Name = "projectsToolStripMenuItem";
-            this.projectsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.projectsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.projectsToolStripMenuItem.Text = "Projects";
             // 
             // addProjectToolStripMenuItem
             // 
             this.addProjectToolStripMenuItem.Name = "addProjectToolStripMenuItem";
-            this.addProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.addProjectToolStripMenuItem.Text = "Add Project";
             this.addProjectToolStripMenuItem.Click += new System.EventHandler(this.addProjectToolStripMenuItem_Click);
             // 
             // updateProjectToolStripMenuItem
             // 
             this.updateProjectToolStripMenuItem.Name = "updateProjectToolStripMenuItem";
-            this.updateProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.updateProjectToolStripMenuItem.Text = "Update Project";
+            this.updateProjectToolStripMenuItem.Click += new System.EventHandler(this.updateProjectToolStripMenuItem_Click);
             // 
             // assignDeveloperToAProjectToolStripMenuItem
             // 
             this.assignDeveloperToAProjectToolStripMenuItem.Name = "assignDeveloperToAProjectToolStripMenuItem";
-            this.assignDeveloperToAProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.assignDeveloperToAProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.assignDeveloperToAProjectToolStripMenuItem.Text = "Assign Developer";
             // 
             // completeAProjectToolStripMenuItem
             // 
             this.completeAProjectToolStripMenuItem.Name = "completeAProjectToolStripMenuItem";
-            this.completeAProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.completeAProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.completeAProjectToolStripMenuItem.Text = "Complete a Project";
             // 
             // tasksToolStripMenuItem
@@ -111,43 +112,43 @@ namespace Task_Manager_System
             this.removeDeveloperToolStripMenuItem,
             this.completeTaskToolStripMenuItem});
             this.tasksToolStripMenuItem.Name = "tasksToolStripMenuItem";
-            this.tasksToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.tasksToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.tasksToolStripMenuItem.Text = "Tasks";
             // 
             // addTaskToolStripMenuItem
             // 
             this.addTaskToolStripMenuItem.Name = "addTaskToolStripMenuItem";
-            this.addTaskToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.addTaskToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.addTaskToolStripMenuItem.Text = "Add Task";
             // 
             // updateTaskToolStripMenuItem
             // 
             this.updateTaskToolStripMenuItem.Name = "updateTaskToolStripMenuItem";
-            this.updateTaskToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.updateTaskToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.updateTaskToolStripMenuItem.Text = "Update Task";
             // 
             // removeTaskToolStripMenuItem
             // 
             this.removeTaskToolStripMenuItem.Name = "removeTaskToolStripMenuItem";
-            this.removeTaskToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.removeTaskToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.removeTaskToolStripMenuItem.Text = "Remove Task";
             // 
             // assignDeveloperToolStripMenuItem
             // 
             this.assignDeveloperToolStripMenuItem.Name = "assignDeveloperToolStripMenuItem";
-            this.assignDeveloperToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.assignDeveloperToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.assignDeveloperToolStripMenuItem.Text = "Assign Developer";
             // 
             // removeDeveloperToolStripMenuItem
             // 
             this.removeDeveloperToolStripMenuItem.Name = "removeDeveloperToolStripMenuItem";
-            this.removeDeveloperToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.removeDeveloperToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.removeDeveloperToolStripMenuItem.Text = "Remove Developer";
             // 
             // completeTaskToolStripMenuItem
             // 
             this.completeTaskToolStripMenuItem.Name = "completeTaskToolStripMenuItem";
-            this.completeTaskToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.completeTaskToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.completeTaskToolStripMenuItem.Text = "Complete Task";
             // 
             // developersToolStripMenuItem
@@ -157,25 +158,25 @@ namespace Task_Manager_System
             this.showDeveloperProfileToolStripMenuItem,
             this.showMonthRevenueToolStripMenuItem});
             this.developersToolStripMenuItem.Name = "developersToolStripMenuItem";
-            this.developersToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.developersToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             this.developersToolStripMenuItem.Text = "Admin";
             // 
             // showProjectProfileToolStripMenuItem
             // 
             this.showProjectProfileToolStripMenuItem.Name = "showProjectProfileToolStripMenuItem";
-            this.showProjectProfileToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.showProjectProfileToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
             this.showProjectProfileToolStripMenuItem.Text = "Show project profile";
             // 
             // showDeveloperProfileToolStripMenuItem
             // 
             this.showDeveloperProfileToolStripMenuItem.Name = "showDeveloperProfileToolStripMenuItem";
-            this.showDeveloperProfileToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.showDeveloperProfileToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
             this.showDeveloperProfileToolStripMenuItem.Text = "Show developer profile";
             // 
             // showMonthRevenueToolStripMenuItem
             // 
             this.showMonthRevenueToolStripMenuItem.Name = "showMonthRevenueToolStripMenuItem";
-            this.showMonthRevenueToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.showMonthRevenueToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
             this.showMonthRevenueToolStripMenuItem.Text = "Show month revenue";
             // 
             // exitToolStripMenuItem
@@ -184,16 +185,17 @@ namespace Task_Manager_System
             this.exitToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // frmMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1187, 713);
+            this.ClientSize = new System.Drawing.Size(1583, 878);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmMenu";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.frmMenu_Load);

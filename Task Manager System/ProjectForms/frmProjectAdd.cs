@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TMS_BLL.Interfaces;
+using TMS_BLL.Models;
 
-namespace Task_Manager_System
+namespace Task_Manager_System.ProjectForms
 {
     public partial class frmProjectAdd : Form
     {
-        public frmMenu MainMenu { get; }
+        private IProjectService projectService;
+        private frmMenu MainMenu;
         public frmProjectAdd()
         {
             InitializeComponent();
         }
 
-        public frmProjectAdd(frmMenu menu)
+        public frmProjectAdd(frmMenu menu, IProjectService projectService)
         {
             MainMenu = menu;
+            this.projectService = projectService;
             InitializeComponent();
         }
 
@@ -43,18 +40,20 @@ namespace Task_Manager_System
                 MainMenu.Show();
         }
 
-        private void btnSaveProject_Click(object sender, EventArgs e)
+        private async void btnSaveProject_Click(object sender, EventArgs e)
         {
             try
             {
-                string name = txtName.Text;
-                string description = txtDescription.Text;
-                DateTime startDate = dtpDateStart.Value;
-                DateTime endDate = dtpDateEnd.Value;
-                double expectedCost = Convert.ToDouble(txtExpectedCost.Text);
-                //call method addProject
+                Project project = new Project();
+                project.Name = txtName.Text;
+                project.Description = txtDescription.Text;
+                project.StartDate = dtpDateStart.Value;
+                project.EndDate = dtpDateEnd.Value;
+                project.ExpectedCost = Convert.ToDouble(txtExpectedCost.Text);
+                bool res = await projectService.AddProject(project);
+                MessageBox.Show("Project is successfully added");
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 MessageBox.Show("Expected cost must be numeric");
             }
