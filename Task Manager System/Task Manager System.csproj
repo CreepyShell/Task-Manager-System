@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminForms\frmAdminProjectProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\frmAdminProjectProfile.Designer.cs">
+      <DependentUpon>frmAdminProjectProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,18 @@
       <DependentUpon>frmProjectAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="ProjectForms\frmProjectAssignDeveloper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectForms\frmProjectAssignDeveloper.Designer.cs">
+      <DependentUpon>frmProjectAssignDeveloper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectForms\frmProjectComplete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectForms\frmProjectComplete.Designer.cs">
+      <DependentUpon>frmProjectComplete.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectForms\frmProjectUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,11 +103,53 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProjectService.cs" />
+    <Compile Include="TasksForms\frmTaskAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskAdd.Designer.cs">
+      <DependentUpon>frmTaskAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskAssignDeveloper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskAssignDeveloper.Designer.cs">
+      <DependentUpon>frmTaskAssignDeveloper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskComplete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskComplete.Designer.cs">
+      <DependentUpon>frmTaskComplete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskRemove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskRemove.Designer.cs">
+      <DependentUpon>frmTaskRemove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskRemoveDeveloper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskRemoveDeveloper.Designer.cs">
+      <DependentUpon>frmTaskRemoveDeveloper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TasksForms\frmTaskUpdate.Designer.cs">
+      <DependentUpon>frmTaskUpdate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectForms\frmProjectAdd.resx">
       <DependentUpon>frmProjectAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectForms\frmProjectAssignDeveloper.resx">
+      <DependentUpon>frmProjectAssignDeveloper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectForms\frmProjectComplete.resx">
+      <DependentUpon>frmProjectComplete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectForms\frmProjectUpdate.resx">
       <DependentUpon>frmProjectUpdate.cs</DependentUpon>
@@ -103,6 +163,24 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TasksForms\frmTaskAdd.resx">
+      <DependentUpon>frmTaskAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TasksForms\frmTaskAssignDeveloper.resx">
+      <DependentUpon>frmTaskAssignDeveloper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TasksForms\frmTaskComplete.resx">
+      <DependentUpon>frmTaskComplete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TasksForms\frmTaskRemove.resx">
+      <DependentUpon>frmTaskRemove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TasksForms\frmTaskRemoveDeveloper.resx">
+      <DependentUpon>frmTaskRemoveDeveloper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TasksForms\frmTaskUpdate.resx">
+      <DependentUpon>frmTaskUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -117,5 +195,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

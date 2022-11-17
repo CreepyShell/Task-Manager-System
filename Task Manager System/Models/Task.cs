@@ -1,4 +1,5 @@
 ﻿using System;
+using Task_Manager_System.Models;
 
 namespace TMS_BLL.Models
 {
@@ -10,6 +11,7 @@ namespace TMS_BLL.Models
         public DateTime StartDate { get; set; }
         public int Hours { get; set; }
         public Status Status { get; set; }
+        public Priority Priority { get; set; }
         public Project Project { get; set; }
         public Developer Developer { get; set; }
     }

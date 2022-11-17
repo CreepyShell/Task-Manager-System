@@ -9,7 +9,6 @@ namespace TMS_BLL.Models
         public string LastName { get; set; }
         public int? ProjectId { get; set; }
         public Project Project { get; set; }
-        public List<(string, int)> CompletedTasks { get; set; }
         public List<Task> Tasks { get; set; }
     }
 }

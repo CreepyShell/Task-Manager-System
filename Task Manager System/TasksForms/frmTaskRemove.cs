@@ -8,20 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Task_Manager_System.ProjectForms
+namespace Task_Manager_System.TasksForms
 {
-    public partial class frmProjectAssignDeveloper : Form
+    public partial class frmTaskRemove : Form
     {
         private readonly frmMenu MainMenu;
-        public frmProjectAssignDeveloper(frmMenu menu)
+        public frmTaskRemove(frmMenu menu)
         {
-            InitializeComponent();
             MainMenu = menu;
-        }
-
-        private void frmProjectAssignDeveloper_Load(object sender, EventArgs e)
-        {
-
+            InitializeComponent();
         }
 
         private void dtnBack_Click(object sender, EventArgs e)
