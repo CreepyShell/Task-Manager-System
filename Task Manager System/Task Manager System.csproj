@@ -55,11 +55,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminForms\frmAdminDeveloperProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\frmAdminDeveloperProfile.Designer.cs">
+      <DependentUpon>frmAdminDeveloperProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForms\frmAdminProjectProfile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdminForms\frmAdminProjectProfile.Designer.cs">
       <DependentUpon>frmAdminProjectProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminForms\frmAdminProjectRevenue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\frmAdminProjectRevenue.Designer.cs">
+      <DependentUpon>frmAdminProjectRevenue.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
@@ -103,6 +115,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProjectService.cs" />
+    <Compile Include="TasksDb.cs" />
     <Compile Include="TasksForms\frmTaskAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +152,15 @@
     <Compile Include="TasksForms\frmTaskUpdate.Designer.cs">
       <DependentUpon>frmTaskUpdate.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminForms\frmAdminDeveloperProfile.resx">
+      <DependentUpon>frmAdminDeveloperProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\frmAdminProjectProfile.resx">
+      <DependentUpon>frmAdminProjectProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\frmAdminProjectRevenue.resx">
+      <DependentUpon>frmAdminProjectRevenue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>

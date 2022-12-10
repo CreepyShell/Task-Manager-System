@@ -38,33 +38,38 @@ namespace Task_Manager_System.ProjectForms
             // labelProjId
             // 
             this.labelProjId.AutoSize = true;
-            this.labelProjId.Location = new System.Drawing.Point(213, 72);
+            this.labelProjId.Location = new System.Drawing.Point(284, 89);
+            this.labelProjId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelProjId.Name = "labelProjId";
-            this.labelProjId.Size = new System.Drawing.Size(78, 13);
+            this.labelProjId.Size = new System.Drawing.Size(96, 16);
             this.labelProjId.TabIndex = 0;
             this.labelProjId.Text = "Enter project id";
             // 
             // txtProjId
             // 
-            this.txtProjId.Location = new System.Drawing.Point(314, 72);
+            this.txtProjId.Location = new System.Drawing.Point(419, 89);
+            this.txtProjId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtProjId.Name = "txtProjId";
-            this.txtProjId.Size = new System.Drawing.Size(100, 20);
+            this.txtProjId.Size = new System.Drawing.Size(132, 22);
             this.txtProjId.TabIndex = 1;
             // 
             // btnProjectComplete
             // 
-            this.btnProjectComplete.Location = new System.Drawing.Point(314, 265);
+            this.btnProjectComplete.Location = new System.Drawing.Point(419, 326);
+            this.btnProjectComplete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnProjectComplete.Name = "btnProjectComplete";
-            this.btnProjectComplete.Size = new System.Drawing.Size(100, 43);
+            this.btnProjectComplete.Size = new System.Drawing.Size(133, 53);
             this.btnProjectComplete.TabIndex = 2;
             this.btnProjectComplete.Text = "Complete project";
             this.btnProjectComplete.UseVisualStyleBackColor = true;
+            this.btnProjectComplete.Click += new System.EventHandler(this.btnProjectComplete_Click);
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(713, 13);
+            this.btnBack.Location = new System.Drawing.Point(951, 16);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 23);
+            this.btnBack.Size = new System.Drawing.Size(100, 28);
             this.btnBack.TabIndex = 3;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -72,13 +77,14 @@ namespace Task_Manager_System.ProjectForms
             // 
             // frmProjectComplete
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnProjectComplete);
             this.Controls.Add(this.txtProjId);
             this.Controls.Add(this.labelProjId);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmProjectComplete";
             this.Text = "frmProjectComplete";
             this.ResumeLayout(false);

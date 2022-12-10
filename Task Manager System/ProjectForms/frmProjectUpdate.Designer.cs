@@ -32,8 +32,10 @@ namespace Task_Manager_System.ProjectForms
             this.labelProjId = new System.Windows.Forms.Label();
             this.txtProjId = new System.Windows.Forms.TextBox();
             this.grpProject = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btnSaveProj = new System.Windows.Forms.Button();
+            this.txtExpectedCost = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.ComboBox();
+            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.labelStatus = new System.Windows.Forms.Label();
@@ -41,8 +43,6 @@ namespace Task_Manager_System.ProjectForms
             this.labelEndDate = new System.Windows.Forms.Label();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
-            this.txtExpectedCost = new System.Windows.Forms.TextBox();
-            this.btnSaveProj = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFindProj = new System.Windows.Forms.Button();
             this.grpProject.SuspendLayout();
@@ -68,8 +68,8 @@ namespace Task_Manager_System.ProjectForms
             // 
             this.grpProject.Controls.Add(this.btnSaveProj);
             this.grpProject.Controls.Add(this.txtExpectedCost);
-            this.grpProject.Controls.Add(this.comboBox1);
-            this.grpProject.Controls.Add(this.dateTimePicker1);
+            this.grpProject.Controls.Add(this.txtStatus);
+            this.grpProject.Controls.Add(this.dtpEndDate);
             this.grpProject.Controls.Add(this.txtDescription);
             this.grpProject.Controls.Add(this.txtName);
             this.grpProject.Controls.Add(this.labelStatus);
@@ -85,25 +85,42 @@ namespace Task_Manager_System.ProjectForms
             this.grpProject.Text = "Change project details";
             this.grpProject.Visible = false;
             // 
-            // comboBox1
+            // btnSaveProj
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.btnSaveProj.Location = new System.Drawing.Point(288, 256);
+            this.btnSaveProj.Name = "btnSaveProj";
+            this.btnSaveProj.Size = new System.Drawing.Size(112, 35);
+            this.btnSaveProj.TabIndex = 10;
+            this.btnSaveProj.Text = "Save project";
+            this.btnSaveProj.UseVisualStyleBackColor = true;
+            this.btnSaveProj.Click += new System.EventHandler(this.btnSaveProj_Click);
+            // 
+            // txtExpectedCost
+            // 
+            this.txtExpectedCost.Location = new System.Drawing.Point(144, 200);
+            this.txtExpectedCost.Name = "txtExpectedCost";
+            this.txtExpectedCost.Size = new System.Drawing.Size(208, 22);
+            this.txtExpectedCost.TabIndex = 9;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.FormattingEnabled = true;
+            this.txtStatus.Items.AddRange(new object[] {
             "Created",
             "Started",
             "Extended",
             "Finished"});
-            this.comboBox1.Location = new System.Drawing.Point(144, 157);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 8;
+            this.txtStatus.Location = new System.Drawing.Point(144, 157);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(121, 24);
+            this.txtStatus.TabIndex = 8;
             // 
-            // dateTimePicker1
+            // dtpEndDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(144, 117);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 7;
+            this.dtpEndDate.Location = new System.Drawing.Point(144, 117);
+            this.dtpEndDate.Name = "dtpEndDate";
+            this.dtpEndDate.Size = new System.Drawing.Size(200, 22);
+            this.dtpEndDate.TabIndex = 7;
             // 
             // txtDescription
             // 
@@ -165,23 +182,6 @@ namespace Task_Manager_System.ProjectForms
             this.labelName.TabIndex = 0;
             this.labelName.Text = "Name";
             // 
-            // txtExpectedCost
-            // 
-            this.txtExpectedCost.Location = new System.Drawing.Point(144, 200);
-            this.txtExpectedCost.Name = "txtExpectedCost";
-            this.txtExpectedCost.Size = new System.Drawing.Size(208, 22);
-            this.txtExpectedCost.TabIndex = 9;
-            // 
-            // btnSaveProj
-            // 
-            this.btnSaveProj.Location = new System.Drawing.Point(288, 256);
-            this.btnSaveProj.Name = "btnSaveProj";
-            this.btnSaveProj.Size = new System.Drawing.Size(112, 35);
-            this.btnSaveProj.TabIndex = 10;
-            this.btnSaveProj.Text = "Save project";
-            this.btnSaveProj.UseVisualStyleBackColor = true;
-            this.btnSaveProj.Click += new System.EventHandler(this.btnSaveProj_Click);
-            // 
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(959, 13);
@@ -235,8 +235,8 @@ namespace Task_Manager_System.ProjectForms
         private System.Windows.Forms.Label labelEndDate;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox txtStatus;
+        private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.TextBox txtExpectedCost;
         private System.Windows.Forms.Button btnSaveProj;
         private System.Windows.Forms.Button btnBack;

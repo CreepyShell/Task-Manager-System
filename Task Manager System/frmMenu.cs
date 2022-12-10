@@ -1,6 +1,7 @@
 ﻿using Castle.Windsor;
 using System;
 using System.Windows.Forms;
+using Task_Manager_System.AdminForms;
 using Task_Manager_System.ProjectForms;
 using Task_Manager_System.Services;
 using Task_Manager_System.TasksForms;
@@ -31,14 +32,14 @@ namespace Task_Manager_System
         private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmProjectAdd projectAdd = new frmProjectAdd(this, null);
+            frmProjectAdd projectAdd = new frmProjectAdd(this);
             projectAdd.Show();
         }
 
         private void updateProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmProjectUpdate projectAdd = new frmProjectUpdate(this, null);
+            frmProjectUpdate projectAdd = new frmProjectUpdate(this);
             projectAdd.Show();
         }
 
@@ -100,7 +101,28 @@ namespace Task_Manager_System
 
         private void showProjectProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
+            frmAdminProjectProfile frmAdminProjectProfile = new frmAdminProjectProfile(this);
+            frmAdminProjectProfile.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void showDeveloperProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this); 
+            frmAdminDeveloperProfile.Show();
+        }
+
+        private void showMonthRevenueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmAdminProjectRevenue frmAdminProjectRevenue = new frmAdminProjectRevenue(this);
+            frmAdminProjectRevenue.Show();
         }
     }
 }

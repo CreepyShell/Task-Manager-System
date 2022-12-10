@@ -32,14 +32,15 @@ namespace Task_Manager_System.TasksForms
             this.dtnBack = new System.Windows.Forms.Button();
             this.btnTaskRemove = new System.Windows.Forms.Button();
             this.labelTaskId = new System.Windows.Forms.Label();
-            this.txtTaskId = new System.Windows.Forms.TextBox();
+            this.cmbTasksList = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // dtnBack
             // 
-            this.dtnBack.Location = new System.Drawing.Point(713, 12);
+            this.dtnBack.Location = new System.Drawing.Point(951, 15);
+            this.dtnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtnBack.Name = "dtnBack";
-            this.dtnBack.Size = new System.Drawing.Size(75, 23);
+            this.dtnBack.Size = new System.Drawing.Size(100, 28);
             this.dtnBack.TabIndex = 0;
             this.dtnBack.Text = "Back";
             this.dtnBack.UseVisualStyleBackColor = true;
@@ -47,40 +48,46 @@ namespace Task_Manager_System.TasksForms
             // 
             // btnTaskRemove
             // 
-            this.btnTaskRemove.Location = new System.Drawing.Point(340, 260);
+            this.btnTaskRemove.Location = new System.Drawing.Point(453, 320);
+            this.btnTaskRemove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTaskRemove.Name = "btnTaskRemove";
-            this.btnTaskRemove.Size = new System.Drawing.Size(95, 32);
+            this.btnTaskRemove.Size = new System.Drawing.Size(127, 39);
             this.btnTaskRemove.TabIndex = 1;
             this.btnTaskRemove.Text = "Remove task";
             this.btnTaskRemove.UseVisualStyleBackColor = true;
+            this.btnTaskRemove.Click += new System.EventHandler(this.btnTaskRemove_Click);
             // 
             // labelTaskId
             // 
             this.labelTaskId.AutoSize = true;
-            this.labelTaskId.Location = new System.Drawing.Point(236, 71);
+            this.labelTaskId.Location = new System.Drawing.Point(66, 68);
+            this.labelTaskId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTaskId.Name = "labelTaskId";
-            this.labelTaskId.Size = new System.Drawing.Size(66, 13);
+            this.labelTaskId.Size = new System.Drawing.Size(145, 16);
             this.labelTaskId.TabIndex = 2;
-            this.labelTaskId.Text = "Enter task id";
+            this.labelTaskId.Text = "Choose task to remove";
             // 
-            // txtTaskId
+            // cmbTasksList
             // 
-            this.txtTaskId.Location = new System.Drawing.Point(322, 71);
-            this.txtTaskId.Name = "txtTaskId";
-            this.txtTaskId.Size = new System.Drawing.Size(100, 20);
-            this.txtTaskId.TabIndex = 3;
+            this.cmbTasksList.FormattingEnabled = true;
+            this.cmbTasksList.Location = new System.Drawing.Point(228, 65);
+            this.cmbTasksList.Name = "cmbTasksList";
+            this.cmbTasksList.Size = new System.Drawing.Size(721, 24);
+            this.cmbTasksList.TabIndex = 3;
             // 
             // frmTaskRemove
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtTaskId);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.cmbTasksList);
             this.Controls.Add(this.labelTaskId);
             this.Controls.Add(this.btnTaskRemove);
             this.Controls.Add(this.dtnBack);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmTaskRemove";
             this.Text = "frmTaskRemove";
+            this.Load += new System.EventHandler(this.frmTaskRemove_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,6 +98,6 @@ namespace Task_Manager_System.TasksForms
         private System.Windows.Forms.Button dtnBack;
         private System.Windows.Forms.Button btnTaskRemove;
         private System.Windows.Forms.Label labelTaskId;
-        private System.Windows.Forms.TextBox txtTaskId;
+        private System.Windows.Forms.ComboBox cmbTasksList;
     }
 }

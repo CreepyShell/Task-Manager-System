@@ -59,10 +59,10 @@ namespace Task_Manager_System.ProjectForms
             // 
             // txtProjId
             // 
-            this.txtProjId.Enabled = false;
             this.txtProjId.Location = new System.Drawing.Point(204, 41);
-            this.txtProjId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProjId.Margin = new System.Windows.Forms.Padding(4);
             this.txtProjId.Name = "txtProjId";
+            this.txtProjId.ReadOnly = true;
             this.txtProjId.Size = new System.Drawing.Size(297, 22);
             this.txtProjId.TabIndex = 2;
             // 
@@ -80,9 +80,9 @@ namespace Task_Manager_System.ProjectForms
             this.grpProject.Controls.Add(this.txtName);
             this.grpProject.Controls.Add(this.label3);
             this.grpProject.Location = new System.Drawing.Point(64, 73);
-            this.grpProject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpProject.Margin = new System.Windows.Forms.Padding(4);
             this.grpProject.Name = "grpProject";
-            this.grpProject.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpProject.Padding = new System.Windows.Forms.Padding(4);
             this.grpProject.Size = new System.Drawing.Size(947, 390);
             this.grpProject.TabIndex = 3;
             this.grpProject.TabStop = false;
@@ -92,7 +92,7 @@ namespace Task_Manager_System.ProjectForms
             // btnSaveProject
             // 
             this.btnSaveProject.Location = new System.Drawing.Point(393, 244);
-            this.btnSaveProject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSaveProject.Margin = new System.Windows.Forms.Padding(4);
             this.btnSaveProject.Name = "btnSaveProject";
             this.btnSaveProject.Size = new System.Drawing.Size(151, 48);
             this.btnSaveProject.TabIndex = 11;
@@ -103,7 +103,7 @@ namespace Task_Manager_System.ProjectForms
             // txtExpectedCost
             // 
             this.txtExpectedCost.Location = new System.Drawing.Point(128, 212);
-            this.txtExpectedCost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtExpectedCost.Margin = new System.Windows.Forms.Padding(4);
             this.txtExpectedCost.Name = "txtExpectedCost";
             this.txtExpectedCost.Size = new System.Drawing.Size(76, 22);
             this.txtExpectedCost.TabIndex = 10;
@@ -121,7 +121,7 @@ namespace Task_Manager_System.ProjectForms
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(128, 79);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescription.MaxLength = 200;
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
@@ -161,7 +161,7 @@ namespace Task_Manager_System.ProjectForms
             // dtpDateEnd
             // 
             this.dtpDateEnd.Location = new System.Drawing.Point(128, 162);
-            this.dtpDateEnd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDateEnd.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDateEnd.MinDate = new System.DateTime(2022, 11, 10, 0, 0, 0, 0);
             this.dtpDateEnd.Name = "dtpDateEnd";
             this.dtpDateEnd.Size = new System.Drawing.Size(268, 22);
@@ -170,7 +170,7 @@ namespace Task_Manager_System.ProjectForms
             // dtpDateStart
             // 
             this.dtpDateStart.Location = new System.Drawing.Point(128, 114);
-            this.dtpDateStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDateStart.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDateStart.MinDate = new System.DateTime(2022, 11, 10, 0, 0, 0, 0);
             this.dtpDateStart.Name = "dtpDateStart";
             this.dtpDateStart.Size = new System.Drawing.Size(268, 22);
@@ -180,7 +180,7 @@ namespace Task_Manager_System.ProjectForms
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(128, 39);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.MaxLength = 20;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(340, 22);
@@ -199,7 +199,7 @@ namespace Task_Manager_System.ProjectForms
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(951, 15);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(100, 28);
             this.btnBack.TabIndex = 4;
@@ -216,7 +216,7 @@ namespace Task_Manager_System.ProjectForms
             this.Controls.Add(this.grpProject);
             this.Controls.Add(this.txtProjId);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmProjectAdd";
             this.Text = "frmProjectAdd";
             this.Load += new System.EventHandler(this.frmProjectAdd_Load);
