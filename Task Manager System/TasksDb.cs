@@ -15,16 +15,16 @@ namespace Task_Manager_System
         }
         private TasksDb()
         {
-            Developers = new List<Developer>();
-            Tasks = new List<Task>();
-            Projects = new List<Project>();
-            InstertDefaultValues();
+            //Developers = new List<Developer>();
+            //Tasks = new List<Task>();
+            // Projects = new List<Project>();
+            //InstertDefaultValues();
         }
         public List<Developer> Developers { get; set; }
         public List<Task> Tasks { get; set; }
         public List<Project> Projects { get; set; }
 
-        private void InstertDefaultValues()
+        /*private void InstertDefaultValues()
         {
 
             Project project = new Project();
@@ -136,6 +136,6 @@ namespace Task_Manager_System
             task3.Description = "Download java from official site";
             task3.Developer = developer4;
             this.Tasks.AddRange(new Task[] { task, task2, task3 });
-        }
+        }*/
     }
 }
