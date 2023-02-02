@@ -12,6 +12,7 @@ namespace Task_Manager_System
     public partial class frmMenu : Form
     {
         private WindsorContainer container;
+        
         public frmMenu()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace Task_Manager_System
         private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmProjectAdd projectAdd = new frmProjectAdd(this);
+            frmProjectAdd projectAdd = new frmProjectAdd(this, container.Resolve<IProjectService>());
             projectAdd.Show();
         }
 

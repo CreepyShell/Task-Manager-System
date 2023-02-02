@@ -18,7 +18,7 @@ namespace Task_Manager_System
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmConnect());
+            Application.Run(new frmMenu());
         }
     }
 }

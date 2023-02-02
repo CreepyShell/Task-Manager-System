@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Windows.Forms;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.ProjectForms
 {
     public partial class frmProjectAdd : Form
     {
-        private frmMenu MainMenu;
-        private TasksDb db;
+        private readonly frmMenu MainMenu;
+        private readonly TasksDb db;
+        private readonly IProjectService _projectService;
         public frmProjectAdd()
         {
             db = TasksDb.GetTasksDb();
             InitializeComponent();
         }
 
-        public frmProjectAdd(frmMenu menu)
+        public frmProjectAdd(frmMenu menu, IProjectService projectService)
         {
+            _projectService = projectService;
             db = TasksDb.GetTasksDb();
             MainMenu = menu;
             InitializeComponent();
@@ -68,6 +71,7 @@ namespace Task_Manager_System.ProjectForms
                     return;
                 }
                 db.Projects.Add(project);
+                _projectService.AddProject(project);
                 txtProjId.Text = Guid.NewGuid().ToString();
                 MessageBox.Show("Project is successfully added");
             }
