@@ -4,7 +4,7 @@ namespace TMS_BLL.Models
 {
     public class Developer
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public int Age { get; set; }
         public string Specialization { get; set; }
         public string FirstName { get; set; }

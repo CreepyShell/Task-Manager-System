@@ -13,8 +13,8 @@ namespace Task_Manager_System.Services
             using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
             {
                 await connection.OpenAsync();
-                string sqlQuery = "INSERT INTO Projects Values ('" +
-                  newProject.Id + "','" +
+                string sqlQuery = "INSERT INTO Projects Values (" +
+                  newProject.Id + ",'" +
                   newProject.Name + "','" +
                   newProject.Description + "'," +
                   "TO_DATE('" + newProject.StartDate.ToString("dd/MM/yyyy") + "', 'DD/MM/YYYY')" + "," +
@@ -23,7 +23,8 @@ namespace Task_Manager_System.Services
                   newProject.ExpectedCost + ")";
 
                 OracleCommand command = new OracleCommand(sqlQuery, connection);
-                await command.ExecuteNonQueryAsync();
+                int res = await command.ExecuteNonQueryAsync();
+
                 command.Dispose();
                 connection.Close();
                 return true;

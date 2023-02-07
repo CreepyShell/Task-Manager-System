@@ -26,7 +26,7 @@ namespace Task_Manager_System.ProjectForms
 
         private void frmProjectAdd_Load(object sender, EventArgs e)
         {
-            txtProjId.Text = Guid.NewGuid().ToString();
+            txtProjId.Text = Project.getNextProjId().ToString();
             dtpDateStart.MinDate = DateTime.Today;
             dtpDateEnd.MinDate = DateTime.Today.AddDays(1);
         }
@@ -43,7 +43,7 @@ namespace Task_Manager_System.ProjectForms
                 MainMenu.Show();
         }
 
-        private void btnSaveProject_Click(object sender, EventArgs e)
+        private async void btnSaveProject_Click(object sender, EventArgs e)
         {
             try
             {
@@ -70,9 +70,8 @@ namespace Task_Manager_System.ProjectForms
                     MessageBox.Show("Excepted cost must more than sero");
                     return;
                 }
-                db.Projects.Add(project);
-                _projectService.AddProject(project);
-                txtProjId.Text = Guid.NewGuid().ToString();
+                await _projectService.AddProject(project);
+                txtProjId.Text = (int.Parse(project.Id) + 1).ToString();
                 MessageBox.Show("Project is successfully added");
             }
             catch (FormatException)

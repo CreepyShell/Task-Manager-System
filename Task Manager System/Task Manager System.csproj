@@ -124,6 +124,7 @@
     <Compile Include="Interfaces\IProjectService.cs" />
     <Compile Include="Interfaces\ITaskService.cs" />
     <Compile Include="Models\Developer.cs" />
+    <Compile Include="Models\oracleDataReader.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Status.cs" />
@@ -266,7 +267,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="db.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

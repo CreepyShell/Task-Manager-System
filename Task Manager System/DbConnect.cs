@@ -3,6 +3,6 @@
     public class DbConnect
     {
         public const string oradb =
-            "Data Source=oracle/orcl;User Id=T00243556;Password= 4yn?yT66ecmv;";
+            "Data Source=oracle/orcl;User Id=T00243556;Password= ;";
     }
 }
