@@ -37,7 +37,7 @@ namespace Task_Manager_System.ProjectForms
 
         private void btnFindProj_Click(object sender, EventArgs e)
         {
-            this.project = db.Projects.FirstOrDefault(p => p.Id == txtProjId.Text);
+            this.project = db.Projects.FirstOrDefault(p => p.Id.ToString() == txtProjId.Text);
             if (project == null)
             {
                 MessageBox.Show("Project with chosen id was not found");
@@ -94,7 +94,7 @@ namespace Task_Manager_System.ProjectForms
                 MessageBox.Show("Excepted cost must be numeric");
                 return;
             }
-            string projId = project.Id;
+            int projId = project.Id;
             DateTime startDate = project.StartDate;
             this.db.Projects.Remove(project);
 

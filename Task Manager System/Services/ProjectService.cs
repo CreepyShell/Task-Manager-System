@@ -41,9 +41,31 @@ namespace Task_Manager_System.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<Project> GetById(string id)
+        public async Task<Project> GetById(string id)
         {
-            throw new System.NotImplementedException();
+            Project project = null;
+            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
+            {
+                await connection.OpenAsync();
+                string updateQuery = "SELECT * FROM projects" +
+                                     $"Where ProjId={id}";
+
+                OracleCommand command = new OracleCommand(updateQuery, connection);
+                OracleDataReader dr =  command.ExecuteReader();
+                if (dr.Read())
+                {
+                    project.Id = dr.GetInt32(0);
+                    project.Name = dr.GetString(1);
+                    project.Description = dr.GetString(3);
+                    project.StartDate = dr.GetDateTime(4);
+                    project.EndDate = dr.GetDateTime(5);
+                    //project.Status = dr.GetString(6);
+                    project.ExpectedCost = dr.GetInt32(7);
+                }
+                command.Dispose();
+                connection.Close();
+                return project;
+            }
         }
 
         public Task<Project> GetByName(string name)
@@ -51,9 +73,24 @@ namespace Task_Manager_System.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<Project> UpdateProject(string idOldProject, Project newProject)
+        public async Task<Project> UpdateProject(string idOldProject, Project newProject)
         {
-            throw new System.NotImplementedException();
+            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
+            {
+                await connection.OpenAsync();
+                string updateQuery = $"UPDATE projects " +
+                    $"SET projectname = '{newProject.Name}', " +
+                    $"expectedcost = {newProject.ExpectedCost}" +
+                    $"" +
+                    $" WHERE projId = {idOldProject};";
+
+                OracleCommand command = new OracleCommand(updateQuery, connection);
+                int res = await command.ExecuteNonQueryAsync();
+
+                command.Dispose();
+                connection.Close();
+                return await GetById(idOldProject);
+            }
         }
     }
 }

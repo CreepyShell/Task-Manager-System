@@ -21,7 +21,7 @@ namespace Task_Manager_System.AdminForms
         {
             txtProjectInfo.Clear();
             txtTasksInfo.Items.Clear();
-            Developer developer = db.Developers.FirstOrDefault(d => d.Id == txtDevid.Text);
+            Developer developer = db.Developers.FirstOrDefault(d => d.Id.ToString() == txtDevid.Text);
             if (developer == null)
             {
                 MessageBox.Show("Developer was not found");

@@ -24,7 +24,7 @@ namespace Task_Manager_System.TasksForms
 
         private void btnCompleteTask_Click(object sender, EventArgs e)
         {
-            Task task = db.Tasks.FirstOrDefault(t => t.Id == txtTaskId.Text);
+            Task task = db.Tasks.FirstOrDefault(t => t.Id.ToString() == txtTaskId.Text);
             if (task == null)
             {
                 MessageBox.Show("Task was not found");

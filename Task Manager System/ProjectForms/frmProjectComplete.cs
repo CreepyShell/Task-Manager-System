@@ -24,7 +24,7 @@ namespace Task_Manager_System.ProjectForms
 
         private void btnProjectComplete_Click(object sender, EventArgs e)
         {
-            Project project = db.Projects.FirstOrDefault(p => p.Id == txtProjId.Text);
+            Project project = db.Projects.FirstOrDefault(p => p.Id.ToString() == txtProjId.Text);
             if (project == null)
             {
                 MessageBox.Show("Project was not found");

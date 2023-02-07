@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Windows.Forms;
 using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
@@ -48,7 +49,7 @@ namespace Task_Manager_System.ProjectForms
             try
             {
                 Project project = new Project();
-                project.Id = txtProjId.Text;
+                project.Id = int.Parse(txtProjId.Text);
                 project.Name = txtName.Text;
                 if(project.Name.Length > 30 || project.Name.Length < 5)
                 {
@@ -71,13 +72,18 @@ namespace Task_Manager_System.ProjectForms
                     return;
                 }
                 await _projectService.AddProject(project);
-                txtProjId.Text = (int.Parse(project.Id) + 1).ToString();
+                txtProjId.Text = (project.Id + 1).ToString();
                 MessageBox.Show("Project is successfully added");
             }
             catch (FormatException)
             {
                 MessageBox.Show("Expected cost must be numeric");
             }
+            catch(OracleException ex)
+            {
+                MessageBox.Show("Smt went wrong:" + ex.Message);
+            }
+            
         }
 
         private void grpProject_Enter(object sender, EventArgs e)

@@ -30,7 +30,7 @@ namespace Task_Manager_System.TasksForms
                 return;
             }
             string taskStr = cmbTasksList.Text.Split(',')[1].Trim();
-            Task task = db.Tasks.FirstOrDefault(t => t.Id == taskStr);
+            Task task = db.Tasks.FirstOrDefault(t => t.Id.ToString() == taskStr);
             db.Tasks.Remove(task);
             cmbTasksList.Items.Remove(cmbTasksList.SelectedItem);
             if (db.Tasks.Count > 0)

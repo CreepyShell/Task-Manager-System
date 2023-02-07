@@ -27,7 +27,7 @@ namespace Task_Manager_System.TasksForms
         private void btnAddTask_Click(object sender, EventArgs e)
         {
             Task task = new Task();
-            task.Id = txtTaskId.Text;
+            task.Id = int.Parse(txtTaskId.Text);
             if (txtName.Text.Length > 20 || txtName.Text.Length < 5)
             {
                 MessageBox.Show("Name must be greater than 5 symbols and less than 20 symbols");
@@ -58,7 +58,7 @@ namespace Task_Manager_System.TasksForms
                 return;
             }
             task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
-            Project project = db.Projects.FirstOrDefault(p => p.Id == txtProjId.Text);
+            Project project = db.Projects.FirstOrDefault(p => p.Id.ToString() == txtProjId.Text);
             if (project == null)
             {
                 MessageBox.Show("Project was not found");

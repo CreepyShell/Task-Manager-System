@@ -107,12 +107,6 @@
       <DependentUpon>frmAdminProjectRevenue.cs</DependentUpon>
     </Compile>
     <Compile Include="DbConnect.cs" />
-    <Compile Include="frmConnect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmConnect.Designer.cs">
-      <DependentUpon>frmConnect.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,7 +118,6 @@
     <Compile Include="Interfaces\IProjectService.cs" />
     <Compile Include="Interfaces\ITaskService.cs" />
     <Compile Include="Models\Developer.cs" />
-    <Compile Include="Models\oracleDataReader.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Status.cs" />
@@ -201,9 +194,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\frmAdminProjectRevenue.resx">
       <DependentUpon>frmAdminProjectRevenue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmConnect.resx">
-      <DependentUpon>frmConnect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>

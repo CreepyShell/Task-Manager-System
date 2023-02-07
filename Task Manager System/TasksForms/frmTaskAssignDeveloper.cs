@@ -24,14 +24,14 @@ namespace Task_Manager_System.TasksForms
 
         private void btnTaskAssignDeveloper_Click(object sender, EventArgs e)
         {
-            Developer developer = db.Developers.FirstOrDefault(d=>d.Id==txtDevId.Text);
+            Developer developer = db.Developers.FirstOrDefault(d => d.Id.ToString() == txtDevId.Text);
             if(developer == null)
             {
                 MessageBox.Show("Developer was not found");
                 return;
             }
 
-            Task task = db.Tasks.FirstOrDefault(d=>d.Id==txtTaskId.Text);
+            Task task = db.Tasks.FirstOrDefault(d=>d.Id.ToString() == txtTaskId.Text);
             if(task == null)
             {
                 MessageBox.Show("Task was not found");

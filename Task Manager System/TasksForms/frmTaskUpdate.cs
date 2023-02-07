@@ -31,7 +31,7 @@ namespace Task_Manager_System.TasksForms
 
         private void dtnTaskFind_Click(object sender, EventArgs e)
         {
-            task = db.Tasks.FirstOrDefault(t => t.Id == txtTaskId.Text);
+            task = db.Tasks.FirstOrDefault(t => t.Id.ToString() == txtTaskId.Text);
             if (task == null)
             {
                 MessageBox.Show("Task was not found");

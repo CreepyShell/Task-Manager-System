@@ -29,6 +29,8 @@ namespace TMS_BLL.Models
                 OracleCommand command = new OracleCommand(sql, connection);
                 OracleDataReader dr = command.ExecuteReader();
                 dr.Read();
+                if (dr.IsDBNull(0))
+                    return 0;
                 nextId = int.Parse(dr.GetString(0));
                 command.Dispose();
                 connection.Close();

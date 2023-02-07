@@ -28,7 +28,7 @@ namespace Task_Manager_System
         {
 
             Project project = new Project();
-            project.Id = "1";
+            project.Id = 1;
             project.Status = Status.Extended;
             project.Name = "BotNet";
             project.Description = "Secret";
@@ -37,7 +37,7 @@ namespace Task_Manager_System
             project.ExpectedCost = 100000;
 
             Project project2 = new Project();
-            project2.Id = "2";
+            project2.Id = 2;
             project2.Status = Status.Started;
             project2.Name = "Online shop";
             project2.Description = "Food shop";
@@ -46,7 +46,7 @@ namespace Task_Manager_System
             project2.ExpectedCost = 1000;
 
             Project project3 = new Project();
-            project3.Id = "3";
+            project3.Id = 3;
             project3.Status = Status.Extended;
             project3.Name = "Calculator";
             project3.Description = "Math calculator";
@@ -55,7 +55,7 @@ namespace Task_Manager_System
             project3.ExpectedCost = 5000;
 
             Project project4 = new Project();
-            project4.Id = "4";
+            project4.Id = 4;
             project4.Status = Status.Finished;
             project4.Name = "Generator";
             project4.Description = "This project should generate random number from 1 to 1000";
@@ -64,7 +64,7 @@ namespace Task_Manager_System
             project4.ExpectedCost = 15000;
 
             Project project5 = new Project();
-            project5.Id = "5";
+            project5.Id = 5;
             project5.Status = Status.Started;
             project5.Name = "Airplane system";
             project5.Description = "Develop Airplane system for Ryanair";
@@ -75,28 +75,28 @@ namespace Task_Manager_System
 
 
             Developer developer = new Developer();
-            developer.Id = "1";
+            developer.Id = 1;
             developer.Age = 22;
             developer.Specialization = ".Net";
             developer.FirstName = "Andrew";
             developer.LastName = "";
 
             Developer developer2 = new Developer();
-            developer2.Id = "2";
+            developer2.Id = 2;
             developer2.Age = 25;
             developer2.Specialization = "Java";
             developer2.FirstName = "Mike";
             developer2.LastName = "";
 
             Developer developer3 = new Developer();
-            developer3.Id = "3";
+            developer3.Id = 3;
             developer3.Age = 30;
             developer3.Specialization = "Sql";
             developer3.FirstName = "David";
             developer3.LastName = "";
 
             Developer developer4 = new Developer();
-            developer4.Id = "4";
+            developer4.Id = 4;
             developer4.Age = 27;
             developer4.Specialization = "C++";
             developer4.FirstName = "John";
@@ -107,7 +107,7 @@ namespace Task_Manager_System
 
 
             Task task = new Task();
-            task.Id = "1";
+            task.Id = 1;
             task.Name = "Downaload c++";
             task.Status = Status.Extended;
             task.StartDate = DateTime.Now;
@@ -117,7 +117,7 @@ namespace Task_Manager_System
             task.Description = "Download c++ from official site";
 
             Task task2 = new Task();
-            task2.Id = "2";
+            task2.Id = 2;
             task2.Name = "Finish adding item";
             task2.Status = Status.Started;
             task2.Project = project2;
@@ -127,7 +127,7 @@ namespace Task_Manager_System
             task2.Developer = developer3;
 
             Task task3 = new Task();
-            task3.Id = "3";
+            task3.Id = 3;
             task3.Name = "Downaload java";
             task3.Status = Status.Extended;
             task3.Project = project;

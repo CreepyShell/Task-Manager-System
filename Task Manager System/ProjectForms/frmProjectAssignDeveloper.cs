@@ -29,7 +29,7 @@ namespace Task_Manager_System.ProjectForms
 
         private void btnAssign_Click(object sender, EventArgs e)
         {
-            Project project = db.Projects.FirstOrDefault(x => x.Id == txtProjId.Text);
+            Project project = db.Projects.FirstOrDefault(x => x.Id.ToString() == txtProjId.Text);
             if (project == null)
             {
                 MessageBox.Show("Project with this id was not found");
@@ -42,7 +42,7 @@ namespace Task_Manager_System.ProjectForms
                 return;
             }
 
-            Developer developer = db.Developers.FirstOrDefault(d => d.Id == txtDevId.Text);
+            Developer developer = db.Developers.FirstOrDefault(d => d.Id.ToString() == txtDevId.Text);
             if (developer == null)
             {
                 MessageBox.Show("Developer with this id was not found");
