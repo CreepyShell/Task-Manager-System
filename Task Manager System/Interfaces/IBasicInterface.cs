@@ -9,7 +9,7 @@ namespace TMS_BLL.Interfaces
     public interface IBasicInterface<T>
         where T: class
     {
-        Task<T> GetById(string id);
+        Task<T> GetById(int id);
         Task<T> GetByName(string name);
     }
 }

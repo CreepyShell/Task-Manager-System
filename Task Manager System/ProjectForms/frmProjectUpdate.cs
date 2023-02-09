@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.ProjectForms
 {
     public partial class frmProjectUpdate : Form
     {
+        private readonly TasksDb db;
+        private readonly frmMenu MainMenu;
+        private readonly IProjectService projectService;
+
         private Project project;
-        private TasksDb db;
-        private frmMenu MainMenu;
         public frmProjectUpdate()
         {
             InitializeComponent();
             db = TasksDb.GetTasksDb();
         }
 
-        public frmProjectUpdate(frmMenu menu)
+        public frmProjectUpdate(frmMenu menu, IProjectService _projectService)
         {
             MainMenu = menu;
             InitializeComponent();
             db = TasksDb.GetTasksDb();
+            projectService = _projectService;
         }
 
         private void frmProjectUpdate_Load(object sender, EventArgs e)
@@ -35,12 +39,20 @@ namespace Task_Manager_System.ProjectForms
                 MainMenu.Show();
         }
 
-        private void btnFindProj_Click(object sender, EventArgs e)
+        private async void btnFindProj_Click(object sender, EventArgs e)
         {
-            this.project = db.Projects.FirstOrDefault(p => p.Id.ToString() == txtProjId.Text);
+            bool parse = int.TryParse(txtProjId.Text, out int res);
+            if (!parse)
+            {
+                MessageBox.Show("Invalid id");
+                this.grpProject.Visible = false;
+                return;
+            }
+            this.project = await this.projectService.GetById(res);
             if (project == null)
             {
                 MessageBox.Show("Project with chosen id was not found");
+                this.grpProject.Visible = false;
                 return;
             }
 
@@ -57,7 +69,7 @@ namespace Task_Manager_System.ProjectForms
             this.txtStatus.Text = project.Status.ToString();
         }
 
-        private void btnSaveProj_Click(object sender, EventArgs e)
+        private async void btnSaveProj_Click(object sender, EventArgs e)
         {
 
             if (project.Status == Status.Extended)
@@ -96,7 +108,6 @@ namespace Task_Manager_System.ProjectForms
             }
             int projId = project.Id;
             DateTime startDate = project.StartDate;
-            this.db.Projects.Remove(project);
 
             project.Description = txtDescription.Text;
             project.Id = projId;
@@ -105,7 +116,7 @@ namespace Task_Manager_System.ProjectForms
             project.ExpectedCost = Convert.ToDouble(txtExpectedCost.Text);
 
             project.Status = (Status)Enum.Parse(typeof(Status), txtStatus.Text);
-            this.db.Projects.Add(project);
+            await this.projectService.UpdateProject(int.Parse(txtProjId.Text), project);
 
             this.grpProject.Visible = false;
         }

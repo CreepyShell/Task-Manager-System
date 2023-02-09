@@ -1,4 +1,5 @@
-﻿using Castle.Windsor;
+﻿using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using System;
 using System.Windows.Forms;
 using Task_Manager_System.AdminForms;
@@ -17,7 +18,7 @@ namespace Task_Manager_System
         {
             InitializeComponent();
             container = new WindsorContainer();
-            container.Register(Castle.MicroKernel.Registration.Component.For<IProjectService>().ImplementedBy<ProjectService>());
+            container.Register(Component.For<IProjectService>().ImplementedBy<ProjectService>());
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,7 +41,7 @@ namespace Task_Manager_System
         private void updateProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmProjectUpdate projectAdd = new frmProjectUpdate(this);
+            frmProjectUpdate projectAdd = new frmProjectUpdate(this, container.Resolve<IProjectService>());
             projectAdd.Show();
         }
 

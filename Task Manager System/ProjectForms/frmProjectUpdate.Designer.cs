@@ -51,17 +51,19 @@ namespace Task_Manager_System.ProjectForms
             // labelProjId
             // 
             this.labelProjId.AutoSize = true;
-            this.labelProjId.Location = new System.Drawing.Point(97, 30);
+            this.labelProjId.Location = new System.Drawing.Point(73, 24);
+            this.labelProjId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelProjId.Name = "labelProjId";
-            this.labelProjId.Size = new System.Drawing.Size(96, 16);
+            this.labelProjId.Size = new System.Drawing.Size(78, 13);
             this.labelProjId.TabIndex = 0;
             this.labelProjId.Text = "Enter project id";
             // 
             // txtProjId
             // 
-            this.txtProjId.Location = new System.Drawing.Point(211, 24);
+            this.txtProjId.Location = new System.Drawing.Point(158, 20);
+            this.txtProjId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtProjId.Name = "txtProjId";
-            this.txtProjId.Size = new System.Drawing.Size(241, 22);
+            this.txtProjId.Size = new System.Drawing.Size(182, 20);
             this.txtProjId.TabIndex = 1;
             // 
             // grpProject
@@ -77,9 +79,11 @@ namespace Task_Manager_System.ProjectForms
             this.grpProject.Controls.Add(this.labelEndDate);
             this.grpProject.Controls.Add(this.labelDescription);
             this.grpProject.Controls.Add(this.labelName);
-            this.grpProject.Location = new System.Drawing.Point(100, 152);
+            this.grpProject.Location = new System.Drawing.Point(75, 124);
+            this.grpProject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpProject.Name = "grpProject";
-            this.grpProject.Size = new System.Drawing.Size(653, 332);
+            this.grpProject.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpProject.Size = new System.Drawing.Size(490, 270);
             this.grpProject.TabIndex = 2;
             this.grpProject.TabStop = false;
             this.grpProject.Text = "Change project details";
@@ -87,9 +91,10 @@ namespace Task_Manager_System.ProjectForms
             // 
             // btnSaveProj
             // 
-            this.btnSaveProj.Location = new System.Drawing.Point(288, 256);
+            this.btnSaveProj.Location = new System.Drawing.Point(216, 208);
+            this.btnSaveProj.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSaveProj.Name = "btnSaveProj";
-            this.btnSaveProj.Size = new System.Drawing.Size(112, 35);
+            this.btnSaveProj.Size = new System.Drawing.Size(84, 28);
             this.btnSaveProj.TabIndex = 10;
             this.btnSaveProj.Text = "Save project";
             this.btnSaveProj.UseVisualStyleBackColor = true;
@@ -97,9 +102,10 @@ namespace Task_Manager_System.ProjectForms
             // 
             // txtExpectedCost
             // 
-            this.txtExpectedCost.Location = new System.Drawing.Point(144, 200);
+            this.txtExpectedCost.Location = new System.Drawing.Point(108, 162);
+            this.txtExpectedCost.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtExpectedCost.Name = "txtExpectedCost";
-            this.txtExpectedCost.Size = new System.Drawing.Size(208, 22);
+            this.txtExpectedCost.Size = new System.Drawing.Size(157, 20);
             this.txtExpectedCost.TabIndex = 9;
             // 
             // txtStatus
@@ -110,56 +116,63 @@ namespace Task_Manager_System.ProjectForms
             "Started",
             "Extended",
             "Finished"});
-            this.txtStatus.Location = new System.Drawing.Point(144, 157);
+            this.txtStatus.Location = new System.Drawing.Point(108, 128);
+            this.txtStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(121, 24);
+            this.txtStatus.Size = new System.Drawing.Size(92, 21);
             this.txtStatus.TabIndex = 8;
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(144, 117);
+            this.dtpEndDate.Location = new System.Drawing.Point(108, 95);
+            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(200, 22);
+            this.dtpEndDate.Size = new System.Drawing.Size(200, 20);
             this.dtpEndDate.TabIndex = 7;
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(144, 80);
+            this.txtDescription.Location = new System.Drawing.Point(108, 65);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(423, 22);
+            this.txtDescription.Size = new System.Drawing.Size(378, 20);
             this.txtDescription.TabIndex = 6;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(144, 41);
+            this.txtName.Location = new System.Drawing.Point(108, 33);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(173, 22);
+            this.txtName.Size = new System.Drawing.Size(244, 20);
             this.txtName.TabIndex = 5;
             // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(33, 157);
+            this.labelStatus.Location = new System.Drawing.Point(25, 128);
+            this.labelStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(86, 16);
+            this.labelStatus.Size = new System.Drawing.Size(70, 13);
             this.labelStatus.TabIndex = 4;
             this.labelStatus.Text = "ProjectStatus";
             // 
             // labelExpectedCost
             // 
             this.labelExpectedCost.AutoSize = true;
-            this.labelExpectedCost.Location = new System.Drawing.Point(33, 200);
+            this.labelExpectedCost.Location = new System.Drawing.Point(25, 162);
+            this.labelExpectedCost.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelExpectedCost.Name = "labelExpectedCost";
-            this.labelExpectedCost.Size = new System.Drawing.Size(91, 16);
+            this.labelExpectedCost.Size = new System.Drawing.Size(73, 13);
             this.labelExpectedCost.TabIndex = 3;
             this.labelExpectedCost.Text = "ExpectedCost";
             // 
             // labelEndDate
             // 
             this.labelEndDate.AutoSize = true;
-            this.labelEndDate.Location = new System.Drawing.Point(33, 124);
+            this.labelEndDate.Location = new System.Drawing.Point(25, 101);
+            this.labelEndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelEndDate.Name = "labelEndDate";
-            this.labelEndDate.Size = new System.Drawing.Size(60, 16);
+            this.labelEndDate.Size = new System.Drawing.Size(49, 13);
             this.labelEndDate.TabIndex = 2;
             this.labelEndDate.Text = "EndDate";
             // 
@@ -167,26 +180,29 @@ namespace Task_Manager_System.ProjectForms
             // 
             this.labelDescription.AutoEllipsis = true;
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(34, 80);
+            this.labelDescription.Location = new System.Drawing.Point(26, 65);
+            this.labelDescription.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(75, 16);
+            this.labelDescription.Size = new System.Drawing.Size(60, 13);
             this.labelDescription.TabIndex = 1;
             this.labelDescription.Text = "Description";
             // 
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(34, 41);
+            this.labelName.Location = new System.Drawing.Point(26, 33);
+            this.labelName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(44, 16);
+            this.labelName.Size = new System.Drawing.Size(35, 13);
             this.labelName.TabIndex = 0;
             this.labelName.Text = "Name";
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(959, 13);
+            this.btnBack.Location = new System.Drawing.Point(719, 11);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 23);
+            this.btnBack.Size = new System.Drawing.Size(56, 19);
             this.btnBack.TabIndex = 3;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -194,9 +210,10 @@ namespace Task_Manager_System.ProjectForms
             // 
             // btnFindProj
             // 
-            this.btnFindProj.Location = new System.Drawing.Point(143, 87);
+            this.btnFindProj.Location = new System.Drawing.Point(107, 71);
+            this.btnFindProj.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFindProj.Name = "btnFindProj";
-            this.btnFindProj.Size = new System.Drawing.Size(125, 32);
+            this.btnFindProj.Size = new System.Drawing.Size(94, 26);
             this.btnFindProj.TabIndex = 4;
             this.btnFindProj.Text = "Find project";
             this.btnFindProj.UseVisualStyleBackColor = true;
@@ -204,15 +221,14 @@ namespace Task_Manager_System.ProjectForms
             // 
             // frmProjectUpdate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnFindProj);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.grpProject);
             this.Controls.Add(this.txtProjId);
             this.Controls.Add(this.labelProjId);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmProjectUpdate";
             this.Text = "frmProjectUpdate";
             this.Load += new System.EventHandler(this.frmProjectUpdate_Load);

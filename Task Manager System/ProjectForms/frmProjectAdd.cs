@@ -27,7 +27,7 @@ namespace Task_Manager_System.ProjectForms
 
         private void frmProjectAdd_Load(object sender, EventArgs e)
         {
-            txtProjId.Text = Project.getNextProjId().ToString();
+            txtProjId.Text = Project.GetNextProjId().ToString();
             dtpDateStart.MinDate = DateTime.Today;
             dtpDateEnd.MinDate = DateTime.Today.AddDays(1);
         }

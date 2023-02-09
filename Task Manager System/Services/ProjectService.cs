@@ -1,4 +1,5 @@
 ﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TMS_BLL.Interfaces;
@@ -31,7 +32,7 @@ namespace Task_Manager_System.Services
             }
         }
 
-        public Task<bool> AssignDeveloperToProject(string projId, string devId)
+        public Task<bool> AssignDeveloperToProject(int projId, string devId)
         {
             throw new System.NotImplementedException();
         }
@@ -41,27 +42,42 @@ namespace Task_Manager_System.Services
             throw new System.NotImplementedException();
         }
 
-        public async Task<Project> GetById(string id)
+        public async Task<Project> GetById(int id)
         {
             Project project = null;
             using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
             {
                 await connection.OpenAsync();
                 string updateQuery = "SELECT * FROM projects" +
-                                     $"Where ProjId={id}";
+                                     $" Where ProjId={id}";
 
                 OracleCommand command = new OracleCommand(updateQuery, connection);
                 OracleDataReader dr =  command.ExecuteReader();
                 if (dr.Read())
                 {
-                    project.Id = dr.GetInt32(0);
-                    project.Name = dr.GetString(1);
-                    project.Description = dr.GetString(3);
-                    project.StartDate = dr.GetDateTime(4);
-                    project.EndDate = dr.GetDateTime(5);
-                    //project.Status = dr.GetString(6);
-                    project.ExpectedCost = dr.GetInt32(7);
+                    string descr;
+                    Status currStatus = Status.Started;
+                    try
+                    {
+                        descr = dr.GetString(2);
+                        Enum.TryParse(dr.GetString(5), out currStatus);
+                    }
+                    catch (InvalidCastException)
+                    {
+                        descr = "";
+                    }
+                    project = new Project()
+                    {
+                        Id = dr.GetInt32(0),
+                        Name = dr.GetString(1),
+                        Description = descr,
+                        StartDate = dr.GetDateTime(3),
+                        EndDate = dr.GetDateTime(4),
+                        Status = currStatus,
+                        ExpectedCost = dr.GetInt32(6)
+                    };
                 }
+                
                 command.Dispose();
                 connection.Close();
                 return project;
@@ -73,23 +89,24 @@ namespace Task_Manager_System.Services
             throw new System.NotImplementedException();
         }
 
-        public async Task<Project> UpdateProject(string idOldProject, Project newProject)
+        public async Task<Project> UpdateProject(int idOldProject, Project newProject)
         {
             using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
             {
                 await connection.OpenAsync();
                 string updateQuery = $"UPDATE projects " +
                     $"SET projectname = '{newProject.Name}', " +
-                    $"expectedcost = {newProject.ExpectedCost}" +
-                    $"" +
-                    $" WHERE projId = {idOldProject};";
+                    $" expectedcost = {newProject.ExpectedCost}," +
+                    $" projectdescription = '{newProject.Description}'," +
+                    $" status = '{newProject.Status}'" +
+                    $" WHERE projId = {idOldProject}";
 
                 OracleCommand command = new OracleCommand(updateQuery, connection);
                 int res = await command.ExecuteNonQueryAsync();
 
                 command.Dispose();
                 connection.Close();
-                return await GetById(idOldProject);
+                return newProject;
             }
         }
     }

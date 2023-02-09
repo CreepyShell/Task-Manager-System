@@ -19,7 +19,7 @@ namespace TMS_BLL.Models
         public List<Task> Tasks { get; set; }
 
 
-        public static int getNextProjId()
+        public static int GetNextProjId()
         {
             int nextId = 0;
             string sql = "select MAX(ProjId) from Projects";
