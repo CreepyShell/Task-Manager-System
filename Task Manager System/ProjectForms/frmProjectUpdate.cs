@@ -73,7 +73,10 @@ namespace Task_Manager_System.ProjectForms
         {
 
             if (project.Status == Status.Extended)
+            {
                 txtStatus.Enabled = false;
+                txtStatus.Text = project.Status.ToString();
+            }
 
 
             if (txtDescription.Text.Length > 200)
@@ -107,11 +110,10 @@ namespace Task_Manager_System.ProjectForms
                 return;
             }
             int projId = project.Id;
-            DateTime startDate = project.StartDate;
 
             project.Description = txtDescription.Text;
             project.Id = projId;
-            project.StartDate = startDate;
+            project.EndDate = dtpEndDate.Value;
             project.Name = txtName.Text;
             project.ExpectedCost = Convert.ToDouble(txtExpectedCost.Text);
 

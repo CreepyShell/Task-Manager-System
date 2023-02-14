@@ -32,14 +32,44 @@ namespace Task_Manager_System.Services
             }
         }
 
-        public Task<bool> AssignDeveloperToProject(int projId, string devId)
+        public async Task<bool> AssignDeveloperToProject(int projId, string devId)
         {
-            throw new System.NotImplementedException();
+            if (await this.GetById(projId) == null)
+                return false;
+            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
+            {
+                await connection.OpenAsync();
+                string updateQuery = "UPDATE projects " +
+                    $"SET developerid = '{devId}', " +
+                    $" WHERE projectId = {projId}";
+
+                OracleCommand command = new OracleCommand(updateQuery, connection);
+                int res = await command.ExecuteNonQueryAsync();
+
+                command.Dispose();
+                connection.Close();
+                return true;
+            }
         }
 
-        public Task<bool> CompleteProject(Project project)
+        public async Task<bool> CompleteProject(Project project)
         {
-            throw new System.NotImplementedException();
+            if (await this.GetById(project.Id) == null)
+                return false;
+            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
+            {
+                await connection.OpenAsync();
+                string updateQuery = "UPDATE projects " +
+                    "SET status = 'finished', " +
+                    $" WHERE projId = {project.Id}";
+
+                OracleCommand command = new OracleCommand(updateQuery, connection);
+                int res = await command.ExecuteNonQueryAsync();
+
+                command.Dispose();
+                connection.Close();
+                return true;
+            }
         }
 
         public async Task<Project> GetById(int id)
@@ -98,6 +128,7 @@ namespace Task_Manager_System.Services
                     $"SET projectname = '{newProject.Name}', " +
                     $" expectedcost = {newProject.ExpectedCost}," +
                     $" projectdescription = '{newProject.Description}'," +
+                    $" enddate = TO_DATE('{newProject.EndDate.ToString("dd/MM/yyyy")}', 'DD/MM/YYYY')," +
                     $" status = '{newProject.Status}'" +
                     $" WHERE projId = {idOldProject}";
 
