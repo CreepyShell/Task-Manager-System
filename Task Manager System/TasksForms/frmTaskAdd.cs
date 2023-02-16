@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using Task_Manager_System.Models;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.TasksForms
@@ -10,11 +11,15 @@ namespace Task_Manager_System.TasksForms
     {
         private readonly frmMenu MainMenu;
         private readonly TasksDb db;
-        public frmTaskAdd(frmMenu menu)
+        private readonly ITaskService taskService;
+        private readonly IProjectService projectService;
+        public frmTaskAdd(frmMenu menu, ITaskService taskService, IProjectService projectService)
         {
             InitializeComponent();
             MainMenu = menu;
             db = TasksDb.GetTasksDb();
+            this.taskService = taskService;
+            this.projectService = projectService;
         }
 
 
@@ -24,7 +29,7 @@ namespace Task_Manager_System.TasksForms
             MainMenu.Show();
         }
 
-        private void btnAddTask_Click(object sender, EventArgs e)
+        private async void btnAddTask_Click(object sender, EventArgs e)
         {
             Task task = new Task();
             task.Id = int.Parse(txtTaskId.Text);
@@ -58,13 +63,14 @@ namespace Task_Manager_System.TasksForms
                 return;
             }
             task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
-            Project project = db.Projects.FirstOrDefault(p => p.Id.ToString() == txtProjId.Text);
+            Project project = await projectService.GetById(int.Parse(txtProjId.Text));
             if (project == null)
             {
                 MessageBox.Show("Project was not found");
                 return;
             }
-            db.Tasks.Add(task);
+            task.Project = project;
+            await taskService.AddTaskToProject(task);
             MessageBox.Show("Task added");
             txtTaskId.Text = Guid.NewGuid().ToString();
         }
@@ -74,7 +80,7 @@ namespace Task_Manager_System.TasksForms
             dtpStartTime.MinDate = DateTime.Now;
             cmbPriority.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPriority.Text = cmbPriority.Items[0].ToString();
-            txtTaskId.Text = Guid.NewGuid().ToString();
+            txtTaskId.Text = Task.GetNextTaskId().ToString();
         }
     }
 }

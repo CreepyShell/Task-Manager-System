@@ -19,6 +19,7 @@ namespace Task_Manager_System
             InitializeComponent();
             container = new WindsorContainer();
             container.Register(Component.For<IProjectService>().ImplementedBy<ProjectService>());
+            container.Register(Component.For<ITaskService>().ImplementedBy<TaskService>());
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace Task_Manager_System
         private void addTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmTaskAdd taskAdd = new frmTaskAdd(this);
+            frmTaskAdd taskAdd = new frmTaskAdd(this, container.Resolve<ITaskService>(), container.Resolve<IProjectService>());
             taskAdd.Show();
         }
 

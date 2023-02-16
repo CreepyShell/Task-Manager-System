@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProjectService.cs" />
+    <Compile Include="Services\TaskService.cs" />
     <Compile Include="TasksDb.cs" />
     <Compile Include="TasksForms\frmTaskAdd.cs">
       <SubType>Form</SubType>

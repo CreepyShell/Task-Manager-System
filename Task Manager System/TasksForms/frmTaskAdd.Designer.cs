@@ -30,10 +30,14 @@ namespace Task_Manager_System.TasksForms
         private void InitializeComponent()
         {
             this.grpTask = new System.Windows.Forms.GroupBox();
+            this.txtProjId = new System.Windows.Forms.TextBox();
+            this.projIdLabel = new System.Windows.Forms.Label();
+            this.cmbPriority = new System.Windows.Forms.ComboBox();
             this.txtTaskHours = new System.Windows.Forms.TextBox();
             this.dtpStartTime = new System.Windows.Forms.DateTimePicker();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.labelTaskPriority = new System.Windows.Forms.Label();
             this.labelTaskHours = new System.Windows.Forms.Label();
             this.labelTaskStartDate = new System.Windows.Forms.Label();
             this.labelTaskDescription = new System.Windows.Forms.Label();
@@ -42,15 +46,15 @@ namespace Task_Manager_System.TasksForms
             this.txtBack = new System.Windows.Forms.Button();
             this.labelTaskId = new System.Windows.Forms.Label();
             this.txtTaskId = new System.Windows.Forms.TextBox();
-            this.projIdLabel = new System.Windows.Forms.Label();
-            this.txtProjId = new System.Windows.Forms.TextBox();
-            this.cmbPriority = new System.Windows.Forms.ComboBox();
-            this.labelTaskPriority = new System.Windows.Forms.Label();
+            this.lblDevId = new System.Windows.Forms.Label();
+            this.txtDevId = new System.Windows.Forms.TextBox();
             this.grpTask.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpTask
             // 
+            this.grpTask.Controls.Add(this.txtDevId);
+            this.grpTask.Controls.Add(this.lblDevId);
             this.grpTask.Controls.Add(this.txtProjId);
             this.grpTask.Controls.Add(this.projIdLabel);
             this.grpTask.Controls.Add(this.cmbPriority);
@@ -64,143 +68,30 @@ namespace Task_Manager_System.TasksForms
             this.grpTask.Controls.Add(this.labelTaskDescription);
             this.grpTask.Controls.Add(this.labelTaskName);
             this.grpTask.Controls.Add(this.btnAddTask);
-            this.grpTask.Location = new System.Drawing.Point(135, 90);
-            this.grpTask.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpTask.Location = new System.Drawing.Point(101, 73);
             this.grpTask.Name = "grpTask";
-            this.grpTask.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpTask.Size = new System.Drawing.Size(729, 372);
+            this.grpTask.Size = new System.Drawing.Size(547, 324);
             this.grpTask.TabIndex = 0;
             this.grpTask.TabStop = false;
             this.grpTask.Text = "Enter new task details";
             // 
-            // txtTaskHours
+            // txtProjId
             // 
-            this.txtTaskHours.Location = new System.Drawing.Point(204, 146);
-            this.txtTaskHours.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtTaskHours.Name = "txtTaskHours";
-            this.txtTaskHours.Size = new System.Drawing.Size(132, 22);
-            this.txtTaskHours.TabIndex = 9;
-            // 
-            // dtpStartTime
-            // 
-            this.dtpStartTime.Location = new System.Drawing.Point(204, 105);
-            this.dtpStartTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtpStartTime.Name = "dtpStartTime";
-            this.dtpStartTime.Size = new System.Drawing.Size(265, 22);
-            this.dtpStartTime.TabIndex = 8;
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(204, 66);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(415, 22);
-            this.txtDescription.TabIndex = 7;
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(204, 36);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(163, 22);
-            this.txtName.TabIndex = 6;
-            // 
-            // labelTaskHours
-            // 
-            this.labelTaskHours.AutoSize = true;
-            this.labelTaskHours.Location = new System.Drawing.Point(39, 150);
-            this.labelTaskHours.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTaskHours.Name = "labelTaskHours";
-            this.labelTaskHours.Size = new System.Drawing.Size(102, 16);
-            this.labelTaskHours.TabIndex = 4;
-            this.labelTaskHours.Text = "Enter task hours";
-            // 
-            // labelTaskStartDate
-            // 
-            this.labelTaskStartDate.AutoSize = true;
-            this.labelTaskStartDate.Location = new System.Drawing.Point(39, 113);
-            this.labelTaskStartDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTaskStartDate.Name = "labelTaskStartDate";
-            this.labelTaskStartDate.Size = new System.Drawing.Size(124, 16);
-            this.labelTaskStartDate.TabIndex = 3;
-            this.labelTaskStartDate.Text = "Enter task start date";
-            // 
-            // labelTaskDescription
-            // 
-            this.labelTaskDescription.AutoSize = true;
-            this.labelTaskDescription.Location = new System.Drawing.Point(39, 75);
-            this.labelTaskDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTaskDescription.Name = "labelTaskDescription";
-            this.labelTaskDescription.Size = new System.Drawing.Size(135, 16);
-            this.labelTaskDescription.TabIndex = 2;
-            this.labelTaskDescription.Text = "Enter task description";
-            // 
-            // labelTaskName
-            // 
-            this.labelTaskName.AutoSize = true;
-            this.labelTaskName.Location = new System.Drawing.Point(39, 39);
-            this.labelTaskName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTaskName.Name = "labelTaskName";
-            this.labelTaskName.Size = new System.Drawing.Size(103, 16);
-            this.labelTaskName.TabIndex = 1;
-            this.labelTaskName.Text = "Enter task name";
-            // 
-            // btnAddTask
-            // 
-            this.btnAddTask.Location = new System.Drawing.Point(311, 302);
-            this.btnAddTask.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnAddTask.Name = "btnAddTask";
-            this.btnAddTask.Size = new System.Drawing.Size(100, 28);
-            this.btnAddTask.TabIndex = 0;
-            this.btnAddTask.Text = "Add task";
-            this.btnAddTask.UseVisualStyleBackColor = true;
-            this.btnAddTask.Click += new System.EventHandler(this.btnAddTask_Click);
-            // 
-            // txtBack
-            // 
-            this.txtBack.Location = new System.Drawing.Point(951, 16);
-            this.txtBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtBack.Name = "txtBack";
-            this.txtBack.Size = new System.Drawing.Size(100, 28);
-            this.txtBack.TabIndex = 1;
-            this.txtBack.Text = "Back";
-            this.txtBack.UseVisualStyleBackColor = true;
-            this.txtBack.Click += new System.EventHandler(this.txtBack_Click);
-            // 
-            // labelTaskId
-            // 
-            this.labelTaskId.AutoSize = true;
-            this.labelTaskId.Location = new System.Drawing.Point(175, 60);
-            this.labelTaskId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTaskId.Name = "labelTaskId";
-            this.labelTaskId.Size = new System.Drawing.Size(52, 16);
-            this.labelTaskId.TabIndex = 2;
-            this.labelTaskId.Text = "Task id";
-            // 
-            // txtTaskId
-            // 
-            this.txtTaskId.Location = new System.Drawing.Point(317, 52);
-            this.txtTaskId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtTaskId.Name = "txtTaskId";
-            this.txtTaskId.ReadOnly = true;
-            this.txtTaskId.Size = new System.Drawing.Size(132, 22);
-            this.txtTaskId.TabIndex = 3;
+            this.txtProjId.Location = new System.Drawing.Point(153, 184);
+            this.txtProjId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtProjId.Name = "txtProjId";
+            this.txtProjId.Size = new System.Drawing.Size(156, 20);
+            this.txtProjId.TabIndex = 12;
             // 
             // projIdLabel
             // 
             this.projIdLabel.AutoSize = true;
-            this.projIdLabel.Location = new System.Drawing.Point(43, 227);
+            this.projIdLabel.Location = new System.Drawing.Point(32, 184);
+            this.projIdLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.projIdLabel.Name = "projIdLabel";
-            this.projIdLabel.Size = new System.Drawing.Size(96, 16);
+            this.projIdLabel.Size = new System.Drawing.Size(78, 13);
             this.projIdLabel.TabIndex = 11;
             this.projIdLabel.Text = "Enter project id";
-            // 
-            // txtProjId
-            // 
-            this.txtProjId.Location = new System.Drawing.Point(204, 227);
-            this.txtProjId.Name = "txtProjId";
-            this.txtProjId.Size = new System.Drawing.Size(207, 22);
-            this.txtProjId.TabIndex = 12;
             // 
             // cmbPriority
             // 
@@ -209,32 +100,146 @@ namespace Task_Manager_System.TasksForms
             "Avarage",
             "Low",
             "Unnecessary"});
-            this.cmbPriority.Location = new System.Drawing.Point(204, 187);
-            this.cmbPriority.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbPriority.Location = new System.Drawing.Point(153, 152);
             this.cmbPriority.Name = "cmbPriority";
-            this.cmbPriority.Size = new System.Drawing.Size(160, 24);
+            this.cmbPriority.Size = new System.Drawing.Size(121, 21);
             this.cmbPriority.TabIndex = 10;
+            // 
+            // txtTaskHours
+            // 
+            this.txtTaskHours.Location = new System.Drawing.Point(153, 119);
+            this.txtTaskHours.Name = "txtTaskHours";
+            this.txtTaskHours.Size = new System.Drawing.Size(100, 20);
+            this.txtTaskHours.TabIndex = 9;
+            // 
+            // dtpStartTime
+            // 
+            this.dtpStartTime.Location = new System.Drawing.Point(153, 85);
+            this.dtpStartTime.Name = "dtpStartTime";
+            this.dtpStartTime.Size = new System.Drawing.Size(200, 20);
+            this.dtpStartTime.TabIndex = 8;
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(153, 54);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(312, 20);
+            this.txtDescription.TabIndex = 7;
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(153, 29);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(123, 20);
+            this.txtName.TabIndex = 6;
             // 
             // labelTaskPriority
             // 
             this.labelTaskPriority.AutoSize = true;
-            this.labelTaskPriority.Location = new System.Drawing.Point(39, 187);
-            this.labelTaskPriority.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTaskPriority.Location = new System.Drawing.Point(29, 152);
             this.labelTaskPriority.Name = "labelTaskPriority";
-            this.labelTaskPriority.Size = new System.Drawing.Size(109, 16);
+            this.labelTaskPriority.Size = new System.Drawing.Size(88, 13);
             this.labelTaskPriority.TabIndex = 5;
             this.labelTaskPriority.Text = "Enter task priority";
             // 
+            // labelTaskHours
+            // 
+            this.labelTaskHours.AutoSize = true;
+            this.labelTaskHours.Location = new System.Drawing.Point(29, 122);
+            this.labelTaskHours.Name = "labelTaskHours";
+            this.labelTaskHours.Size = new System.Drawing.Size(84, 13);
+            this.labelTaskHours.TabIndex = 4;
+            this.labelTaskHours.Text = "Enter task hours";
+            // 
+            // labelTaskStartDate
+            // 
+            this.labelTaskStartDate.AutoSize = true;
+            this.labelTaskStartDate.Location = new System.Drawing.Point(29, 92);
+            this.labelTaskStartDate.Name = "labelTaskStartDate";
+            this.labelTaskStartDate.Size = new System.Drawing.Size(102, 13);
+            this.labelTaskStartDate.TabIndex = 3;
+            this.labelTaskStartDate.Text = "Enter task start date";
+            // 
+            // labelTaskDescription
+            // 
+            this.labelTaskDescription.AutoSize = true;
+            this.labelTaskDescription.Location = new System.Drawing.Point(29, 61);
+            this.labelTaskDescription.Name = "labelTaskDescription";
+            this.labelTaskDescription.Size = new System.Drawing.Size(109, 13);
+            this.labelTaskDescription.TabIndex = 2;
+            this.labelTaskDescription.Text = "Enter task description";
+            // 
+            // labelTaskName
+            // 
+            this.labelTaskName.AutoSize = true;
+            this.labelTaskName.Location = new System.Drawing.Point(29, 32);
+            this.labelTaskName.Name = "labelTaskName";
+            this.labelTaskName.Size = new System.Drawing.Size(84, 13);
+            this.labelTaskName.TabIndex = 1;
+            this.labelTaskName.Text = "Enter task name";
+            // 
+            // btnAddTask
+            // 
+            this.btnAddTask.Location = new System.Drawing.Point(234, 259);
+            this.btnAddTask.Name = "btnAddTask";
+            this.btnAddTask.Size = new System.Drawing.Size(75, 23);
+            this.btnAddTask.TabIndex = 0;
+            this.btnAddTask.Text = "Add task";
+            this.btnAddTask.UseVisualStyleBackColor = true;
+            this.btnAddTask.Click += new System.EventHandler(this.btnAddTask_Click);
+            // 
+            // txtBack
+            // 
+            this.txtBack.Location = new System.Drawing.Point(713, 13);
+            this.txtBack.Name = "txtBack";
+            this.txtBack.Size = new System.Drawing.Size(75, 23);
+            this.txtBack.TabIndex = 1;
+            this.txtBack.Text = "Back";
+            this.txtBack.UseVisualStyleBackColor = true;
+            this.txtBack.Click += new System.EventHandler(this.txtBack_Click);
+            // 
+            // labelTaskId
+            // 
+            this.labelTaskId.AutoSize = true;
+            this.labelTaskId.Location = new System.Drawing.Point(131, 49);
+            this.labelTaskId.Name = "labelTaskId";
+            this.labelTaskId.Size = new System.Drawing.Size(42, 13);
+            this.labelTaskId.TabIndex = 2;
+            this.labelTaskId.Text = "Task id";
+            // 
+            // txtTaskId
+            // 
+            this.txtTaskId.Location = new System.Drawing.Point(238, 42);
+            this.txtTaskId.Name = "txtTaskId";
+            this.txtTaskId.ReadOnly = true;
+            this.txtTaskId.Size = new System.Drawing.Size(100, 20);
+            this.txtTaskId.TabIndex = 3;
+            // 
+            // lblDevId
+            // 
+            this.lblDevId.AutoSize = true;
+            this.lblDevId.Location = new System.Drawing.Point(32, 221);
+            this.lblDevId.Name = "lblDevId";
+            this.lblDevId.Size = new System.Drawing.Size(93, 13);
+            this.lblDevId.TabIndex = 13;
+            this.lblDevId.Text = "Enter developer id";
+            // 
+            // txtDevId
+            // 
+            this.txtDevId.Location = new System.Drawing.Point(153, 213);
+            this.txtDevId.Name = "txtDevId";
+            this.txtDevId.Size = new System.Drawing.Size(156, 20);
+            this.txtDevId.TabIndex = 14;
+            // 
             // frmTaskAdd
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.txtTaskId);
             this.Controls.Add(this.labelTaskId);
             this.Controls.Add(this.txtBack);
             this.Controls.Add(this.grpTask);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmTaskAdd";
             this.Text = "frmTaskAdd";
             this.Load += new System.EventHandler(this.frmTaskAdd_Load);
@@ -264,5 +269,7 @@ namespace Task_Manager_System.TasksForms
         private System.Windows.Forms.Label projIdLabel;
         private System.Windows.Forms.ComboBox cmbPriority;
         private System.Windows.Forms.Label labelTaskPriority;
+        private System.Windows.Forms.TextBox txtDevId;
+        private System.Windows.Forms.Label lblDevId;
     }
 }
