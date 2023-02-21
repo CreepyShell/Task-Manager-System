@@ -12,8 +12,9 @@ namespace Task_Manager_System.Services
         public async Task<bool> AddProject(Project newProject)
         {
             using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
-            {
+            { 
                 await connection.OpenAsync();
+
                 string sqlQuery = "INSERT INTO Projects Values (" +
                   newProject.Id + ",'" +
                   newProject.Name + "','" +
@@ -23,8 +24,12 @@ namespace Task_Manager_System.Services
                   newProject.Status + "'," +
                   newProject.ExpectedCost + ")";
 
+
                 OracleCommand command = new OracleCommand(sqlQuery, connection);
                 int res = await command.ExecuteNonQueryAsync();
+
+                OracleTransaction transaction = connection.BeginTransaction();
+                transaction.Commit();
 
                 command.Dispose();
                 connection.Close();
