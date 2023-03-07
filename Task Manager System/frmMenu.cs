@@ -3,6 +3,7 @@ using Castle.Windsor;
 using System;
 using System.Windows.Forms;
 using Task_Manager_System.AdminForms;
+using Task_Manager_System.Interfaces;
 using Task_Manager_System.ProjectForms;
 using Task_Manager_System.Services;
 using Task_Manager_System.TasksForms;
@@ -13,13 +14,14 @@ namespace Task_Manager_System
     public partial class frmMenu : Form
     {
         private WindsorContainer container;
-        
+
         public frmMenu()
         {
             InitializeComponent();
             container = new WindsorContainer();
             container.Register(Component.For<IProjectService>().ImplementedBy<ProjectService>());
             container.Register(Component.For<ITaskService>().ImplementedBy<TaskService>());
+            container.Register(Component.For<IDevService>().ImplementedBy<DevService>());
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -63,7 +65,9 @@ namespace Task_Manager_System
         private void addTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmTaskAdd taskAdd = new frmTaskAdd(this, container.Resolve<ITaskService>(), container.Resolve<IProjectService>());
+            frmTaskAdd taskAdd = new frmTaskAdd(this, container.Resolve<ITaskService>(), 
+                container.Resolve<IProjectService>(), 
+                container.Resolve<IDevService>());
             taskAdd.Show();
         }
 
@@ -117,7 +121,7 @@ namespace Task_Manager_System
         private void showDeveloperProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this); 
+            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this);
             frmAdminDeveloperProfile.Show();
         }
 

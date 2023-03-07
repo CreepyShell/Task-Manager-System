@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using Task_Manager_System.Interfaces;
 using Task_Manager_System.Models;
 using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
@@ -10,16 +11,17 @@ namespace Task_Manager_System.TasksForms
     public partial class frmTaskAdd : Form
     {
         private readonly frmMenu MainMenu;
-        private readonly TasksDb db;
         private readonly ITaskService taskService;
         private readonly IProjectService projectService;
-        public frmTaskAdd(frmMenu menu, ITaskService taskService, IProjectService projectService)
+        private readonly IDevService devService;
+
+        public frmTaskAdd(frmMenu menu, ITaskService taskService, IProjectService projectService, IDevService devService)
         {
             InitializeComponent();
             MainMenu = menu;
-            db = TasksDb.GetTasksDb();
             this.taskService = taskService;
             this.projectService = projectService;
+            this.devService = devService;
         }
 
 
@@ -62,17 +64,29 @@ namespace Task_Manager_System.TasksForms
                 MessageBox.Show("Invalid hours format");
                 return;
             }
-            task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
             Project project = await projectService.GetById(int.Parse(txtProjId.Text));
             if (project == null)
             {
                 MessageBox.Show("Project was not found");
                 return;
             }
+
+            Developer developer = await devService.GetDeveloperById(int.Parse(txtDevId.Text));
+            if (developer == null)
+            {
+                MessageBox.Show("Developer was not found");
+                return;
+            }
+            task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
+            task.Status = (Status)Enum.Parse(typeof(Status), cmbStatus.Text);
+
+            //change form text to combobox to let a user choose a project
+
             task.Project = project;
+            task.Developer = developer;
             await taskService.AddTaskToProject(task);
             MessageBox.Show("Task added");
-            txtTaskId.Text = Guid.NewGuid().ToString();
+            txtTaskId.Text = Task.GetNextTaskId().ToString();
         }
 
         private void frmTaskAdd_Load(object sender, EventArgs e)

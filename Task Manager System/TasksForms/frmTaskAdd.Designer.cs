@@ -30,6 +30,8 @@ namespace Task_Manager_System.TasksForms
         private void InitializeComponent()
         {
             this.grpTask = new System.Windows.Forms.GroupBox();
+            this.txtDevId = new System.Windows.Forms.TextBox();
+            this.lblDevId = new System.Windows.Forms.Label();
             this.txtProjId = new System.Windows.Forms.TextBox();
             this.projIdLabel = new System.Windows.Forms.Label();
             this.cmbPriority = new System.Windows.Forms.ComboBox();
@@ -46,13 +48,17 @@ namespace Task_Manager_System.TasksForms
             this.txtBack = new System.Windows.Forms.Button();
             this.labelTaskId = new System.Windows.Forms.Label();
             this.txtTaskId = new System.Windows.Forms.TextBox();
-            this.lblDevId = new System.Windows.Forms.Label();
-            this.txtDevId = new System.Windows.Forms.TextBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.cboProjects = new System.Windows.Forms.ComboBox();
             this.grpTask.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpTask
             // 
+            this.grpTask.Controls.Add(this.cboProjects);
+            this.grpTask.Controls.Add(this.cmbStatus);
+            this.grpTask.Controls.Add(this.lblStatus);
             this.grpTask.Controls.Add(this.txtDevId);
             this.grpTask.Controls.Add(this.lblDevId);
             this.grpTask.Controls.Add(this.txtProjId);
@@ -75,10 +81,26 @@ namespace Task_Manager_System.TasksForms
             this.grpTask.TabStop = false;
             this.grpTask.Text = "Enter new task details";
             // 
+            // txtDevId
+            // 
+            this.txtDevId.Location = new System.Drawing.Point(153, 248);
+            this.txtDevId.Name = "txtDevId";
+            this.txtDevId.Size = new System.Drawing.Size(156, 20);
+            this.txtDevId.TabIndex = 14;
+            // 
+            // lblDevId
+            // 
+            this.lblDevId.AutoSize = true;
+            this.lblDevId.Location = new System.Drawing.Point(29, 255);
+            this.lblDevId.Name = "lblDevId";
+            this.lblDevId.Size = new System.Drawing.Size(93, 13);
+            this.lblDevId.TabIndex = 13;
+            this.lblDevId.Text = "Enter developer id";
+            // 
             // txtProjId
             // 
-            this.txtProjId.Location = new System.Drawing.Point(153, 184);
-            this.txtProjId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtProjId.Location = new System.Drawing.Point(153, 211);
+            this.txtProjId.Margin = new System.Windows.Forms.Padding(2);
             this.txtProjId.Name = "txtProjId";
             this.txtProjId.Size = new System.Drawing.Size(156, 20);
             this.txtProjId.TabIndex = 12;
@@ -86,7 +108,7 @@ namespace Task_Manager_System.TasksForms
             // projIdLabel
             // 
             this.projIdLabel.AutoSize = true;
-            this.projIdLabel.Location = new System.Drawing.Point(32, 184);
+            this.projIdLabel.Location = new System.Drawing.Point(30, 218);
             this.projIdLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.projIdLabel.Name = "projIdLabel";
             this.projIdLabel.Size = new System.Drawing.Size(78, 13);
@@ -97,10 +119,10 @@ namespace Task_Manager_System.TasksForms
             // 
             this.cmbPriority.Items.AddRange(new object[] {
             "High",
-            "Avarage",
+            "Medium",
             "Low",
             "Unnecessary"});
-            this.cmbPriority.Location = new System.Drawing.Point(153, 152);
+            this.cmbPriority.Location = new System.Drawing.Point(153, 183);
             this.cmbPriority.Name = "cmbPriority";
             this.cmbPriority.Size = new System.Drawing.Size(121, 21);
             this.cmbPriority.TabIndex = 10;
@@ -136,7 +158,7 @@ namespace Task_Manager_System.TasksForms
             // labelTaskPriority
             // 
             this.labelTaskPriority.AutoSize = true;
-            this.labelTaskPriority.Location = new System.Drawing.Point(29, 152);
+            this.labelTaskPriority.Location = new System.Drawing.Point(29, 183);
             this.labelTaskPriority.Name = "labelTaskPriority";
             this.labelTaskPriority.Size = new System.Drawing.Size(88, 13);
             this.labelTaskPriority.TabIndex = 5;
@@ -180,7 +202,7 @@ namespace Task_Manager_System.TasksForms
             // 
             // btnAddTask
             // 
-            this.btnAddTask.Location = new System.Drawing.Point(234, 259);
+            this.btnAddTask.Location = new System.Drawing.Point(234, 282);
             this.btnAddTask.Name = "btnAddTask";
             this.btnAddTask.Size = new System.Drawing.Size(75, 23);
             this.btnAddTask.TabIndex = 0;
@@ -215,21 +237,35 @@ namespace Task_Manager_System.TasksForms
             this.txtTaskId.Size = new System.Drawing.Size(100, 20);
             this.txtTaskId.TabIndex = 3;
             // 
-            // lblDevId
+            // lblStatus
             // 
-            this.lblDevId.AutoSize = true;
-            this.lblDevId.Location = new System.Drawing.Point(32, 221);
-            this.lblDevId.Name = "lblDevId";
-            this.lblDevId.Size = new System.Drawing.Size(93, 13);
-            this.lblDevId.TabIndex = 13;
-            this.lblDevId.Text = "Enter developer id";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(29, 151);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(86, 13);
+            this.lblStatus.TabIndex = 15;
+            this.lblStatus.Text = "Enter task status";
             // 
-            // txtDevId
+            // cmbStatus
             // 
-            this.txtDevId.Location = new System.Drawing.Point(153, 213);
-            this.txtDevId.Name = "txtDevId";
-            this.txtDevId.Size = new System.Drawing.Size(156, 20);
-            this.txtDevId.TabIndex = 14;
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Items.AddRange(new object[] {
+            "Created",
+            "Started",
+            "Extended",
+            "Finished"});
+            this.cmbStatus.Location = new System.Drawing.Point(153, 148);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(121, 21);
+            this.cmbStatus.TabIndex = 16;
+            // 
+            // cboProjects
+            // 
+            this.cboProjects.FormattingEnabled = true;
+            this.cboProjects.Location = new System.Drawing.Point(327, 210);
+            this.cboProjects.Name = "cboProjects";
+            this.cboProjects.Size = new System.Drawing.Size(197, 21);
+            this.cboProjects.TabIndex = 4;
             // 
             // frmTaskAdd
             // 
@@ -271,5 +307,8 @@ namespace Task_Manager_System.TasksForms
         private System.Windows.Forms.Label labelTaskPriority;
         private System.Windows.Forms.TextBox txtDevId;
         private System.Windows.Forms.Label lblDevId;
+        private System.Windows.Forms.ComboBox cmbStatus;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.ComboBox cboProjects;
     }
 }

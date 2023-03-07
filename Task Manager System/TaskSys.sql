@@ -62,4 +62,4 @@ INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, Project
 INSERT INTO TASKS (TaskId, Name, Description, StartDate, Hours, Status, Priority, ProjectId, DeveloperId) VALUES (1, 'Task A', 'Develop login functionality', TO_DATE('2022-01-01','YYYY/MM/DD'), 20, 'Started', 'High', 1, 1);
 INSERT INTO TASKS (TaskId, Name, Description, StartDate, Hours, Status, Priority, ProjectId, DeveloperId) VALUES (2, 'Task B', 'Design UI for mobile app', TO_DATE('2022-02-01','YYYY/MM/DD'), 15, 'Created', 'Medium', 2, 2);
 
--- COMMIT;
+COMMIT;
