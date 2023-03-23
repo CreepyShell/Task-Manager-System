@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace TMS_BLL.Interfaces
@@ -11,5 +8,6 @@ namespace TMS_BLL.Interfaces
     {
         Task<T> GetById(int id);
         Task<T> GetByName(string name);
+        Task<List<T>> GetAll();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.ProjectForms
@@ -9,11 +10,13 @@ namespace Task_Manager_System.ProjectForms
     {
         private readonly frmMenu MainMenu;
         private readonly TasksDb db;
-        public frmProjectComplete(frmMenu menu)
+        private readonly IProjectService projectService;
+        public frmProjectComplete(frmMenu menu, IProjectService projectService)
         {
             InitializeComponent();
             MainMenu = menu;
             db = TasksDb.GetTasksDb();
+            this.projectService = projectService;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -24,7 +27,7 @@ namespace Task_Manager_System.ProjectForms
 
         private void btnProjectComplete_Click(object sender, EventArgs e)
         {
-            Project project = db.Projects.FirstOrDefault(p => p.Id.ToString() == txtProjId.Text);
+            Project project = db.Projects.FirstOrDefault(p => p.Id.ToString() == cboProject.Text);
             if (project == null)
             {
                 MessageBox.Show("Project was not found");
@@ -56,6 +59,15 @@ namespace Task_Manager_System.ProjectForms
                 db.Developers.Add(developer);
             }    
 
+        }
+
+        private async void frmProjectComplete_Load(object sender, EventArgs e)
+        {
+            cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach(Project project in await this.projectService.GetAll())
+            {
+                cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
+            }
         }
     }
 }

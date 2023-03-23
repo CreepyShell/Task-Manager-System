@@ -58,7 +58,7 @@ namespace Task_Manager_System
         private void completeAProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmProjectComplete projectComplete = new frmProjectComplete(this);
+            frmProjectComplete projectComplete = new frmProjectComplete(this, container.Resolve<IProjectService>());
             projectComplete.Show();
         }
 

@@ -30,7 +30,6 @@ namespace Task_Manager_System.ProjectForms
         private void InitializeComponent()
         {
             this.labelProjId = new System.Windows.Forms.Label();
-            this.txtProjId = new System.Windows.Forms.TextBox();
             this.grpProject = new System.Windows.Forms.GroupBox();
             this.btnSaveProj = new System.Windows.Forms.Button();
             this.txtExpectedCost = new System.Windows.Forms.TextBox();
@@ -45,6 +44,7 @@ namespace Task_Manager_System.ProjectForms
             this.labelName = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFindProj = new System.Windows.Forms.Button();
+            this.cboProject = new System.Windows.Forms.ComboBox();
             this.grpProject.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,15 +56,7 @@ namespace Task_Manager_System.ProjectForms
             this.labelProjId.Name = "labelProjId";
             this.labelProjId.Size = new System.Drawing.Size(78, 13);
             this.labelProjId.TabIndex = 0;
-            this.labelProjId.Text = "Enter project id";
-            // 
-            // txtProjId
-            // 
-            this.txtProjId.Location = new System.Drawing.Point(158, 20);
-            this.txtProjId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtProjId.Name = "txtProjId";
-            this.txtProjId.Size = new System.Drawing.Size(182, 20);
-            this.txtProjId.TabIndex = 1;
+            this.labelProjId.Text = "Choose project";
             // 
             // grpProject
             // 
@@ -80,9 +72,9 @@ namespace Task_Manager_System.ProjectForms
             this.grpProject.Controls.Add(this.labelDescription);
             this.grpProject.Controls.Add(this.labelName);
             this.grpProject.Location = new System.Drawing.Point(75, 124);
-            this.grpProject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpProject.Margin = new System.Windows.Forms.Padding(2);
             this.grpProject.Name = "grpProject";
-            this.grpProject.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpProject.Padding = new System.Windows.Forms.Padding(2);
             this.grpProject.Size = new System.Drawing.Size(490, 270);
             this.grpProject.TabIndex = 2;
             this.grpProject.TabStop = false;
@@ -92,7 +84,7 @@ namespace Task_Manager_System.ProjectForms
             // btnSaveProj
             // 
             this.btnSaveProj.Location = new System.Drawing.Point(216, 208);
-            this.btnSaveProj.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSaveProj.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveProj.Name = "btnSaveProj";
             this.btnSaveProj.Size = new System.Drawing.Size(84, 28);
             this.btnSaveProj.TabIndex = 10;
@@ -103,7 +95,7 @@ namespace Task_Manager_System.ProjectForms
             // txtExpectedCost
             // 
             this.txtExpectedCost.Location = new System.Drawing.Point(108, 162);
-            this.txtExpectedCost.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtExpectedCost.Margin = new System.Windows.Forms.Padding(2);
             this.txtExpectedCost.Name = "txtExpectedCost";
             this.txtExpectedCost.Size = new System.Drawing.Size(157, 20);
             this.txtExpectedCost.TabIndex = 9;
@@ -117,7 +109,7 @@ namespace Task_Manager_System.ProjectForms
             "Extended",
             "Finished"});
             this.txtStatus.Location = new System.Drawing.Point(108, 128);
-            this.txtStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.Size = new System.Drawing.Size(92, 21);
             this.txtStatus.TabIndex = 8;
@@ -125,7 +117,7 @@ namespace Task_Manager_System.ProjectForms
             // dtpEndDate
             // 
             this.dtpEndDate.Location = new System.Drawing.Point(108, 95);
-            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(200, 20);
             this.dtpEndDate.TabIndex = 7;
@@ -133,7 +125,7 @@ namespace Task_Manager_System.ProjectForms
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(108, 65);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(378, 20);
             this.txtDescription.TabIndex = 6;
@@ -141,7 +133,7 @@ namespace Task_Manager_System.ProjectForms
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(108, 33);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(244, 20);
             this.txtName.TabIndex = 5;
@@ -200,7 +192,7 @@ namespace Task_Manager_System.ProjectForms
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(719, 11);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(56, 19);
             this.btnBack.TabIndex = 3;
@@ -211,7 +203,7 @@ namespace Task_Manager_System.ProjectForms
             // btnFindProj
             // 
             this.btnFindProj.Location = new System.Drawing.Point(107, 71);
-            this.btnFindProj.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFindProj.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindProj.Name = "btnFindProj";
             this.btnFindProj.Size = new System.Drawing.Size(94, 26);
             this.btnFindProj.TabIndex = 4;
@@ -219,15 +211,23 @@ namespace Task_Manager_System.ProjectForms
             this.btnFindProj.UseVisualStyleBackColor = true;
             this.btnFindProj.Click += new System.EventHandler(this.btnFindProj_Click);
             // 
+            // cboProject
+            // 
+            this.cboProject.FormattingEnabled = true;
+            this.cboProject.Location = new System.Drawing.Point(183, 21);
+            this.cboProject.Name = "cboProject";
+            this.cboProject.Size = new System.Drawing.Size(279, 21);
+            this.cboProject.TabIndex = 5;
+            // 
             // frmProjectUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cboProject);
             this.Controls.Add(this.btnFindProj);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.grpProject);
-            this.Controls.Add(this.txtProjId);
             this.Controls.Add(this.labelProjId);
             this.Name = "frmProjectUpdate";
             this.Text = "frmProjectUpdate";
@@ -242,7 +242,6 @@ namespace Task_Manager_System.ProjectForms
         #endregion
 
         private System.Windows.Forms.Label labelProjId;
-        private System.Windows.Forms.TextBox txtProjId;
         private System.Windows.Forms.GroupBox grpProject;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.TextBox txtName;
@@ -257,5 +256,6 @@ namespace Task_Manager_System.ProjectForms
         private System.Windows.Forms.Button btnSaveProj;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnFindProj;
+        private System.Windows.Forms.ComboBox cboProject;
     }
 }

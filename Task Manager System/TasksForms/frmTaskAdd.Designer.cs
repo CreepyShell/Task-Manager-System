@@ -30,7 +30,9 @@ namespace Task_Manager_System.TasksForms
         private void InitializeComponent()
         {
             this.grpTask = new System.Windows.Forms.GroupBox();
-            this.txtDevId = new System.Windows.Forms.TextBox();
+            this.cboProjects = new System.Windows.Forms.ComboBox();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.lblDevId = new System.Windows.Forms.Label();
             this.txtProjId = new System.Windows.Forms.TextBox();
             this.projIdLabel = new System.Windows.Forms.Label();
@@ -48,18 +50,16 @@ namespace Task_Manager_System.TasksForms
             this.txtBack = new System.Windows.Forms.Button();
             this.labelTaskId = new System.Windows.Forms.Label();
             this.txtTaskId = new System.Windows.Forms.TextBox();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.cboProjects = new System.Windows.Forms.ComboBox();
+            this.cboDev = new System.Windows.Forms.ComboBox();
             this.grpTask.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpTask
             // 
+            this.grpTask.Controls.Add(this.cboDev);
             this.grpTask.Controls.Add(this.cboProjects);
             this.grpTask.Controls.Add(this.cmbStatus);
             this.grpTask.Controls.Add(this.lblStatus);
-            this.grpTask.Controls.Add(this.txtDevId);
             this.grpTask.Controls.Add(this.lblDevId);
             this.grpTask.Controls.Add(this.txtProjId);
             this.grpTask.Controls.Add(this.projIdLabel);
@@ -81,12 +81,36 @@ namespace Task_Manager_System.TasksForms
             this.grpTask.TabStop = false;
             this.grpTask.Text = "Enter new task details";
             // 
-            // txtDevId
+            // cboProjects
             // 
-            this.txtDevId.Location = new System.Drawing.Point(153, 248);
-            this.txtDevId.Name = "txtDevId";
-            this.txtDevId.Size = new System.Drawing.Size(156, 20);
-            this.txtDevId.TabIndex = 14;
+            this.cboProjects.FormattingEnabled = true;
+            this.cboProjects.Location = new System.Drawing.Point(327, 210);
+            this.cboProjects.Name = "cboProjects";
+            this.cboProjects.Size = new System.Drawing.Size(197, 21);
+            this.cboProjects.TabIndex = 4;
+            this.cboProjects.SelectedIndexChanged += new System.EventHandler(this.cboProjects_SelectedIndexChanged);
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Items.AddRange(new object[] {
+            "Created",
+            "Started",
+            "Extended",
+            "Finished"});
+            this.cmbStatus.Location = new System.Drawing.Point(153, 148);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(121, 21);
+            this.cmbStatus.TabIndex = 16;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(29, 151);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(86, 13);
+            this.lblStatus.TabIndex = 15;
+            this.lblStatus.Text = "Enter task status";
             // 
             // lblDevId
             // 
@@ -237,35 +261,12 @@ namespace Task_Manager_System.TasksForms
             this.txtTaskId.Size = new System.Drawing.Size(100, 20);
             this.txtTaskId.TabIndex = 3;
             // 
-            // lblStatus
+            // cboDev
             // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(29, 151);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(86, 13);
-            this.lblStatus.TabIndex = 15;
-            this.lblStatus.Text = "Enter task status";
-            // 
-            // cmbStatus
-            // 
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
-            "Created",
-            "Started",
-            "Extended",
-            "Finished"});
-            this.cmbStatus.Location = new System.Drawing.Point(153, 148);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(121, 21);
-            this.cmbStatus.TabIndex = 16;
-            // 
-            // cboProjects
-            // 
-            this.cboProjects.FormattingEnabled = true;
-            this.cboProjects.Location = new System.Drawing.Point(327, 210);
-            this.cboProjects.Name = "cboProjects";
-            this.cboProjects.Size = new System.Drawing.Size(197, 21);
-            this.cboProjects.TabIndex = 4;
+            this.cboDev.Location = new System.Drawing.Point(153, 252);
+            this.cboDev.Name = "cboDev";
+            this.cboDev.Size = new System.Drawing.Size(197, 21);
+            this.cboDev.TabIndex = 17;
             // 
             // frmTaskAdd
             // 
@@ -305,10 +306,10 @@ namespace Task_Manager_System.TasksForms
         private System.Windows.Forms.Label projIdLabel;
         private System.Windows.Forms.ComboBox cmbPriority;
         private System.Windows.Forms.Label labelTaskPriority;
-        private System.Windows.Forms.TextBox txtDevId;
         private System.Windows.Forms.Label lblDevId;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ComboBox cboProjects;
+        private System.Windows.Forms.ComboBox cboDev;
     }
 }

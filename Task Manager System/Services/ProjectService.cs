@@ -1,5 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMS_BLL.Interfaces;
@@ -74,6 +75,34 @@ namespace Task_Manager_System.Services
                 command.Dispose();
                 connection.Close();
                 return true;
+            }
+        }
+
+        public async Task<List<Project>> GetAll()
+        {
+            List<Project> projects = new List<Project>();
+            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
+            {
+                await connection.OpenAsync();
+                string selectQuery = "SELECT * FROM projects";
+                OracleCommand command = new OracleCommand(selectQuery, connection);
+                OracleDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    Project project = new Project()
+                    {
+                        Id = dr.GetInt32(0),
+                        Name = dr.GetString(1),
+                        StartDate = dr.GetDateTime(3),
+                        EndDate = dr.GetDateTime(4),
+                        ExpectedCost = dr.GetInt32(6)
+                    };
+                    projects.Add(project);
+                }
+
+                command.Dispose();
+                connection.Close();
+                return projects;
             }
         }
 

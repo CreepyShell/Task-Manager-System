@@ -1,4 +1,5 @@
 ﻿using Oracle.ManagedDataAccess.Client;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMS_BLL.Interfaces;
 
@@ -29,6 +30,11 @@ namespace Task_Manager_System.Services
         }
 
         public Task<bool> CompleteTask(TMS_BLL.Models.Task task)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<List<TMS_BLL.Models.Task>> GetAll()
         {
             throw new System.NotImplementedException();
         }

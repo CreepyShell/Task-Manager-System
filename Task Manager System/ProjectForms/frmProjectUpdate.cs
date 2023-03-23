@@ -27,8 +27,13 @@ namespace Task_Manager_System.ProjectForms
             projectService = _projectService;
         }
 
-        private void frmProjectUpdate_Load(object sender, EventArgs e)
+        private async void frmProjectUpdate_Load(object sender, EventArgs e)
         {
+            cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach(Project project in await projectService.GetAll())
+            {
+                cboProject.Items.Add("");
+            }
             dtpEndDate.MinDate = DateTime.Today;
         }
 

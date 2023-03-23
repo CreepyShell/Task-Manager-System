@@ -70,8 +70,8 @@ namespace Task_Manager_System.TasksForms
                 MessageBox.Show("Project was not found");
                 return;
             }
-
-            Developer developer = await devService.GetDeveloperById(int.Parse(txtDevId.Text));
+            string text = new string(cboDev.Text.TakeWhile(c => c != ':').ToArray());
+            Developer developer = await devService.GetDeveloperById(int.Parse(cboDev.Text.TakeWhile(c => c == ':').ToString()));
             if (developer == null)
             {
                 MessageBox.Show("Developer was not found");
@@ -89,12 +89,22 @@ namespace Task_Manager_System.TasksForms
             txtTaskId.Text = Task.GetNextTaskId().ToString();
         }
 
-        private void frmTaskAdd_Load(object sender, EventArgs e)
+        private async void frmTaskAdd_Load(object sender, EventArgs e)
         {
             dtpStartTime.MinDate = DateTime.Now;
             cmbPriority.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPriority.Text = cmbPriority.Items[0].ToString();
             txtTaskId.Text = Task.GetNextTaskId().ToString();
+            cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach (Developer dev in await this.devService.GetAll())
+            {
+                cboDev.Items.Add($"{dev.Id}: {dev.FirstName} {dev.LastName} {dev.Specialization}");
+            }
+        }
+
+        private void cboProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
