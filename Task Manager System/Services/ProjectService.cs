@@ -1,22 +1,21 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Threading.Tasks;
 using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.Services
 {
-    public class ProjectService : IProjectService
+    public class ProjectService : BaseService, IProjectService
     {
+        public ProjectService()
+        {
+
+        }
         public async Task<bool> AddProject(Project newProject)
         {
-            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
-            { 
-                await connection.OpenAsync();
-
-                string sqlQuery = "INSERT INTO Projects Values (" +
+            string sqlQuery = "INSERT INTO Projects Values (" +
                   newProject.Id + ",'" +
                   newProject.Name + "','" +
                   newProject.Description + "'," +
@@ -25,154 +24,116 @@ namespace Task_Manager_System.Services
                   newProject.Status + "'," +
                   newProject.ExpectedCost + ")";
 
+            await insertQuery(sqlQuery);
 
-                OracleCommand command = new OracleCommand(sqlQuery, connection);
-                int res = await command.ExecuteNonQueryAsync();
-
-                OracleTransaction transaction = connection.BeginTransaction();
-                transaction.Commit();
-
-                command.Dispose();
-                connection.Close();
-                return true;
-            }
+            return true;
         }
 
         public async Task<bool> AssignDeveloperToProject(int projId, string devId)
         {
             if (await this.GetById(projId) == null)
                 return false;
-            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
-            {
-                await connection.OpenAsync();
-                string updateQuery = "UPDATE projects " +
-                    $"SET developerid = '{devId}', " +
+
+            string updateQuery = "UPDATE projects " +
+                    $"SET developerId = '{devId}', " +
                     $" WHERE projectId = {projId}";
 
-                OracleCommand command = new OracleCommand(updateQuery, connection);
-                int res = await command.ExecuteNonQueryAsync();
+            await insertQuery(updateQuery);
 
-                command.Dispose();
-                connection.Close();
-                return true;
-            }
+            return true;
         }
 
         public async Task<bool> CompleteProject(Project project)
         {
-            if (await this.GetById(project.Id) == null)
+            if (await GetById(project.Id) == null)
                 return false;
-            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
-            {
-                await connection.OpenAsync();
-                string updateQuery = "UPDATE projects " +
-                    "SET status = 'finished', " +
-                    $" WHERE projId = {project.Id}";
 
-                OracleCommand command = new OracleCommand(updateQuery, connection);
-                int res = await command.ExecuteNonQueryAsync();
+            string updateQuery = "UPDATE projects " +
+                   "SET status = 'finished', " +
+                   $" WHERE projId = {project.Id}";
 
-                command.Dispose();
-                connection.Close();
-                return true;
-            }
+            await insertQuery(updateQuery);
+
+            return true;
         }
 
         public async Task<List<Project>> GetAll()
         {
             List<Project> projects = new List<Project>();
-            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
-            {
-                await connection.OpenAsync();
-                string selectQuery = "SELECT * FROM projects";
-                OracleCommand command = new OracleCommand(selectQuery, connection);
-                OracleDataReader dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    Project project = new Project()
-                    {
-                        Id = dr.GetInt32(0),
-                        Name = dr.GetString(1),
-                        StartDate = dr.GetDateTime(3),
-                        EndDate = dr.GetDateTime(4),
-                        ExpectedCost = dr.GetInt32(6)
-                    };
-                    projects.Add(project);
-                }
+            string selectQuery = "SELECT * FROM projects";
 
-                command.Dispose();
-                connection.Close();
+            DataSet ds = await getDataSet(selectQuery);
+
+            DataTable dt = ds.Tables["projects"];
+
+            if (dt.Rows.Count == 0)
                 return projects;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                projects.Add(new Project()
+                {
+                    Id = (int)row["ProjId"],
+                    Name = (string)row["ProjectName"],
+                    Description = (string)row["ProjectDescription"],
+                    StartDate = (DateTime)row["StartDate"],
+                    EndDate = (DateTime)row["EndDate"],
+                    Status = (Status)row["Status"],
+                    ExpectedCost = (decimal)row["ExpectedCost"]
+                });
             }
+            ds.Dispose();
+            return projects;
         }
 
         public async Task<Project> GetById(int id)
         {
-            Project project = null;
-            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
-            {
-                await connection.OpenAsync();
-                string updateQuery = "SELECT * FROM projects" +
-                                     $" Where ProjId={id}";
-
-                OracleCommand command = new OracleCommand(updateQuery, connection);
-                OracleDataReader dr =  command.ExecuteReader();
-                if (dr.Read())
-                {
-                    string descr;
-                    Status currStatus = Status.Started;
-                    try
-                    {
-                        descr = dr.GetString(2);
-                        Enum.TryParse(dr.GetString(5), out currStatus);
-                    }
-                    catch (InvalidCastException)
-                    {
-                        descr = "";
-                    }
-                    project = new Project()
-                    {
-                        Id = dr.GetInt32(0),
-                        Name = dr.GetString(1),
-                        Description = descr,
-                        StartDate = dr.GetDateTime(3),
-                        EndDate = dr.GetDateTime(4),
-                        Status = currStatus,
-                        ExpectedCost = dr.GetInt32(6)
-                    };
-                }
-                
-                command.Dispose();
-                connection.Close();
-                return project;
-            }
+            string selectQuery = "SELECT * FROM projects" +
+                                     $" Where ProjId = {id}";
+            return await GetProject(selectQuery);
         }
 
-        public Task<Project> GetByName(string name)
+        public async Task<Project> GetByName(string name)
         {
-            throw new System.NotImplementedException();
+            string selectQuery = $"SELECT * FROM projects WHERE ProjectName = {name}";
+            return await GetProject(selectQuery);
         }
 
         public async Task<Project> UpdateProject(int idOldProject, Project newProject)
         {
-            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
+            string updateQuery = $"UPDATE projects " +
+                   $"SET projectname = '{newProject.Name}', " +
+                   $" expectedcost = {newProject.ExpectedCost}," +
+                   $" projectdescription = '{newProject.Description}'," +
+                   $" enddate = TO_DATE('{newProject.EndDate.ToString("dd/MM/yyyy")}', 'DD/MM/YYYY')," +
+                   $" status = '{newProject.Status}'" +
+                   $" WHERE projId = {idOldProject}";
+
+            await insertQuery(updateQuery);
+            return await GetById(idOldProject);
+        }
+
+        private async Task<Project> GetProject(string query)
+        {
+            DataSet dataSet = await getDataSet(query);
+            DataTable projects = dataSet.Tables["projects"];
+
+            if (projects.Rows.Count == 0)
+                return null;
+
+            DataRow row = projects.Rows[0];
+            Project project = new Project()
             {
-                await connection.OpenAsync();
-                string updateQuery = $"UPDATE projects " +
-                    $"SET projectname = '{newProject.Name}', " +
-                    $" expectedcost = {newProject.ExpectedCost}," +
-                    $" projectdescription = '{newProject.Description}'," +
-                    $" enddate = TO_DATE('{newProject.EndDate.ToString("dd/MM/yyyy")}', 'DD/MM/YYYY')," +
-                    $" status = '{newProject.Status}'" +
-                    $" WHERE projId = {idOldProject}";
-
-                OracleCommand command = new OracleCommand(updateQuery, connection);
-                int res = await command.ExecuteNonQueryAsync();
-
-                command.Dispose();
-                connection.Close();
-                return newProject;
-            }
+                Id = (int)row["ProjId"],
+                Name = (string)row["ProjectName"],
+                Description = (string)row["ProjectDescription"],
+                StartDate = (DateTime)row["StartDate"],
+                EndDate = (DateTime)row["EndDate"],
+                Status = (Status)row["Status"],
+                ExpectedCost = (decimal)row["ExpectedCost"]
+            };
+            dataSet.Dispose();
+            return project;
         }
     }
 }

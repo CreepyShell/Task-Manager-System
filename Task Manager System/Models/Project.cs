@@ -14,7 +14,7 @@ namespace TMS_BLL.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Status Status { get; set; }
-        public double ExpectedCost { get; set; }
+        public decimal ExpectedCost { get; set; }
         public List<Developer> Developers { get; set; }
         public List<Task> Tasks { get; set; }
 

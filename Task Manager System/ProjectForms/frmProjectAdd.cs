@@ -9,18 +9,15 @@ namespace Task_Manager_System.ProjectForms
     public partial class frmProjectAdd : Form
     {
         private readonly frmMenu MainMenu;
-        private readonly TasksDb db;
         private readonly IProjectService _projectService;
         public frmProjectAdd()
         {
-            db = TasksDb.GetTasksDb();
             InitializeComponent();
         }
 
         public frmProjectAdd(frmMenu menu, IProjectService projectService)
         {
             _projectService = projectService;
-            db = TasksDb.GetTasksDb();
             MainMenu = menu;
             InitializeComponent();
         }
@@ -64,7 +61,7 @@ namespace Task_Manager_System.ProjectForms
                 }
                 project.StartDate = dtpDateStart.Value;
                 project.EndDate = dtpDateEnd.Value;
-                project.ExpectedCost = Convert.ToDouble(txtExpectedCost.Text);
+                project.ExpectedCost = Convert.ToDecimal(txtExpectedCost.Text);
                 project.Status = Status.Started;
                 if(project.ExpectedCost < 0)
                 {

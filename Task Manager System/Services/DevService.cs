@@ -1,13 +1,12 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using Task_Manager_System.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.Services
 {
-    public class DevService : IDevService
+    public class DevService : BaseService, IDevService
     {
         public DevService()
         {
@@ -17,65 +16,65 @@ namespace Task_Manager_System.Services
         public async Task<List<Developer>> GetAll()
         {
             List<Developer> developers = new List<Developer>();
-            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
-            {
-                await connection.OpenAsync();
-                string selectQuery = "SELECT * FROM developers";
-                OracleCommand command = new OracleCommand(selectQuery, connection);
-                OracleDataReader dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    Developer developer = new Developer()
-                    {
-                        Id = dr.GetInt32(0),
-                        Age = dr.GetInt16(4),
-                        Specialization = dr.GetString(3),
-                        FirstName = dr.GetString(1),
-                        LastName = dr.GetString(2),
-                        Project = new Project() { Id = dr.GetInt16(5) }
-                    };
-                    developers.Add(developer);
-                }
+            string selectQuery = "SELECT * FROM DEVELOPERS";
 
-                command.Dispose();
-                connection.Close();
+            DataSet ds = await getDataSet(selectQuery);
+
+            DataTable dt = ds.Tables["projects"];
+
+            if (dt.Rows.Count == 0)
                 return developers;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                developers.Add(new Developer()
+                {
+                    Id = (int)row["DevId"],
+                    FirstName = (string)row["FirstName"],
+                    LastName = (string)row["LastName"],
+                    Specialization = (string)row["Specialization"],
+                    Age = (int)row["Age"],
+                    Project = new Project() { Id = (int)row["ProjectId"] }
+                });
             }
+            ds.Dispose();
+            return developers;
         }
+
 
         public async Task<Developer> GetDeveloperById(int id)
         {
-            Developer developer = null;
-            using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
-            {
-                await connection.OpenAsync();
-                string selectQuery = "SELECT * FROM developers" +
-                                     $" Where DevId={id}";
-
-                OracleCommand command = new OracleCommand(selectQuery, connection);
-                OracleDataReader dr = command.ExecuteReader();
-                if (dr.Read())
-                {
-                    developer = new Developer()
-                    {
-                        Id = dr.GetInt32(0),
-                        Age = dr.GetInt16(4),
-                        Specialization = dr.GetString(3),
-                        FirstName = dr.GetString(1),
-                        LastName = dr.GetString(2),
-                        Project = new Project() { Id = dr.GetInt16(5) }
-                    };
-                }
-
-                command.Dispose();
-                connection.Close();
-                return developer;
-            }
+            string selectQuery = "SELECT * FROM developers" +
+                                     $" Where DevId = {id}";
+            return await GetDeveloper(selectQuery);
         }
 
-        public Task<Developer> GetDeveloperByName(string name)
+        public async Task<Developer> GetDeveloperByLastName(string lastname)
         {
-            throw new System.NotImplementedException();
+            string selectQuery = "SELECT * FROM developers" +
+                                     $" Where LastName = {lastname}";
+            return await GetDeveloper(selectQuery);
+        }
+        private async Task<Developer> GetDeveloper(string query)
+        {
+            DataSet dataSet = await getDataSet(query);
+            DataTable developers = dataSet.Tables["developers"];
+
+            if (developers.Rows.Count == 0)
+                return null;
+
+            DataRow row = developers.Rows[0];
+            Developer developer = new Developer()
+            {
+                Id = (int)row["DevId"],
+                FirstName = (string)row["FirstName"],
+                LastName = (string)row["LastName"],
+                Specialization = (string)row["Specialization"],
+                Age = (int)row["Age"],
+                Project = new Project() { Id = (int)row["ProjectId"] }
+            };
+            dataSet.Dispose();
+            return developer;
         }
     }
 }

@@ -46,7 +46,9 @@ namespace Task_Manager_System.ProjectForms
 
         private async void btnFindProj_Click(object sender, EventArgs e)
         {
-            bool parse = int.TryParse(txtProjId.Text, out int res);
+            //bool parse = int.TryParse(txtProjId.Text, out int res);
+            bool parse = true;
+            int res = 0;
             if (!parse)
             {
                 MessageBox.Show("Invalid id");
@@ -120,10 +122,10 @@ namespace Task_Manager_System.ProjectForms
             project.Id = projId;
             project.EndDate = dtpEndDate.Value;
             project.Name = txtName.Text;
-            project.ExpectedCost = Convert.ToDouble(txtExpectedCost.Text);
+            project.ExpectedCost = Convert.ToDecimal(txtExpectedCost.Text);
 
             project.Status = (Status)Enum.Parse(typeof(Status), txtStatus.Text);
-            await this.projectService.UpdateProject(int.Parse(txtProjId.Text), project);
+           // await this.projectService.UpdateProject(int.Parse(txtProjId.Text), project);
 
             this.grpProject.Visible = false;
         }

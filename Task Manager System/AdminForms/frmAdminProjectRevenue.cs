@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMS_BLL.Models;
 
@@ -39,7 +34,7 @@ namespace Task_Manager_System.AdminForms
         private void btnFindProject_Click(object sender, EventArgs e)
         {
             Project[] projects = db.Projects.Where(p => p.Status == Status.Finished && p.EndDate < dtpEndDate.Value).ToArray();
-            double revenue = 0;
+            decimal revenue = 0;
             if (projects.Length == 0)
             {
                 MessageBox.Show("No projects found");

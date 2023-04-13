@@ -1,5 +1,4 @@
-﻿
-namespace Task_Manager_System
+﻿namespace Task_Manager_System
 {
     partial class frmMenu
     {
