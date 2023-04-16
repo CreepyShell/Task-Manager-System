@@ -1,7 +1,11 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
+using Task_Manager_System.Interfaces;
+using Task_Manager_System.Services.Validators;
 using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
@@ -9,12 +13,22 @@ namespace Task_Manager_System.Services
 {
     public class ProjectService : BaseService, IProjectService
     {
-        public ProjectService()
+        private readonly ProjectValidator _projectValidator;
+        private readonly IDevService _developerService;
+        private readonly ITaskService _taskService;
+        public ProjectService(IDevService devService, ITaskService taskService)
         {
-
+            _developerService = devService;
+            _projectValidator = new ProjectValidator();
+            _taskService = taskService;
         }
         public async Task<bool> AddProject(Project newProject)
         {
+            if (newProject == null)
+                throw new ArgumentNullException(nameof(newProject));
+
+            _projectValidator.Validate(newProject, op => op.ThrowOnFailures());
+
             string sqlQuery = "INSERT INTO Projects Values (" +
                   newProject.Id + ",'" +
                   newProject.Name + "','" +
@@ -29,9 +43,20 @@ namespace Task_Manager_System.Services
             return true;
         }
 
-        public async Task<bool> AssignDeveloperToProject(int projId, string devId)
+        public async Task<bool> AssignDeveloperToProject(int projId, int devId)
         {
-            if (await this.GetById(projId) == null)
+            Project project = await GetById(projId);
+            if (project == null)
+                throw new ArgumentNullException(nameof(Project), "Project is null");
+
+            Developer developer = await _developerService.GetDeveloperById(devId);
+            if (developer == null)
+                throw new ArgumentNullException(nameof(Developer), "Developer is null");
+
+            if (project.Status == Status.Finished)
+                throw new ArgumentException("Project is finished");
+
+            if (developer.Project != null || (await _taskService.GetDeveloperTasks(devId)).Count != 0)
                 return false;
 
             string updateQuery = "UPDATE projects " +
@@ -43,16 +68,30 @@ namespace Task_Manager_System.Services
             return true;
         }
 
-        public async Task<bool> CompleteProject(Project project)
+        public async Task<bool> CompleteProject(int projectId)
         {
-            if (await GetById(project.Id) == null)
+            Project project = await GetById(projectId);
+            if (project == null)
+                throw new ArgumentNullException(nameof(Project), "Project was not found or just null");
+
+            if((await _taskService.GetAllProjectTasks(project.Id)).Any(t => t.Status != Status.Finished))
+                throw new ArgumentException( "Project has unfinished tasks");
+
+            if(project.EndDate < DateTime.Now)
                 return false;
 
-            string updateQuery = "UPDATE projects " +
-                   "SET status = 'finished', " +
+            string updateProject = "UPDATE projects " +
+                   "SET status = 'finished'," +
+                   "EndDate =  TO_DATE('" + DateTime.Now.ToString("dd/MM/yyyy") + "', 'DD/MM/YYYY')" +
                    $" WHERE projId = {project.Id}";
 
-            await insertQuery(updateQuery);
+            await insertQuery(updateProject);
+
+            string updateDeveloper = "UPDATE developers " +
+                   "SET ProjectId = NULL," +
+                   $" WHERE projId = {project.Id}";
+
+            await insertQuery(updateDeveloper);
 
             return true;
         }
@@ -101,6 +140,11 @@ namespace Task_Manager_System.Services
 
         public async Task<Project> UpdateProject(int idOldProject, Project newProject)
         {
+            if (newProject == null)
+                throw new ArgumentNullException(nameof(newProject));
+
+            _projectValidator.Validate(newProject, op => op.ThrowOnFailures());
+
             string updateQuery = $"UPDATE projects " +
                    $"SET projectname = '{newProject.Name}', " +
                    $" expectedcost = {newProject.ExpectedCost}," +

@@ -39,7 +39,7 @@ CREATE TABLE TASKS(
     Hours NUMBER(2) NOT NULL CHECK(Hours>0),
     Status VARCHAR(10) DEFAULT 'Created',
     Priority VARCHAR(10) NOT NULL,
-    ProjectId NUMBER(4),
+    ProjectId NUMBER(4) NOT NULL,
     DeveloperId NUMBER(4),
     CONSTRAINT pk_Tasks PRIMARY KEY(TaskId),
     CONSTRAINT fk_TaskProjects FOREIGN KEY(ProjectId) REFERENCES PROJECTS(ProjId),

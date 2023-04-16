@@ -1,24 +1,39 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using Task_Manager_System.Interfaces;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.ProjectForms
 {
     public partial class frmProjectAssignDeveloper : Form
     {
+        private readonly IProjectService _projectService;
+        private readonly IDevService _devService;
         private readonly frmMenu MainMenu;
         private readonly TasksDb db;
-        public frmProjectAssignDeveloper(frmMenu menu)
+        public frmProjectAssignDeveloper(frmMenu menu, IProjectService projectService, IDevService devService)
         {
+            _projectService = projectService;
+            _devService = devService;
             InitializeComponent();
             MainMenu = menu;
-            db = TasksDb.GetTasksDb();
         }
 
-        private void frmProjectAssignDeveloper_Load(object sender, EventArgs e)
+        private async void frmProjectAssignDeveloper_Load(object sender, EventArgs e)
         {
+            cmbDev.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach (Developer developer in await this._devService.GetAll())
+            {
+                cmbDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}");
+            }
 
+            cmbProject.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach (Project project in await _projectService.GetAll())
+            {
+                cmbProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
+            }
         }
 
         private void dtnBack_Click(object sender, EventArgs e)
@@ -27,43 +42,33 @@ namespace Task_Manager_System.ProjectForms
             MainMenu.Show();
         }
 
-        private void btnAssign_Click(object sender, EventArgs e)
+        private async void btnAssign_Click(object sender, EventArgs e)
         {
-            Project project = db.Projects.FirstOrDefault(x => x.Id.ToString() == txtProjId.Text);
-            if (project == null)
+            try
             {
-                MessageBox.Show("Project with this id was not found");
-                return;
-            }
+                int projectId = int.Parse(new string(cmbProject.Text.TakeWhile(c => c != ':').ToArray()));
 
-            if (project.Status == Status.Finished)
+                int developerId = int.Parse(new string(cmbProject.Text.TakeWhile(c => c != ':').ToArray()));
+
+                if(await _projectService.AssignDeveloperToProject(projectId, developerId))
+                {
+                    MessageBox.Show("Developer was assigned successfully");
+                    return;
+                }
+                MessageBox.Show("Developer is already assigned to a project or has some tasks to do");
+            }
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("Project is finished");
-                return;
+                MessageBox.Show("Not found: " + ex.Message);
             }
-
-            Developer developer = db.Developers.FirstOrDefault(d => d.Id.ToString() == txtDevId.Text);
-            if (developer == null)
+            catch (ArgumentException ex)
             {
-                MessageBox.Show("Developer with this id was not found");
-                return;
+                MessageBox.Show("Invalid data:" + ex.Message);
             }
-
-            if (developer.Project != null)
+            catch(Exception)
             {
-                MessageBox.Show("Chosen developer has already been assigned to the project");
-                return;
+                MessageBox.Show("Smt went wrong");
             }
-
-            if (db.Tasks.Any(t => t.Developer.Id == developer.Id))
-            {
-                MessageBox.Show("Chosen developer has tasks so he or she can not be assigned to the proejct");
-                return;
-            }
-
-            db.Developers.Remove(developer);
-            developer.Project = project;
-            db.Developers.Add(developer);
         }
     }
 }

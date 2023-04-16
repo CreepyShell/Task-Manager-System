@@ -32,7 +32,7 @@ namespace Task_Manager_System.ProjectForms
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach(Project project in await projectService.GetAll())
             {
-                cboProject.Items.Add("");
+                cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
             }
             dtpEndDate.MinDate = DateTime.Today;
         }
@@ -46,9 +46,7 @@ namespace Task_Manager_System.ProjectForms
 
         private async void btnFindProj_Click(object sender, EventArgs e)
         {
-            //bool parse = int.TryParse(txtProjId.Text, out int res);
-            bool parse = true;
-            int res = 0;
+            bool parse = int.TryParse(new string(cboProject.Text.TakeWhile(c => c != ':').ToArray()), out int res);
             if (!parse)
             {
                 MessageBox.Show("Invalid id");
@@ -85,19 +83,6 @@ namespace Task_Manager_System.ProjectForms
                 txtStatus.Text = project.Status.ToString();
             }
 
-
-            if (txtDescription.Text.Length > 200)
-            {
-                MessageBox.Show("Description length must be less than 200 symbols");
-                return;
-            }
-
-            if (txtName.Text.Length > 30 || txtName.Text.Length < 5)
-            {
-                MessageBox.Show("Name length must be less than 30 symbols and greater than 5");
-                return;
-            }
-
             if (txtStatus.Text != "Created" && txtStatus.Text != "Started" && txtStatus.Text != "Extended" && txtStatus.Text != "Finished")
             {
                 MessageBox.Show("Invalid status");
@@ -105,27 +90,22 @@ namespace Task_Manager_System.ProjectForms
             }
             try
             {
-                if (double.Parse(txtExpectedCost.Text) < 0)
-                {
-                    MessageBox.Show("Expected cost must be greater than zero");
-                    return;
-                }
+                int projId = project.Id;
+                project.Description = txtDescription.Text;
+                project.Id = projId;
+                project.EndDate = dtpEndDate.Value;
+                project.Name = txtName.Text;
+                project.Status = (Status)Enum.Parse(typeof(Status), txtStatus.Text);
+                project.ExpectedCost = Convert.ToDecimal(txtExpectedCost.Text);
             }
             catch (FormatException)
             {
                 MessageBox.Show("Excepted cost must be numeric");
                 return;
             }
-            int projId = project.Id;
 
-            project.Description = txtDescription.Text;
-            project.Id = projId;
-            project.EndDate = dtpEndDate.Value;
-            project.Name = txtName.Text;
-            project.ExpectedCost = Convert.ToDecimal(txtExpectedCost.Text);
-
-            project.Status = (Status)Enum.Parse(typeof(Status), txtStatus.Text);
-           // await this.projectService.UpdateProject(int.Parse(txtProjId.Text), project);
+            
+            await this.projectService.UpdateProject(project.Id, project);
 
             this.grpProject.Visible = false;
         }

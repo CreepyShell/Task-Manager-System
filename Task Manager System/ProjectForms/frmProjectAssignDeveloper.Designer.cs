@@ -32,35 +32,35 @@ namespace Task_Manager_System.ProjectForms
             this.labelProjId = new System.Windows.Forms.Label();
             this.labelDevId = new System.Windows.Forms.Label();
             this.btnAssign = new System.Windows.Forms.Button();
-            this.txtDevId = new System.Windows.Forms.TextBox();
-            this.txtProjId = new System.Windows.Forms.TextBox();
             this.dtnBack = new System.Windows.Forms.Button();
+            this.cmbProject = new System.Windows.Forms.ComboBox();
+            this.cmbDev = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // labelProjId
             // 
             this.labelProjId.AutoSize = true;
-            this.labelProjId.Location = new System.Drawing.Point(33, 85);
+            this.labelProjId.Location = new System.Drawing.Point(119, 115);
             this.labelProjId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelProjId.Name = "labelProjId";
-            this.labelProjId.Size = new System.Drawing.Size(96, 16);
+            this.labelProjId.Size = new System.Drawing.Size(98, 16);
             this.labelProjId.TabIndex = 0;
-            this.labelProjId.Text = "Enter project id";
+            this.labelProjId.Text = "Choose project";
             // 
             // labelDevId
             // 
             this.labelDevId.AutoSize = true;
-            this.labelDevId.Location = new System.Drawing.Point(452, 80);
+            this.labelDevId.Location = new System.Drawing.Point(119, 174);
             this.labelDevId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDevId.Name = "labelDevId";
-            this.labelDevId.Size = new System.Drawing.Size(117, 16);
+            this.labelDevId.Size = new System.Drawing.Size(119, 16);
             this.labelDevId.TabIndex = 1;
-            this.labelDevId.Text = "Enter developer id";
+            this.labelDevId.Text = "Choose developer";
             // 
             // btnAssign
             // 
             this.btnAssign.Location = new System.Drawing.Point(336, 372);
-            this.btnAssign.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAssign.Margin = new System.Windows.Forms.Padding(4);
             this.btnAssign.Name = "btnAssign";
             this.btnAssign.Size = new System.Drawing.Size(172, 49);
             this.btnAssign.TabIndex = 2;
@@ -68,26 +68,10 @@ namespace Task_Manager_System.ProjectForms
             this.btnAssign.UseVisualStyleBackColor = true;
             this.btnAssign.Click += new System.EventHandler(this.btnAssign_Click);
             // 
-            // txtDevId
-            // 
-            this.txtDevId.Location = new System.Drawing.Point(584, 76);
-            this.txtDevId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtDevId.Name = "txtDevId";
-            this.txtDevId.Size = new System.Drawing.Size(257, 22);
-            this.txtDevId.TabIndex = 3;
-            // 
-            // txtProjId
-            // 
-            this.txtProjId.Location = new System.Drawing.Point(171, 76);
-            this.txtProjId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtProjId.Name = "txtProjId";
-            this.txtProjId.Size = new System.Drawing.Size(205, 22);
-            this.txtProjId.TabIndex = 4;
-            // 
             // dtnBack
             // 
             this.dtnBack.Location = new System.Drawing.Point(951, 2);
-            this.dtnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtnBack.Margin = new System.Windows.Forms.Padding(4);
             this.dtnBack.Name = "dtnBack";
             this.dtnBack.Size = new System.Drawing.Size(100, 28);
             this.dtnBack.TabIndex = 5;
@@ -95,18 +79,34 @@ namespace Task_Manager_System.ProjectForms
             this.dtnBack.UseVisualStyleBackColor = true;
             this.dtnBack.Click += new System.EventHandler(this.dtnBack_Click);
             // 
+            // cmbProject
+            // 
+            this.cmbProject.FormattingEnabled = true;
+            this.cmbProject.Location = new System.Drawing.Point(285, 115);
+            this.cmbProject.Name = "cmbProject";
+            this.cmbProject.Size = new System.Drawing.Size(566, 24);
+            this.cmbProject.TabIndex = 6;
+            // 
+            // cmbDev
+            // 
+            this.cmbDev.FormattingEnabled = true;
+            this.cmbDev.Location = new System.Drawing.Point(285, 165);
+            this.cmbDev.Name = "cmbDev";
+            this.cmbDev.Size = new System.Drawing.Size(566, 24);
+            this.cmbDev.TabIndex = 8;
+            // 
             // frmProjectAssignDeveloper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.cmbDev);
+            this.Controls.Add(this.cmbProject);
             this.Controls.Add(this.dtnBack);
-            this.Controls.Add(this.txtProjId);
-            this.Controls.Add(this.txtDevId);
             this.Controls.Add(this.btnAssign);
             this.Controls.Add(this.labelDevId);
             this.Controls.Add(this.labelProjId);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmProjectAssignDeveloper";
             this.Text = "frmProjectAssignDeveloper";
             this.Load += new System.EventHandler(this.frmProjectAssignDeveloper_Load);
@@ -120,8 +120,8 @@ namespace Task_Manager_System.ProjectForms
         private System.Windows.Forms.Label labelProjId;
         private System.Windows.Forms.Label labelDevId;
         private System.Windows.Forms.Button btnAssign;
-        private System.Windows.Forms.TextBox txtDevId;
-        private System.Windows.Forms.TextBox txtProjId;
         private System.Windows.Forms.Button dtnBack;
+        private System.Windows.Forms.ComboBox cmbProject;
+        private System.Windows.Forms.ComboBox cmbDev;
     }
 }

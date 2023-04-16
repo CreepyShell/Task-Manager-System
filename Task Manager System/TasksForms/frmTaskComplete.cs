@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.TasksForms
@@ -8,12 +9,12 @@ namespace Task_Manager_System.TasksForms
     public partial class frmTaskComplete : Form
     {
         private readonly frmMenu MainMenu;
-        private readonly TasksDb db;
-        public frmTaskComplete(frmMenu menu)
+        private readonly ITaskService _taskService;
+        public frmTaskComplete(frmMenu menu, ITaskService taskService)
         {
             InitializeComponent();
             MainMenu = menu;
-            db = TasksDb.GetTasksDb();
+            _taskService = taskService;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -22,30 +23,40 @@ namespace Task_Manager_System.TasksForms
             MainMenu.Show();
         }
 
-        private void btnCompleteTask_Click(object sender, EventArgs e)
+        private async void btnCompleteTask_Click(object sender, EventArgs e)
         {
-            Task task = db.Tasks.FirstOrDefault(t => t.Id.ToString() == txtTaskId.Text);
-            if (task == null)
+            try
             {
-                MessageBox.Show("Task was not found");
-                return;
-            }
+                int taskId = int.Parse(new string(cboTask.Text.TakeWhile(c => c != ':').ToArray()));
 
-            if (task.StartDate.AddHours(task.Hours) < DateTime.Now)
-            {
-                MessageBox.Show("Deadline is expired");
-                return;
+                if (await _taskService.CompleteTask(taskId))
+                {
+                    MessageBox.Show("Task was finished");
+                    return;
+                }
+                MessageBox.Show("Task is already finished");
             }
+            catch (ArgumentNullException ex)
+            {
+                MessageBox.Show("Data not found:" + ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error: smt went wrong");
+            }
+        }
 
-            if (task.Status == Status.Finished)
+        private async void frmTaskComplete_Load(object sender, EventArgs e)
+        {
+            cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach (Task task in await _taskService.GetAll())
             {
-                MessageBox.Show("Task is already been finished");
-                return;
+                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}");
             }
-            db.Tasks.Remove(task);
-            task.Status = Status.Finished;
-            db.Tasks.Add(task);
-            MessageBox.Show("Task was finished");
         }
     }
 }

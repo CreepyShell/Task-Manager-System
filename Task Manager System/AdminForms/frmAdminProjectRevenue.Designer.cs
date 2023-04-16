@@ -123,9 +123,9 @@
             this.monthRevenueLabel.AutoSize = true;
             this.monthRevenueLabel.Location = new System.Drawing.Point(57, 283);
             this.monthRevenueLabel.Name = "monthRevenueLabel";
-            this.monthRevenueLabel.Size = new System.Drawing.Size(44, 16);
+            this.monthRevenueLabel.Size = new System.Drawing.Size(95, 16);
             this.monthRevenueLabel.TabIndex = 19;
-            this.monthRevenueLabel.Text = "label1";
+            this.monthRevenueLabel.Text = "Month revenue";
             // 
             // frmAdminProjectRevenue
             // 

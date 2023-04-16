@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtDevid = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFindDeveloper = new System.Windows.Forms.Button();
             this.devIdLabel = new System.Windows.Forms.Label();
@@ -36,14 +35,8 @@
             this.tasksLabel = new System.Windows.Forms.Label();
             this.txtProjectInfo = new System.Windows.Forms.TextBox();
             this.txtTasksInfo = new System.Windows.Forms.ComboBox();
+            this.cboDev = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // txtDevid
-            // 
-            this.txtDevid.Location = new System.Drawing.Point(257, 46);
-            this.txtDevid.Name = "txtDevid";
-            this.txtDevid.Size = new System.Drawing.Size(195, 22);
-            this.txtDevid.TabIndex = 0;
             // 
             // btnBack
             // 
@@ -70,9 +63,9 @@
             this.devIdLabel.AutoSize = true;
             this.devIdLabel.Location = new System.Drawing.Point(118, 46);
             this.devIdLabel.Name = "devIdLabel";
-            this.devIdLabel.Size = new System.Drawing.Size(117, 16);
+            this.devIdLabel.Size = new System.Drawing.Size(119, 16);
             this.devIdLabel.TabIndex = 3;
-            this.devIdLabel.Text = "Enter developer id";
+            this.devIdLabel.Text = "Choose developer";
             // 
             // projectLabel
             // 
@@ -107,11 +100,20 @@
             this.txtTasksInfo.Size = new System.Drawing.Size(597, 24);
             this.txtTasksInfo.TabIndex = 7;
             // 
+            // cboDev
+            // 
+            this.cboDev.FormattingEnabled = true;
+            this.cboDev.Location = new System.Drawing.Point(242, 46);
+            this.cboDev.Name = "cboDev";
+            this.cboDev.Size = new System.Drawing.Size(553, 24);
+            this.cboDev.TabIndex = 8;
+            // 
             // frmAdminDeveloperProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 535);
+            this.Controls.Add(this.cboDev);
             this.Controls.Add(this.txtTasksInfo);
             this.Controls.Add(this.txtProjectInfo);
             this.Controls.Add(this.tasksLabel);
@@ -119,7 +121,6 @@
             this.Controls.Add(this.devIdLabel);
             this.Controls.Add(this.btnFindDeveloper);
             this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.txtDevid);
             this.Name = "frmAdminDeveloperProfile";
             this.Text = "frmAdminDeveloperProfile";
             this.Load += new System.EventHandler(this.frmAdminDeveloperProfile_Load);
@@ -129,8 +130,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtDevid;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnFindDeveloper;
         private System.Windows.Forms.Label devIdLabel;
@@ -138,5 +137,6 @@
         private System.Windows.Forms.Label tasksLabel;
         private System.Windows.Forms.TextBox txtProjectInfo;
         private System.Windows.Forms.ComboBox txtTasksInfo;
+        private System.Windows.Forms.ComboBox cboDev;
     }
 }

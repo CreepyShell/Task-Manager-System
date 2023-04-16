@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 using Task_Manager_System.Interfaces;
@@ -35,58 +36,52 @@ namespace Task_Manager_System.TasksForms
         {
             Task task = new Task();
             task.Id = int.Parse(txtTaskId.Text);
-            if (txtName.Text.Length > 20 || txtName.Text.Length < 5)
-            {
-                MessageBox.Show("Name must be greater than 5 symbols and less than 20 symbols");
-                return;
-            }
             task.Name = txtName.Text;
-
-            if (txtDescription.Text.Length > 200)
-            {
-                MessageBox.Show("Description must be less than 200 symblos");
-                return;
-            }
             task.Description = txtDescription.Text;
             task.StartDate = dtpStartTime.Value;
+            Project project = await projectService.GetById(int.Parse(cboProjects.Text.TakeWhile(c => c == ':').ToString()));
+            if (project == null)
+            {
+                MessageBox.Show("Project was not found");
+                return;
+            }
+
+            Developer developer = await devService.GetDeveloperById(int.Parse(cboDev.Text.TakeWhile(c => c == ':').ToString()));
+
+            task.Project = project;
+            task.Developer = developer;
+           
+            task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
+            task.Status = (Status)Enum.Parse(typeof(Status), cmbStatus.Text);
+
             try
             {
                 int hours = int.Parse(txtTaskHours.Text);
-                if (hours < 0 || hours > 72)
-                {
-                    MessageBox.Show("Task hours mush be greater than 0 and less than 72");
-                    return;
-                }
                 task.Hours = hours;
+                await taskService.AddTaskToProject(task);
+                MessageBox.Show("Task added");
+                txtTaskId.Text = Task.GetNextTaskId().ToString();
             }
             catch (FormatException)
             {
                 MessageBox.Show("Invalid hours format");
                 return;
             }
-            Project project = await projectService.GetById(int.Parse(txtProjId.Text));
-            if (project == null)
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("Project was not found");
+                MessageBox.Show("Data not found: " + ex.Message);
                 return;
             }
-            string text = new string(cboDev.Text.TakeWhile(c => c != ':').ToArray());
-            Developer developer = await devService.GetDeveloperById(int.Parse(cboDev.Text.TakeWhile(c => c == ':').ToString()));
-            if (developer == null)
+            catch (ValidationException ex)
             {
-                MessageBox.Show("Developer was not found");
+                MessageBox.Show("Data invalid: " + ex.Message);
                 return;
             }
-            task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
-            task.Status = (Status)Enum.Parse(typeof(Status), cmbStatus.Text);
-
-            //change form text to combobox to let a user choose a project
-
-            task.Project = project;
-            task.Developer = developer;
-            await taskService.AddTaskToProject(task);
-            MessageBox.Show("Task added");
-            txtTaskId.Text = Task.GetNextTaskId().ToString();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Smt went wrong: " + ex.Message);
+                return;
+            }
         }
 
         private async void frmTaskAdd_Load(object sender, EventArgs e)
@@ -97,12 +92,22 @@ namespace Task_Manager_System.TasksForms
             txtTaskId.Text = Task.GetNextTaskId().ToString();
             cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Developer dev in await this.devService.GetAll())
-            {
                 cboDev.Items.Add($"{dev.Id}: {dev.FirstName} {dev.LastName} {dev.Specialization}");
+            cboDev.Items.Add("Unassigned task");
+
+            cboProjects.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach (Project project in await this.projectService.GetAll())
+            {
+                cboProjects.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
             }
         }
 
         private void cboProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grpTask_Enter(object sender, EventArgs e)
         {
 
         }

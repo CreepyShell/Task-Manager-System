@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using Task_Manager_System.Interfaces;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.TasksForms
@@ -8,12 +10,14 @@ namespace Task_Manager_System.TasksForms
     public partial class frmTaskRemoveDeveloper : Form
     {
         private readonly frmMenu MainMenu;
-        private readonly TasksDb db;
-        public frmTaskRemoveDeveloper(frmMenu menu)
+        private readonly ITaskService _taskService;
+        private readonly IDevService _devService;
+        public frmTaskRemoveDeveloper(frmMenu menu, ITaskService taskService, IDevService devService)
         {
+            _taskService = taskService;
+            _devService = devService;
             InitializeComponent();
             MainMenu = menu;
-            db = TasksDb.GetTasksDb();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -22,45 +26,47 @@ namespace Task_Manager_System.TasksForms
             MainMenu.Show();
         }
 
-        private void btnAssignDev_Click(object sender, EventArgs e)
+        private async void btnAssignDev_Click(object sender, EventArgs e)
         {
-            Developer developer = db.Developers.FirstOrDefault(d => d.Id.ToString() == txtDevId.Text);
-            if (developer == null)
+            try
             {
-                MessageBox.Show("Developer was not found");
-                return;
-            }
+                int developerId = int.Parse(new string(cboDev.Text.TakeWhile(c => c != ':').ToArray()));
 
-            Task task = db.Tasks.FirstOrDefault(d => d.Id.ToString() == txtTaskId.Text);
-            if (task == null)
+                int taskId = int.Parse(new string(cboTask.Text.TakeWhile(c => c != ':').ToArray()));
+
+                if (await _taskService.RemoveDeveloperFromTask(taskId, developerId))
+                {
+                    MessageBox.Show("Developer was removed"); 
+                    return;
+                }
+                MessageBox.Show("Task has no developer assigned to it or developer was not assigned to this task");
+            }
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("Task was not found");
-                return;
+                MessageBox.Show("Data not found:" + ex.Message);
             }
-
-            if (task.Status == Status.Finished)
+            catch (ArgumentException ex)
             {
-                MessageBox.Show("Task is finished");
-                return;
+                MessageBox.Show("Error: " + ex.Message);
             }
-
-            if (task.Developer == null)
+            catch (Exception)
             {
-                MessageBox.Show("This task has no developer");
-                return;
+                MessageBox.Show("Error: smt went wrong");
             }
+        }
 
-            if(task.Developer.Id != developer.Id)
+        private async void frmTaskRemoveDeveloper_Load(object sender, EventArgs e)
+        {
+            cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach (Task task in await _taskService.GetAll())
             {
-                MessageBox.Show("Task was not assighed to this developer");
-                return;
+                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}");
             }
-
-            db.Tasks.Remove(task);
-            task.Developer = null;
-            db.Tasks.Add(task);
-
-            MessageBox.Show("Developer was removed");
+            cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach (Developer developer in await _devService.GetAll())
+            {
+                cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}");
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Task_Manager_System.Services
                     LastName = (string)row["LastName"],
                     Specialization = (string)row["Specialization"],
                     Age = (int)row["Age"],
-                    Project = new Project() { Id = (int)row["ProjectId"] }
+                    Project = row.IsNull("ProjectId") ? null : new Project() { Id = (int)row["ProjectId"] }
                 });
             }
             ds.Dispose();
@@ -55,6 +55,7 @@ namespace Task_Manager_System.Services
                                      $" Where LastName = {lastname}";
             return await GetDeveloper(selectQuery);
         }
+
         private async Task<Developer> GetDeveloper(string query)
         {
             DataSet dataSet = await getDataSet(query);

@@ -32,13 +32,13 @@ namespace Task_Manager_System.TasksForms
             this.btnBack = new System.Windows.Forms.Button();
             this.btnCompleteTask = new System.Windows.Forms.Button();
             this.labelTaskId = new System.Windows.Forms.Label();
-            this.txtTaskId = new System.Windows.Forms.TextBox();
+            this.cboTask = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(951, 16);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(100, 28);
             this.btnBack.TabIndex = 0;
@@ -49,7 +49,7 @@ namespace Task_Manager_System.TasksForms
             // btnCompleteTask
             // 
             this.btnCompleteTask.Location = new System.Drawing.Point(513, 405);
-            this.btnCompleteTask.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCompleteTask.Margin = new System.Windows.Forms.Padding(4);
             this.btnCompleteTask.Name = "btnCompleteTask";
             this.btnCompleteTask.Size = new System.Drawing.Size(113, 39);
             this.btnCompleteTask.TabIndex = 1;
@@ -63,30 +63,31 @@ namespace Task_Manager_System.TasksForms
             this.labelTaskId.Location = new System.Drawing.Point(251, 124);
             this.labelTaskId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTaskId.Name = "labelTaskId";
-            this.labelTaskId.Size = new System.Drawing.Size(80, 16);
+            this.labelTaskId.Size = new System.Drawing.Size(82, 16);
             this.labelTaskId.TabIndex = 2;
-            this.labelTaskId.Text = "Enter task id";
+            this.labelTaskId.Text = "Choose task";
             // 
-            // txtTaskId
+            // cboTask
             // 
-            this.txtTaskId.Location = new System.Drawing.Point(347, 124);
-            this.txtTaskId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtTaskId.Name = "txtTaskId";
-            this.txtTaskId.Size = new System.Drawing.Size(132, 22);
-            this.txtTaskId.TabIndex = 3;
+            this.cboTask.FormattingEnabled = true;
+            this.cboTask.Location = new System.Drawing.Point(364, 115);
+            this.cboTask.Name = "cboTask";
+            this.cboTask.Size = new System.Drawing.Size(458, 24);
+            this.cboTask.TabIndex = 3;
             // 
             // frmTaskComplete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.txtTaskId);
+            this.Controls.Add(this.cboTask);
             this.Controls.Add(this.labelTaskId);
             this.Controls.Add(this.btnCompleteTask);
             this.Controls.Add(this.btnBack);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTaskComplete";
             this.Text = "frmTaskComplete";
+            this.Load += new System.EventHandler(this.frmTaskComplete_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,6 +98,6 @@ namespace Task_Manager_System.TasksForms
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnCompleteTask;
         private System.Windows.Forms.Label labelTaskId;
-        private System.Windows.Forms.TextBox txtTaskId;
+        private System.Windows.Forms.ComboBox cboTask;
     }
 }

@@ -51,7 +51,7 @@ namespace Task_Manager_System
         private void assignDeveloperToAProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmProjectAssignDeveloper projectAssignDeveloper = new frmProjectAssignDeveloper(this);
+            frmProjectAssignDeveloper projectAssignDeveloper = new frmProjectAssignDeveloper(this, container.Resolve<IProjectService>(), container.Resolve<IDevService>());
             projectAssignDeveloper.Show();
         }
 
@@ -65,8 +65,8 @@ namespace Task_Manager_System
         private void addTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmTaskAdd taskAdd = new frmTaskAdd(this, container.Resolve<ITaskService>(), 
-                container.Resolve<IProjectService>(), 
+            frmTaskAdd taskAdd = new frmTaskAdd(this, container.Resolve<ITaskService>(),
+                container.Resolve<IProjectService>(),
                 container.Resolve<IDevService>());
             taskAdd.Show();
         }
@@ -74,42 +74,42 @@ namespace Task_Manager_System
         private void updateTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmTaskUpdate taskUpdate = new frmTaskUpdate(this);
+            frmTaskUpdate taskUpdate = new frmTaskUpdate(this, container.Resolve<ITaskService>());
             taskUpdate.Show();
         }
 
         private void removeTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmTaskRemove taskRemove = new frmTaskRemove(this);
+            frmTaskRemove taskRemove = new frmTaskRemove(this, container.Resolve<ITaskService>());
             taskRemove.Show();
         }
 
         private void assignDeveloperToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmTaskAssignDeveloper taskAssignDeveloper = new frmTaskAssignDeveloper(this);
+            frmTaskAssignDeveloper taskAssignDeveloper = new frmTaskAssignDeveloper(this, container.Resolve<IDevService>(), container.Resolve<ITaskService>());
             taskAssignDeveloper.Show();
         }
 
         private void removeDeveloperToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmTaskRemoveDeveloper TaskRemoveDeveloper = new frmTaskRemoveDeveloper(this);
+            frmTaskRemoveDeveloper TaskRemoveDeveloper = new frmTaskRemoveDeveloper(this, container.Resolve<ITaskService>(), container.Resolve<IDevService>());
             TaskRemoveDeveloper.Show();
         }
 
         private void completeTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmTaskComplete taskComplete = new frmTaskComplete(this);
+            frmTaskComplete taskComplete = new frmTaskComplete(this, container.Resolve<ITaskService>());
             taskComplete.Show();
         }
 
         private void showProjectProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmAdminProjectProfile frmAdminProjectProfile = new frmAdminProjectProfile(this);
+            frmAdminProjectProfile frmAdminProjectProfile = new frmAdminProjectProfile(this, container.Resolve<IProjectService>());
             frmAdminProjectProfile.Show();
         }
 
@@ -121,7 +121,7 @@ namespace Task_Manager_System
         private void showDeveloperProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this);
+            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this, container.Resolve<IDevService>());
             frmAdminDeveloperProfile.Show();
         }
 

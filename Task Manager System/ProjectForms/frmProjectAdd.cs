@@ -1,4 +1,5 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using FluentValidation;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Windows.Forms;
 using TMS_BLL.Interfaces;
@@ -48,39 +49,29 @@ namespace Task_Manager_System.ProjectForms
                 Project project = new Project();
                 project.Id = int.Parse(txtProjId.Text);
                 project.Name = txtName.Text;
-                if(project.Name.Length > 30 || project.Name.Length < 5)
-                {
-                    MessageBox.Show("Name must be more than 30 and less than 5 symbols");
-                    return;
-                }
                 project.Description = txtDescription.Text;
-                if (project.Description.Length > 200)
-                {
-                    MessageBox.Show("Description must be less than 200 symbols");
-                    return;
-                }
                 project.StartDate = dtpDateStart.Value;
                 project.EndDate = dtpDateEnd.Value;
                 project.ExpectedCost = Convert.ToDecimal(txtExpectedCost.Text);
                 project.Status = Status.Started;
-                if(project.ExpectedCost < 0)
-                {
-                    MessageBox.Show("Excepted cost must more than sero");
-                    return;
-                }
+
                 await _projectService.AddProject(project);
                 txtProjId.Text = (project.Id + 1).ToString();
                 MessageBox.Show("Project is successfully added");
+            }
+            catch (ValidationException ex)
+            {
+                MessageBox.Show("Invalid project: " + ex.Message);
             }
             catch (FormatException)
             {
                 MessageBox.Show("Expected cost must be numeric");
             }
-            catch(OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show("Smt went wrong:" + ex.Message);
             }
-            
+
         }
 
         private void grpProject_Enter(object sender, EventArgs e)

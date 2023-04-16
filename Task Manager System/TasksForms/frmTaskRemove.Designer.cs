@@ -38,7 +38,7 @@ namespace Task_Manager_System.TasksForms
             // dtnBack
             // 
             this.dtnBack.Location = new System.Drawing.Point(951, 15);
-            this.dtnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtnBack.Margin = new System.Windows.Forms.Padding(4);
             this.dtnBack.Name = "dtnBack";
             this.dtnBack.Size = new System.Drawing.Size(100, 28);
             this.dtnBack.TabIndex = 0;
@@ -49,7 +49,7 @@ namespace Task_Manager_System.TasksForms
             // btnTaskRemove
             // 
             this.btnTaskRemove.Location = new System.Drawing.Point(453, 320);
-            this.btnTaskRemove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTaskRemove.Margin = new System.Windows.Forms.Padding(4);
             this.btnTaskRemove.Name = "btnTaskRemove";
             this.btnTaskRemove.Size = new System.Drawing.Size(127, 39);
             this.btnTaskRemove.TabIndex = 1;
@@ -72,7 +72,7 @@ namespace Task_Manager_System.TasksForms
             this.cmbTasksList.FormattingEnabled = true;
             this.cmbTasksList.Location = new System.Drawing.Point(228, 65);
             this.cmbTasksList.Name = "cmbTasksList";
-            this.cmbTasksList.Size = new System.Drawing.Size(721, 24);
+            this.cmbTasksList.Size = new System.Drawing.Size(650, 24);
             this.cmbTasksList.TabIndex = 3;
             // 
             // frmTaskRemove
@@ -84,7 +84,7 @@ namespace Task_Manager_System.TasksForms
             this.Controls.Add(this.labelTaskId);
             this.Controls.Add(this.btnTaskRemove);
             this.Controls.Add(this.dtnBack);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTaskRemove";
             this.Text = "frmTaskRemove";
             this.Load += new System.EventHandler(this.frmTaskRemove_Load);

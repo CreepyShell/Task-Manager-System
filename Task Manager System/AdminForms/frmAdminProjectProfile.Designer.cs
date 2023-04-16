@@ -31,7 +31,6 @@ namespace Task_Manager_System.AdminForms
         {
             this.projIdLabel = new System.Windows.Forms.Label();
             this.btnFindProject = new System.Windows.Forms.Button();
-            this.txtProjId = new System.Windows.Forms.TextBox();
             this.numTasksLabel = new System.Windows.Forms.Label();
             this.tasksHoursLabel = new System.Windows.Forms.Label();
             this.projectDurationLabel = new System.Windows.Forms.Label();
@@ -43,6 +42,7 @@ namespace Task_Manager_System.AdminForms
             this.txtDuration = new System.Windows.Forms.TextBox();
             this.txtCost = new System.Windows.Forms.TextBox();
             this.txtDevelopers = new System.Windows.Forms.ComboBox();
+            this.cboProject = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // projIdLabel
@@ -50,9 +50,9 @@ namespace Task_Manager_System.AdminForms
             this.projIdLabel.AutoSize = true;
             this.projIdLabel.Location = new System.Drawing.Point(60, 54);
             this.projIdLabel.Name = "projIdLabel";
-            this.projIdLabel.Size = new System.Drawing.Size(96, 16);
+            this.projIdLabel.Size = new System.Drawing.Size(98, 16);
             this.projIdLabel.TabIndex = 0;
-            this.projIdLabel.Text = "Enter project id";
+            this.projIdLabel.Text = "Choose project";
             // 
             // btnFindProject
             // 
@@ -63,13 +63,6 @@ namespace Task_Manager_System.AdminForms
             this.btnFindProject.Text = "Find project";
             this.btnFindProject.UseVisualStyleBackColor = true;
             this.btnFindProject.Click += new System.EventHandler(this.btnFindProject_Click);
-            // 
-            // txtProjId
-            // 
-            this.txtProjId.Location = new System.Drawing.Point(243, 54);
-            this.txtProjId.Name = "txtProjId";
-            this.txtProjId.Size = new System.Drawing.Size(232, 22);
-            this.txtProjId.TabIndex = 3;
             // 
             // numTasksLabel
             // 
@@ -166,11 +159,20 @@ namespace Task_Manager_System.AdminForms
             this.txtDevelopers.Size = new System.Drawing.Size(230, 24);
             this.txtDevelopers.TabIndex = 15;
             // 
+            // cboProject
+            // 
+            this.cboProject.FormattingEnabled = true;
+            this.cboProject.Location = new System.Drawing.Point(199, 46);
+            this.cboProject.Name = "cboProject";
+            this.cboProject.Size = new System.Drawing.Size(660, 24);
+            this.cboProject.TabIndex = 16;
+            // 
             // frmAdminProjectProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1058, 508);
+            this.Controls.Add(this.cboProject);
             this.Controls.Add(this.txtDevelopers);
             this.Controls.Add(this.txtCost);
             this.Controls.Add(this.txtDuration);
@@ -182,7 +184,6 @@ namespace Task_Manager_System.AdminForms
             this.Controls.Add(this.projectDurationLabel);
             this.Controls.Add(this.tasksHoursLabel);
             this.Controls.Add(this.numTasksLabel);
-            this.Controls.Add(this.txtProjId);
             this.Controls.Add(this.btnFindProject);
             this.Controls.Add(this.projIdLabel);
             this.Name = "frmAdminProjectProfile";
@@ -197,7 +198,6 @@ namespace Task_Manager_System.AdminForms
 
         private System.Windows.Forms.Label projIdLabel;
         private System.Windows.Forms.Button btnFindProject;
-        private System.Windows.Forms.TextBox txtProjId;
         private System.Windows.Forms.Label numTasksLabel;
         private System.Windows.Forms.Label tasksHoursLabel;
         private System.Windows.Forms.Label projectDurationLabel;
@@ -209,5 +209,6 @@ namespace Task_Manager_System.AdminForms
         private System.Windows.Forms.TextBox txtDuration;
         private System.Windows.Forms.TextBox txtCost;
         private System.Windows.Forms.ComboBox txtDevelopers;
+        private System.Windows.Forms.ComboBox cboProject;
     }
 }

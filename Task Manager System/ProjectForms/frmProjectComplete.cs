@@ -25,31 +25,32 @@ namespace Task_Manager_System.ProjectForms
             MainMenu.Show();
         }
 
-        private void btnProjectComplete_Click(object sender, EventArgs e)
+        private async void btnProjectComplete_Click(object sender, EventArgs e)
         {
-            Project project = db.Projects.FirstOrDefault(p => p.Id.ToString() == cboProject.Text);
-            if (project == null)
+            try
             {
-                MessageBox.Show("Project was not found");
-                return;
-            }
+                int projectId = int.Parse(new string(cboProject.Text.TakeWhile(c => c != ':').ToArray()));
+                await projectService.CompleteProject(projectId);
 
-            if (db.Tasks.Any(t => t.Project.Id == project.Id && t.Status != Status.Finished))
+                if (await projectService.CompleteProject(projectId))
+                {
+                    MessageBox.Show("Project was finished successfully");
+                    return;
+                }
+                MessageBox.Show("Deadline is expired");
+            }
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("Project has unfinished tasks");
-                return;
+                MessageBox.Show("Not found: " + ex.Message);
             }
-
-            if (project.EndDate < DateTime.Now)
+            catch (ArgumentException)
             {
-                MessageBox.Show("Deadline is expired, extend it");
-                return;
+                MessageBox.Show("Error: Project has unfinished tasks");
             }
-
-            db.Projects.Add(project);
-            project.Status = Status.Finished;
-            project.EndDate = DateTime.Now;
-            db.Projects.Add(project);
+            catch (Exception)
+            {
+                MessageBox.Show("Smt went wrong");
+            }
 
             Developer[] developers = db.Developers.Where(d => d.Project != null).ToArray();
             foreach (Developer developer in developers)
