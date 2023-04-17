@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Task_Manager_System.Interfaces;
 using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
@@ -10,29 +12,31 @@ namespace Task_Manager_System.AdminForms
     {
         private readonly frmMenu MainMenu;
         private readonly IProjectService _projectService;
-        private readonly TasksDb db;
-        public frmAdminProjectProfile(frmMenu menu, IProjectService projectService)
+        private readonly ITaskService _taskService;
+        private readonly IDevService _devService;
+        public frmAdminProjectProfile(frmMenu menu, IProjectService projectService, ITaskService taskService, IDevService devService)
         {
             _projectService = projectService;
+            _taskService = taskService;
+            _devService = devService;
             InitializeComponent();
             MainMenu = menu;
-            db = TasksDb.GetTasksDb();
         }
 
-        private void btnFindProject_Click(object sender, EventArgs e)
+        private async void btnFindProject_Click(object sender, EventArgs e)
         {
-            Project project = db.Projects.FirstOrDefault(p => p.Id.ToString() == new string(cboProject.Text.TakeWhile(c => c != ':').ToArray()));
+            Project project = await _projectService.GetById(int.Parse(new string(cboProject.Text.TakeWhile(c => c != ':').ToArray())));
             if (project == null)
             {
                 MessageBox.Show("Project was not found");
                 return;
             }
-            Task[] tasks = db.Tasks.Where(t => t.Project.Id == project.Id).ToArray();
-            txtTasks.Text = tasks.Length.ToString();
+            List<Task> tasks = await _taskService.GetAllProjectTasks(project.Id);
+            txtTasks.Text = tasks.Count.ToString();
             txtHours.Text = tasks.Select(t => t.Hours).Sum().ToString();
             txtDuration.Text = (project.EndDate - project.StartDate).ToString();
             txtCost.Text = project.ExpectedCost.ToString();
-            Developer[] developers = db.Developers.Where(d => d.Project?.Id == project.Id).ToArray();
+            Developer[] developers = (await _devService.GetAll()).Where(d => d.Project?.Id == project.Id).ToArray();
             foreach (Developer developer in developers)
                 txtDevelopers.Items.Add(developer.FirstName + " " + developer.LastName);
         }

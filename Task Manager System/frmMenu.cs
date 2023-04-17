@@ -109,7 +109,7 @@ namespace Task_Manager_System
         private void showProjectProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmAdminProjectProfile frmAdminProjectProfile = new frmAdminProjectProfile(this, container.Resolve<IProjectService>());
+            frmAdminProjectProfile frmAdminProjectProfile = new frmAdminProjectProfile(this, container.Resolve<IProjectService>(), container.Resolve<ITaskService>(), container.Resolve<IDevService>());
             frmAdminProjectProfile.Show();
         }
 
@@ -121,14 +121,14 @@ namespace Task_Manager_System
         private void showDeveloperProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this, container.Resolve<IDevService>());
+            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this, container.Resolve<IDevService>(), container.Resolve<ITaskService>());
             frmAdminDeveloperProfile.Show();
         }
 
         private void showMonthRevenueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmAdminProjectRevenue frmAdminProjectRevenue = new frmAdminProjectRevenue(this);
+            frmAdminProjectRevenue frmAdminProjectRevenue = new frmAdminProjectRevenue(this, container.Resolve<IProjectService>());
             frmAdminProjectRevenue.Show();
         }
     }

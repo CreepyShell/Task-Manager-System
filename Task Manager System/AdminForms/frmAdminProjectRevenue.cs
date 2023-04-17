@@ -2,6 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.AdminForms
@@ -9,10 +10,10 @@ namespace Task_Manager_System.AdminForms
     public partial class frmAdminProjectRevenue : Form
     {
         private readonly frmMenu frmMenu;
-        private readonly TasksDb db;
-        public frmAdminProjectRevenue(frmMenu frmMenu)
+        private readonly IProjectService _projectService;
+        public frmAdminProjectRevenue(frmMenu frmMenu, IProjectService projectService)
         {
-            db = TasksDb.GetTasksDb();
+            _projectService = projectService;
             this.frmMenu = frmMenu;
             InitializeComponent();
         }
@@ -31,9 +32,9 @@ namespace Task_Manager_System.AdminForms
 
         }
 
-        private void btnFindProject_Click(object sender, EventArgs e)
+        private async void btnFindProject_Click(object sender, EventArgs e)
         {
-            Project[] projects = db.Projects.Where(p => p.Status == Status.Finished && p.EndDate < dtpEndDate.Value).ToArray();
+            Project[] projects = (await _projectService.GetAll()).Where(p => p.Status == Status.Finished && p.EndDate < dtpEndDate.Value).ToArray();
             decimal revenue = 0;
             if (projects.Length == 0)
             {

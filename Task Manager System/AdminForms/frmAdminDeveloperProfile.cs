@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Task_Manager_System.Interfaces;
+using TMS_BLL.Interfaces;
 using TMS_BLL.Models;
 
 namespace Task_Manager_System.AdminForms
@@ -9,27 +11,28 @@ namespace Task_Manager_System.AdminForms
     public partial class frmAdminDeveloperProfile : Form
     {
         private readonly IDevService _devService;
+        private readonly ITaskService _taskService;
         private readonly frmMenu MainMenu;
-        private readonly TasksDb db;
-        public frmAdminDeveloperProfile(frmMenu menu, IDevService devService)
+        public frmAdminDeveloperProfile(frmMenu menu, IDevService devService, ITaskService taskService)
         {
             _devService = devService;
+            _taskService = taskService;
             InitializeComponent();
             MainMenu = menu;
-            db = TasksDb.GetTasksDb();
         }
 
-        private void btnFindDeveloper_Click(object sender, EventArgs e)
+        private async void btnFindDeveloper_Click(object sender, EventArgs e)
         {
             txtProjectInfo.Clear();
             txtTasksInfo.Items.Clear();
-            Developer developer = db.Developers.FirstOrDefault(d => d.Id.ToString() == new string(cboDev.Text.TakeWhile(c => c != ':').ToArray()));
+            int devId = int.Parse(new string(cboDev.Text.TakeWhile(c => c != ':').ToArray()));
+            Developer developer = await _devService.GetDeveloperById(devId);
             if (developer == null)
             {
                 MessageBox.Show("Developer was not found");
                 return;
             }
-            Task[] tasks = db.Tasks.Where(t => t.Developer.Id == developer.Id).ToArray();
+            List<Task> tasks = await _taskService.GetDeveloperTasks(devId);
             foreach (Task task in tasks)
                 txtTasksInfo.Items.Add($"{task.Name}--{task.Hours}--{task.Status}--{task.Project}");
             if(developer.Project != null)
