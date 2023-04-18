@@ -29,11 +29,13 @@ namespace Task_Manager_System.ProjectForms
 
         private async void frmProjectUpdate_Load(object sender, EventArgs e)
         {
+            cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboStatus.SelectedItem = cboStatus.Items[0];
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
             Project[] projects = (await projectService.GetAll()).ToArray();
             foreach (Project project in projects)
             {
-                cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
+                cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}  Status:{project.Status}");
             }
             dtpEndDate.MinDate = DateTime.Today;
         }
@@ -72,7 +74,7 @@ namespace Task_Manager_System.ProjectForms
             this.txtDescription.Text = project.Description;
             this.txtName.Text = project.Name;
             this.txtExpectedCost.Text = project.ExpectedCost.ToString();
-            this.txtStatus.Text = project.Status.ToString();
+            this.cboStatus.Text = project.Status.ToString();
         }
 
         private async void btnSaveProj_Click(object sender, EventArgs e)
@@ -80,11 +82,11 @@ namespace Task_Manager_System.ProjectForms
 
             if (project.Status == Status.Extended)
             {
-                txtStatus.Enabled = false;
-                txtStatus.Text = project.Status.ToString();
+                cboStatus.Enabled = false;
+                cboStatus.Text = project.Status.ToString();
             }
 
-            if (txtStatus.Text != "Created" && txtStatus.Text != "Started" && txtStatus.Text != "Extended" && txtStatus.Text != "Finished")
+            if (cboStatus.Text != "Created" && cboStatus.Text != "Started" && cboStatus.Text != "Extended" && cboStatus.Text != "Finished")
             {
                 MessageBox.Show("Invalid status");
                 return;
@@ -96,8 +98,9 @@ namespace Task_Manager_System.ProjectForms
                 project.Id = projId;
                 project.EndDate = dtpEndDate.Value;
                 project.Name = txtName.Text;
-                project.Status = (Status)Enum.Parse(typeof(Status), txtStatus.Text);
+                project.Status = (Status)Enum.Parse(typeof(Status), cboStatus.Text);
                 project.ExpectedCost = Convert.ToDecimal(txtExpectedCost.Text);
+                await this.projectService.UpdateProject(project.Id, project);
             }
             catch (FormatException)
             {
@@ -106,7 +109,7 @@ namespace Task_Manager_System.ProjectForms
             }
 
             
-            await this.projectService.UpdateProject(project.Id, project);
+           
 
             this.grpProject.Visible = false;
         }

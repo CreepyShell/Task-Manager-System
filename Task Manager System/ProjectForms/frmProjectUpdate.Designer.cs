@@ -33,7 +33,7 @@ namespace Task_Manager_System.ProjectForms
             this.grpProject = new System.Windows.Forms.GroupBox();
             this.btnSaveProj = new System.Windows.Forms.Button();
             this.txtExpectedCost = new System.Windows.Forms.TextBox();
-            this.txtStatus = new System.Windows.Forms.ComboBox();
+            this.cboStatus = new System.Windows.Forms.ComboBox();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -62,7 +62,7 @@ namespace Task_Manager_System.ProjectForms
             // 
             this.grpProject.Controls.Add(this.btnSaveProj);
             this.grpProject.Controls.Add(this.txtExpectedCost);
-            this.grpProject.Controls.Add(this.txtStatus);
+            this.grpProject.Controls.Add(this.cboStatus);
             this.grpProject.Controls.Add(this.dtpEndDate);
             this.grpProject.Controls.Add(this.txtDescription);
             this.grpProject.Controls.Add(this.txtName);
@@ -100,19 +100,19 @@ namespace Task_Manager_System.ProjectForms
             this.txtExpectedCost.Size = new System.Drawing.Size(157, 20);
             this.txtExpectedCost.TabIndex = 9;
             // 
-            // txtStatus
+            // cboStatus
             // 
-            this.txtStatus.FormattingEnabled = true;
-            this.txtStatus.Items.AddRange(new object[] {
+            this.cboStatus.FormattingEnabled = true;
+            this.cboStatus.Items.AddRange(new object[] {
             "Created",
             "Started",
             "Extended",
             "Finished"});
-            this.txtStatus.Location = new System.Drawing.Point(108, 128);
-            this.txtStatus.Margin = new System.Windows.Forms.Padding(2);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(92, 21);
-            this.txtStatus.TabIndex = 8;
+            this.cboStatus.Location = new System.Drawing.Point(108, 128);
+            this.cboStatus.Margin = new System.Windows.Forms.Padding(2);
+            this.cboStatus.Name = "cboStatus";
+            this.cboStatus.Size = new System.Drawing.Size(100, 21);
+            this.cboStatus.TabIndex = 8;
             // 
             // dtpEndDate
             // 
@@ -250,7 +250,7 @@ namespace Task_Manager_System.ProjectForms
         private System.Windows.Forms.Label labelEndDate;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.ComboBox txtStatus;
+        private System.Windows.Forms.ComboBox cboStatus;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.TextBox txtExpectedCost;
         private System.Windows.Forms.Button btnSaveProj;

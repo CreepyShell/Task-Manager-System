@@ -39,6 +39,10 @@ namespace Task_Manager_System.ProjectForms
                 }
                 MessageBox.Show("Deadline is expired");
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("No project is chosen");
+            }
             catch (ArgumentNullException ex)
             {
                 MessageBox.Show("Not found: " + ex.Message);
@@ -67,7 +71,7 @@ namespace Task_Manager_System.ProjectForms
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach(Project project in await this.projectService.GetAll())
             {
-                cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
+                cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy} Status: {project.Status}");
             }
         }
     }

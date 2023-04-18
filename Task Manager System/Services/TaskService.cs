@@ -27,9 +27,10 @@ namespace Task_Manager_System.Services
 
             taskValidator.Validate(newTask, options => options.ThrowOnFailures());
 
+            string devId = newTask.Developer == null ? "NULL" : newTask.Developer.Id.ToString();
             string sqlQuery = "INSERT INTO TASKS (TaskId, Name, Description, StartDate, Hours, Status, Priority, ProjectId, DeveloperId) " +
                     $"VALUES ({newTask.Id}, '{newTask.Name}', '{newTask.Description}', TO_DATE('{newTask.StartDate.ToString("dd/MM/yyyy")}','DD/MM/YYYY')," +
-                    $" {newTask.Hours}, '{newTask.Status}', '{newTask.Priority}', {newTask.Project.Id}, {newTask.Developer?.Id})";
+                    $" {newTask.Hours}, '{newTask.Status}', '{newTask.Priority}', {newTask.Project.Id}, {devId})";
 
             await insertQuery(sqlQuery);
             return true;
@@ -152,8 +153,7 @@ namespace Task_Manager_System.Services
             if (task.Developer != null)
                 return false;
 
-            string updateQuery = "UPDATE tasks " +
-                    $"SET ProjectId = NULL, " +
+            string updateQuery = "DELETE FROM tasks " +
                     $" WHERE TaskId = {taskId}";
 
             await insertQuery(updateQuery);
@@ -183,7 +183,7 @@ namespace Task_Manager_System.Services
         private async Task<TMS_BLL.Models.Task> GetTask(string query)
         {
             DataSet dataSet = await getDataSet(query);
-            DataTable tasks = dataSet.Tables["tasks"];
+            DataTable tasks = dataSet.Tables[0];
 
             if (tasks.Rows.Count == 0)
                 return null;
@@ -191,15 +191,15 @@ namespace Task_Manager_System.Services
             DataRow row = tasks.Rows[0];
             TMS_BLL.Models.Task task = new TMS_BLL.Models.Task()
             {
-                Id = (int)row["TaskId"],
-                Name = (string)row["Name"],
-                Description = (string)row["Description"],
-                StartDate = (DateTime)row["StartDate"],
-                Hours = (int)row["Hours"],
-                Status = (Status)row["Status"],
-                Priority = (Priority)row["Priority"],
-                Developer = row.IsNull("DeveloperId") ? null : new Developer() { Id = (int)row["DeveloperId"] },
-                Project = row.IsNull("ProjectId") ? null : new Project() { Id = (int)row["ProjectId"] },
+                Id = row.Field<short>(0),
+                Name = row.Field<string>(1),
+                Description = row.Field<string>(2),
+                StartDate = row.Field<DateTime>(3),
+                Hours = row.Field<short>(4),
+                Status = (Status)Enum.Parse(typeof(Status), row.Field<string>(5)),
+                Priority = (Priority)Enum.Parse(typeof(Priority), row.Field<string>(6)),
+                Project = row.IsNull(7) ? null : new Project() { Id = row.Field<short>(7) },
+                Developer = row.IsNull(8) ? null : new Developer() { Id = row.Field<short>(8) },
             };
             dataSet.Dispose();
             return task;
@@ -224,11 +224,11 @@ namespace Task_Manager_System.Services
                     Name = row.Field<string>(1),
                     Description = row.Field<string>(2),
                     StartDate = row.Field<DateTime>(3),
-                    Hours = (int)row["Hours"],
-                    Status = (Status)row["Status"],
-                    Priority = (Priority)row["Priority"],
-                    Developer = new Developer() { Id = (int)row["DeveloperId"] },
-                    Project = new Project() { Id = (int)row["ProjectId"] },
+                    Hours = row.Field<short>(4),
+                    Status = (Status)Enum.Parse(typeof(Status), row.Field<string>(5)),
+                    Priority = (Priority)Enum.Parse(typeof(Priority), row.Field<string>(6)),
+                    Project = row.IsNull(7) ? null : new Project() { Id = row.Field<short>(7) },
+                    Developer = row.IsNull(8) ? null : new Developer() { Id = row.Field<short>(8) },
                 });
             }
             ds.Dispose();

@@ -59,9 +59,9 @@ namespace Task_Manager_System.Services
             if (developer.Project != null || (await _taskService.GetDeveloperTasks(devId)).Count != 0)
                 return false;
 
-            string updateQuery = "UPDATE projects " +
-                    $"SET developerId = '{devId}', " +
-                    $" WHERE projectId = {projId}";
+            string updateQuery = "UPDATE DEVELOPERS " +
+                    $"SET ProjectId = {projId} " +
+                    $" WHERE DevId = {devId}";
 
             await insertQuery(updateQuery);
 
@@ -81,15 +81,15 @@ namespace Task_Manager_System.Services
                 return false;
 
             string updateProject = "UPDATE projects " +
-                   "SET status = 'finished'," +
+                   "SET status = 'Finished'," +
                    "EndDate =  TO_DATE('" + DateTime.Now.ToString("dd/MM/yyyy") + "', 'DD/MM/YYYY')" +
                    $" WHERE projId = {project.Id}";
 
             await insertQuery(updateProject);
 
             string updateDeveloper = "UPDATE developers " +
-                   "SET ProjectId = NULL," +
-                   $" WHERE projId = {project.Id}";
+                   "SET ProjectId = NULL" +
+                   $" WHERE ProjectId = {project.Id}";
 
             await insertQuery(updateDeveloper);
 

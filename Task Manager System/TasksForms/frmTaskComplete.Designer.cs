@@ -37,10 +37,9 @@ namespace Task_Manager_System.TasksForms
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(951, 16);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBack.Location = new System.Drawing.Point(713, 13);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(100, 28);
+            this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 0;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -48,10 +47,9 @@ namespace Task_Manager_System.TasksForms
             // 
             // btnCompleteTask
             // 
-            this.btnCompleteTask.Location = new System.Drawing.Point(513, 405);
-            this.btnCompleteTask.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCompleteTask.Location = new System.Drawing.Point(385, 329);
             this.btnCompleteTask.Name = "btnCompleteTask";
-            this.btnCompleteTask.Size = new System.Drawing.Size(113, 39);
+            this.btnCompleteTask.Size = new System.Drawing.Size(85, 32);
             this.btnCompleteTask.TabIndex = 1;
             this.btnCompleteTask.Text = "Complete task";
             this.btnCompleteTask.UseVisualStyleBackColor = true;
@@ -60,31 +58,30 @@ namespace Task_Manager_System.TasksForms
             // labelTaskId
             // 
             this.labelTaskId.AutoSize = true;
-            this.labelTaskId.Location = new System.Drawing.Point(251, 124);
-            this.labelTaskId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTaskId.Location = new System.Drawing.Point(54, 101);
             this.labelTaskId.Name = "labelTaskId";
-            this.labelTaskId.Size = new System.Drawing.Size(82, 16);
+            this.labelTaskId.Size = new System.Drawing.Size(66, 13);
             this.labelTaskId.TabIndex = 2;
             this.labelTaskId.Text = "Choose task";
             // 
             // cboTask
             // 
             this.cboTask.FormattingEnabled = true;
-            this.cboTask.Location = new System.Drawing.Point(364, 115);
+            this.cboTask.Location = new System.Drawing.Point(141, 93);
+            this.cboTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboTask.Name = "cboTask";
-            this.cboTask.Size = new System.Drawing.Size(458, 24);
+            this.cboTask.Size = new System.Drawing.Size(625, 21);
             this.cboTask.TabIndex = 3;
             // 
             // frmTaskComplete
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.cboTask);
             this.Controls.Add(this.labelTaskId);
             this.Controls.Add(this.btnCompleteTask);
             this.Controls.Add(this.btnBack);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTaskComplete";
             this.Text = "frmTaskComplete";
             this.Load += new System.EventHandler(this.frmTaskComplete_Load);

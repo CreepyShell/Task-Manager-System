@@ -24,9 +24,10 @@ namespace Task_Manager_System.TasksForms
         {
             cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Task task in await _taskService.GetAll())
-            {
                 cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}");
-            }
+
+            if (cboTask.Items.Count > 0)
+                cboTask.SelectedItem = cboTask.Items[0];
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -37,6 +38,12 @@ namespace Task_Manager_System.TasksForms
 
         private async void dtnTaskFind_Click(object sender, EventArgs e)
         {
+            if (cboTask.Items.Count == 0)
+            {
+                MessageBox.Show("No tasks available");
+                return;
+            }
+
             task = await _taskService.GetById(int.Parse(new string(cboTask.Text.TakeWhile(c => c != ':').ToArray())));
             if (task == null)
             {

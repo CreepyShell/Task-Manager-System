@@ -39,20 +39,27 @@ namespace Task_Manager_System.TasksForms
             task.Name = txtName.Text;
             task.Description = txtDescription.Text;
             task.StartDate = dtpStartTime.Value;
-            Project project = await projectService.GetById(int.Parse(cboProjects.Text.TakeWhile(c => c == ':').ToString()));
+            if (cboProjects.Items.Count == 0)
+            {
+                MessageBox.Show("No project available");
+                return;
+            }
+            Project project = await projectService.GetById(int.Parse(new string(cboProjects.Text.TakeWhile(c => c != ':').ToArray())));
             if (project == null)
             {
                 MessageBox.Show("Project was not found");
                 return;
             }
 
-            Developer developer = await devService.GetDeveloperById(int.Parse(cboDev.Text.TakeWhile(c => c == ':').ToString()));
+            Developer developer = null;
+            if(cboDev.SelectedItem != null)
+                developer = await devService.GetDeveloperById(int.Parse(new string(cboProjects.Text.TakeWhile(c => c != ':').ToArray())));
 
             task.Project = project;
             task.Developer = developer;
            
             task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
-            task.Status = (Status)Enum.Parse(typeof(Status), cmbStatus.Text);
+            task.Status = (Status)Enum.Parse(typeof(Status), cboStatus.Text);
 
             try
             {
@@ -88,18 +95,22 @@ namespace Task_Manager_System.TasksForms
         {
             dtpStartTime.MinDate = DateTime.Now;
             cmbPriority.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPriority.Text = cmbPriority.Items[0].ToString();
+            cmbPriority.SelectedItem = cmbPriority.Items[0].ToString();
+
+            cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboStatus.SelectedItem = cboStatus.Items[0].ToString();
+
             txtTaskId.Text = Task.GetNextTaskId().ToString();
             cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Developer dev in await this.devService.GetAll())
                 cboDev.Items.Add($"{dev.Id}: {dev.FirstName} {dev.LastName} {dev.Specialization}");
-            cboDev.Items.Add("Unassigned task");
 
             cboProjects.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Project project in await this.projectService.GetAll())
-            {
                 cboProjects.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
-            }
+
+            if (cboProjects.Items.Count > 0)
+                cboProjects.SelectedItem = cboProjects.Items[0];
         }
 
         private void cboProjects_SelectedIndexChanged(object sender, EventArgs e)

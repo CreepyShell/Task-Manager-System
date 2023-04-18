@@ -32,6 +32,9 @@ namespace Task_Manager_System.TasksForms
                 if(await _taskService.RemoveTaskFromProject(int.Parse(taskId)))
                 {
                     MessageBox.Show("Task was removed");
+                    cmbTasksList.Items.Remove(cmbTasksList.SelectedItem);
+                    if (cmbTasksList.Items.Count > 0)
+                        cmbTasksList.Text = cmbTasksList.Items[0].ToString();
                     return;
                 }
                 MessageBox.Show("A developer is working on this task");
@@ -48,10 +51,6 @@ namespace Task_Manager_System.TasksForms
             {
                 MessageBox.Show("Error: smt went wrong");
             }
-
-            cmbTasksList.Items.Remove(cmbTasksList.SelectedItem);
-            if (cmbTasksList.Items.Count > 0)
-                cmbTasksList.Text = cmbTasksList.Items[0].ToString();
         }
 
         private async void frmTaskRemove_Load(object sender, EventArgs e)

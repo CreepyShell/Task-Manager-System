@@ -36,6 +36,10 @@ namespace Task_Manager_System.TasksForms
                 }
                 MessageBox.Show("Task is already finished");
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("No task is chosen");
+            }
             catch (ArgumentNullException ex)
             {
                 MessageBox.Show("Data not found:" + ex.Message);
@@ -55,7 +59,8 @@ namespace Task_Manager_System.TasksForms
             cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Task task in await _taskService.GetAll())
             {
-                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}");
+                cboTask.Items.Add($"{task.Id}: {task.Name}   Deadline: {task.StartDate:dd-MM-yyyy}   Hours: {task.Hours}    Priority: {task.Priority}  " +
+                    $"    Status: {task.Status}     DevId: {task.Developer?.Id}");
             }
         }
     }

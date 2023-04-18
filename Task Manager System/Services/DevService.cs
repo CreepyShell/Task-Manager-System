@@ -59,7 +59,7 @@ namespace Task_Manager_System.Services
         private async Task<Developer> GetDeveloper(string query)
         {
             DataSet dataSet = await getDataSet(query);
-            DataTable developers = dataSet.Tables["developers"];
+            DataTable developers = dataSet.Tables[0];
 
             if (developers.Rows.Count == 0)
                 return null;
@@ -67,12 +67,12 @@ namespace Task_Manager_System.Services
             DataRow row = developers.Rows[0];
             Developer developer = new Developer()
             {
-                Id = (int)row["DevId"],
-                FirstName = (string)row["FirstName"],
-                LastName = (string)row["LastName"],
-                Specialization = (string)row["Specialization"],
-                Age = (int)row["Age"],
-                Project = new Project() { Id = (int)row["ProjectId"] }
+                Id = row.Field<short>(0),
+                FirstName = row.Field<string>(1),
+                LastName = row.Field<string>(2),
+                Specialization = row.Field<string>(3),
+                Age = row.Field<short>(4),
+                Project = row.IsNull(5) ? null : new Project() { Id = row.Field<short>(5) }
             };
             dataSet.Dispose();
             return developer;

@@ -40,29 +40,26 @@ namespace Task_Manager_System.TasksForms
             // labelDevId
             // 
             this.labelDevId.AutoSize = true;
-            this.labelDevId.Location = new System.Drawing.Point(136, 167);
-            this.labelDevId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDevId.Location = new System.Drawing.Point(102, 79);
             this.labelDevId.Name = "labelDevId";
-            this.labelDevId.Size = new System.Drawing.Size(119, 16);
+            this.labelDevId.Size = new System.Drawing.Size(93, 13);
             this.labelDevId.TabIndex = 2;
             this.labelDevId.Text = "Choose developer";
             // 
             // labelTaskId
             // 
             this.labelTaskId.AutoSize = true;
-            this.labelTaskId.Location = new System.Drawing.Point(136, 103);
-            this.labelTaskId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTaskId.Location = new System.Drawing.Point(102, 128);
             this.labelTaskId.Name = "labelTaskId";
-            this.labelTaskId.Size = new System.Drawing.Size(82, 16);
+            this.labelTaskId.Size = new System.Drawing.Size(66, 13);
             this.labelTaskId.TabIndex = 3;
             this.labelTaskId.Text = "Choose task";
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(951, 16);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBack.Location = new System.Drawing.Point(713, 13);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(100, 28);
+            this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -70,10 +67,9 @@ namespace Task_Manager_System.TasksForms
             // 
             // btnAssignDev
             // 
-            this.btnAssignDev.Location = new System.Drawing.Point(421, 321);
-            this.btnAssignDev.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAssignDev.Location = new System.Drawing.Point(316, 261);
             this.btnAssignDev.Name = "btnAssignDev";
-            this.btnAssignDev.Size = new System.Drawing.Size(137, 49);
+            this.btnAssignDev.Size = new System.Drawing.Size(103, 40);
             this.btnAssignDev.TabIndex = 5;
             this.btnAssignDev.Text = "Assign developer to chosen task";
             this.btnAssignDev.UseVisualStyleBackColor = true;
@@ -82,31 +78,32 @@ namespace Task_Manager_System.TasksForms
             // cboTask
             // 
             this.cboTask.FormattingEnabled = true;
-            this.cboTask.Location = new System.Drawing.Point(268, 94);
+            this.cboTask.Location = new System.Drawing.Point(201, 125);
+            this.cboTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboTask.Name = "cboTask";
-            this.cboTask.Size = new System.Drawing.Size(583, 24);
+            this.cboTask.Size = new System.Drawing.Size(438, 21);
             this.cboTask.TabIndex = 6;
             // 
             // cboDev
             // 
             this.cboDev.FormattingEnabled = true;
-            this.cboDev.Location = new System.Drawing.Point(268, 158);
+            this.cboDev.Location = new System.Drawing.Point(201, 76);
+            this.cboDev.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboDev.Name = "cboDev";
-            this.cboDev.Size = new System.Drawing.Size(583, 24);
+            this.cboDev.Size = new System.Drawing.Size(438, 21);
             this.cboDev.TabIndex = 7;
             // 
             // frmTaskRemoveDeveloper
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.cboDev);
             this.Controls.Add(this.cboTask);
             this.Controls.Add(this.btnAssignDev);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.labelTaskId);
             this.Controls.Add(this.labelDevId);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTaskRemoveDeveloper";
             this.Text = "frmTaskRemoveDeveloper";
             this.Load += new System.EventHandler(this.frmTaskRemoveDeveloper_Load);

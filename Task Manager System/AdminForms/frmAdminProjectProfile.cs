@@ -25,6 +25,11 @@ namespace Task_Manager_System.AdminForms
 
         private async void btnFindProject_Click(object sender, EventArgs e)
         {
+            if (cboProject.Items.Count == 0)
+            {
+                MessageBox.Show("No projects available");
+                return;
+            }
             Project project = await _projectService.GetById(int.Parse(new string(cboProject.Text.TakeWhile(c => c != ':').ToArray())));
             if (project == null)
             {
@@ -37,8 +42,9 @@ namespace Task_Manager_System.AdminForms
             txtDuration.Text = (project.EndDate - project.StartDate).ToString();
             txtCost.Text = project.ExpectedCost.ToString();
             Developer[] developers = (await _devService.GetAll()).Where(d => d.Project?.Id == project.Id).ToArray();
+            cboDevelopers.Items.Clear();
             foreach (Developer developer in developers)
-                txtDevelopers.Items.Add(developer.FirstName + " " + developer.LastName);
+                cboDevelopers.Items.Add(developer.FirstName + " " + developer.LastName);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -49,12 +55,12 @@ namespace Task_Manager_System.AdminForms
 
         private async void frmAdminProjectProfile_Load(object sender, EventArgs e)
         {
-            txtDevelopers.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboDevelopers.DropDownStyle = ComboBoxStyle.DropDownList;
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Project project in await _projectService.GetAll())
-            {
                 cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
-            }
+            if (cboProject.Items.Count > 0)
+                cboProject.SelectedItem = cboProject.Items[0];
         }
     }
 }

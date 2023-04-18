@@ -48,8 +48,8 @@ CREATE TABLE TASKS(
 
 INSERT INTO PROJECTS (ProjId, ProjectName, ProjectDescription, StartDate, EndDate, Status, ExpectedCost) VALUES (1, 'Project A', 'A project to develop a new e-commerce platform', TO_DATE('2022-01-01', 'YYYY/MM/DD'), TO_DATE('2022-06-30','YYYY/MM/DD'), 'Extended', 100000);
 INSERT INTO PROJECTS (ProjId, ProjectName, ProjectDescription, StartDate, EndDate, Status, ExpectedCost) VALUES (2, 'Project B', 'A project to develop a mobile app', TO_DATE('2022-02-01', 'YYYY/MM/DD'), TO_DATE('2022-08-31','YYYY/MM/DD'), 'Created', 50000);
-INSERT INTO PROJECTS (ProjId, ProjectName, ProjectDescription, StartDate, EndDate, Status, ExpectedCost) VALUES (3, 'Project C', 'A project to upgrade legacy systems', TO_DATE('2022-03-01', 'YYYY/MM/DD'), TO_DATE('2022-12-31','YYYY/MM/DD'), 'Started', 200000);
-INSERT INTO PROJECTS (ProjId, ProjectName, ProjectDescription, StartDate, EndDate, Status, ExpectedCost) VALUES (4, 'Project D', 'A project to implement a new CRM system', TO_DATE('2022-04-01', 'YYYY/MM/DD'), TO_DATE('2023-03-31', 'YYYY/MM/DD'), 'Created', 150000);
+INSERT INTO PROJECTS (ProjId, ProjectName, ProjectDescription, StartDate, EndDate, Status, ExpectedCost) VALUES (3, 'Project C', 'A project to upgrade legacy systems', TO_DATE('2023-07-01', 'YYYY/MM/DD'), TO_DATE('2022-12-31','YYYY/MM/DD'), 'Started', 200000);
+INSERT INTO PROJECTS (ProjId, ProjectName, ProjectDescription, StartDate, EndDate, Status, ExpectedCost) VALUES (4, 'Project D', 'A project to implement a new CRM system', TO_DATE('2023-06-01', 'YYYY/MM/DD'), TO_DATE('2023-03-31', 'YYYY/MM/DD'), 'Created', 150000);
 INSERT INTO PROJECTS (ProjId, ProjectName, ProjectDescription, StartDate, EndDate, Status, ExpectedCost) VALUES (5, 'Project E', 'A project to migrate to a new cloud platform', TO_DATE('2022-05-01', 'YYYY/MM/DD'), TO_DATE('2023-01-31','YYYY/MM/DD'), 'Extended', 75000);
 
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (1, 'John', 'Doe', 'Java', 30, 1);
@@ -57,6 +57,7 @@ INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, Project
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (3, 'Bob', 'Johnson', 'C#', 35, 2);
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (4, 'Alice', 'Williams', 'JavaScript', 28, 1);
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (5, 'David', 'Brown', 'PHP', 30, 3);
+INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (6, 'John', 'Selby', 'PHP', 25, NULL);
 
 
 INSERT INTO TASKS (TaskId, Name, Description, StartDate, Hours, Status, Priority, ProjectId, DeveloperId) VALUES (1, 'Task A', 'Develop login functionality', TO_DATE('2022-01-01','YYYY/MM/DD'), 20, 'Started', 'High', 1, 1);

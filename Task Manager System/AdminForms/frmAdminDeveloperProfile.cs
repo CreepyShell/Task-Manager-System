@@ -12,11 +12,13 @@ namespace Task_Manager_System.AdminForms
     {
         private readonly IDevService _devService;
         private readonly ITaskService _taskService;
+        private readonly IProjectService _projectService;
         private readonly frmMenu MainMenu;
-        public frmAdminDeveloperProfile(frmMenu menu, IDevService devService, ITaskService taskService)
+        public frmAdminDeveloperProfile(frmMenu menu, IDevService devService, ITaskService taskService, IProjectService projectService)
         {
             _devService = devService;
             _taskService = taskService;
+            _projectService = projectService;
             InitializeComponent();
             MainMenu = menu;
         }
@@ -25,6 +27,11 @@ namespace Task_Manager_System.AdminForms
         {
             txtProjectInfo.Clear();
             txtTasksInfo.Items.Clear();
+            if (cboDev.Items.Count == 0)
+            {
+                MessageBox.Show("No developers available now");
+                return;
+            }
             int devId = int.Parse(new string(cboDev.Text.TakeWhile(c => c != ':').ToArray()));
             Developer developer = await _devService.GetDeveloperById(devId);
             if (developer == null)
@@ -34,10 +41,11 @@ namespace Task_Manager_System.AdminForms
             }
             List<Task> tasks = await _taskService.GetDeveloperTasks(devId);
             foreach (Task task in tasks)
-                txtTasksInfo.Items.Add($"{task.Name}--{task.Hours}--{task.Status}--{task.Project}");
+                txtTasksInfo.Items.Add($"{task.Name}--{task.Hours}--{task.Status}--{task.Project?.Id}");
             if(developer.Project != null)
             {
-                txtProjectInfo.Text = $"{developer.Project.Name}--{developer.Project.Status}--{developer.Project.StartDate}--{developer.Project.EndDate}";
+                Project project = await _projectService.GetById(developer.Project.Id);
+                txtProjectInfo.Text = $"{project.Name}--{project.Status}--{project.StartDate}--{project.EndDate}";
                 return;
             }
             txtProjectInfo.Text = "Null";
@@ -48,9 +56,10 @@ namespace Task_Manager_System.AdminForms
             txtTasksInfo.DropDownStyle = ComboBoxStyle.DropDownList;
             cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Developer developer in await _devService.GetAll())
-            {
                 cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}");
-            }
+
+            if (cboDev.Items.Count > 0)
+                cboDev.SelectedItem = cboDev.Items[0];
         }
 
         private void btnBack_Click(object sender, EventArgs e)

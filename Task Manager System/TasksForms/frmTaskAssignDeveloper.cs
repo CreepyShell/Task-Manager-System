@@ -28,6 +28,11 @@ namespace Task_Manager_System.TasksForms
 
         private async void btnTaskAssignDeveloper_Click(object sender, EventArgs e)
         {
+            if(cboTask.Items.Count==0 || cboTask.Items.Count==0)
+            {
+                MessageBox.Show("Mp developers or tasks are available");
+                return;
+            }
             try
             {
                 int developerId = int.Parse(new string(cboDev.Text.TakeWhile(c => c != ':').ToArray()));
@@ -64,14 +69,15 @@ namespace Task_Manager_System.TasksForms
         {
             cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Task task in await _taskService.GetAll())
-            {
                 cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}");
-            }
+            if (cboTask.Items.Count > 0)
+                cboTask.SelectedItem = cboTask.Items[0];
+
             cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Developer developer in await _devService.GetAll())
-            {
                 cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}");
-            }
+            if (cboDev.Items.Count > 0)
+                cboDev.SelectedItem = cboDev.Items[0];
         }
     }
 }
