@@ -20,7 +20,7 @@ namespace Task_Manager_System.Services
 
             DataSet ds = await getDataSet(selectQuery);
 
-            DataTable dt = ds.Tables["projects"];
+            DataTable dt = ds.Tables[0];
 
             if (dt.Rows.Count == 0)
                 return developers;
@@ -29,12 +29,12 @@ namespace Task_Manager_System.Services
             {
                 developers.Add(new Developer()
                 {
-                    Id = (int)row["DevId"],
-                    FirstName = (string)row["FirstName"],
-                    LastName = (string)row["LastName"],
-                    Specialization = (string)row["Specialization"],
-                    Age = (int)row["Age"],
-                    Project = row.IsNull("ProjectId") ? null : new Project() { Id = (int)row["ProjectId"] }
+                    Id = row.Field<short>(0),
+                    FirstName = row.Field<string>(1),
+                    LastName = row.Field<string>(2),
+                    Specialization = row.Field<string>(3),
+                    Age = row.Field<short>(4),
+                    Project = row.IsNull(5) ? null : new Project() { Id = row.Field<short>(5) }
                 });
             }
             ds.Dispose();

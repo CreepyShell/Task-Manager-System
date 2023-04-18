@@ -30,7 +30,8 @@ namespace Task_Manager_System.ProjectForms
         private async void frmProjectUpdate_Load(object sender, EventArgs e)
         {
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach(Project project in await projectService.GetAll())
+            Project[] projects = (await projectService.GetAll()).ToArray();
+            foreach (Project project in projects)
             {
                 cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
             }

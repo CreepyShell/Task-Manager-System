@@ -74,10 +74,10 @@ namespace Task_Manager_System.Services
             if (project == null)
                 throw new ArgumentNullException(nameof(Project), "Project was not found or just null");
 
-            if((await _taskService.GetAllProjectTasks(project.Id)).Any(t => t.Status != Status.Finished))
-                throw new ArgumentException( "Project has unfinished tasks");
+            if ((await _taskService.GetAllProjectTasks(project.Id)).Any(t => t.Status != Status.Finished))
+                throw new ArgumentException("Project has unfinished tasks");
 
-            if(project.EndDate < DateTime.Now)
+            if (project.EndDate < DateTime.Now)
                 return false;
 
             string updateProject = "UPDATE projects " +
@@ -103,7 +103,7 @@ namespace Task_Manager_System.Services
 
             DataSet ds = await getDataSet(selectQuery);
 
-            DataTable dt = ds.Tables["projects"];
+            DataTable dt = ds.Tables[0];
 
             if (dt.Rows.Count == 0)
                 return projects;
@@ -112,13 +112,13 @@ namespace Task_Manager_System.Services
             {
                 projects.Add(new Project()
                 {
-                    Id = (int)row["ProjId"],
-                    Name = (string)row["ProjectName"],
-                    Description = (string)row["ProjectDescription"],
-                    StartDate = (DateTime)row["StartDate"],
-                    EndDate = (DateTime)row["EndDate"],
-                    Status = (Status)row["Status"],
-                    ExpectedCost = (decimal)row["ExpectedCost"]
+                    Id = row.Field<short>(0),
+                    Name = row.Field<string>(1),
+                    Description = row.Field<string>(2),
+                    StartDate = row.Field<DateTime>(3),
+                    EndDate = row.Field<DateTime>(4),
+                    Status = (Status)Enum.Parse(typeof(Status), row.Field<string>(5)),
+                    ExpectedCost = (decimal)row.Field<double>(6)
                 });
             }
             ds.Dispose();
@@ -160,7 +160,7 @@ namespace Task_Manager_System.Services
         private async Task<Project> GetProject(string query)
         {
             DataSet dataSet = await getDataSet(query);
-            DataTable projects = dataSet.Tables["projects"];
+            DataTable projects = dataSet.Tables[0];
 
             if (projects.Rows.Count == 0)
                 return null;
@@ -168,13 +168,13 @@ namespace Task_Manager_System.Services
             DataRow row = projects.Rows[0];
             Project project = new Project()
             {
-                Id = (int)row["ProjId"],
-                Name = (string)row["ProjectName"],
-                Description = (string)row["ProjectDescription"],
-                StartDate = (DateTime)row["StartDate"],
-                EndDate = (DateTime)row["EndDate"],
-                Status = (Status)row["Status"],
-                ExpectedCost = (decimal)row["ExpectedCost"]
+                Id = row.Field<short>(0),
+                Name = row.Field<string>(1),
+                Description = row.Field<string>(2),
+                StartDate = row.Field<DateTime>(3),
+                EndDate = row.Field<DateTime>(4),
+                Status = (Status)Enum.Parse(typeof(Status), row.Field<string>(5)),
+                ExpectedCost = (decimal)row.Field<double>(6)
             };
             dataSet.Dispose();
             return project;

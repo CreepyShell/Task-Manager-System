@@ -211,7 +211,7 @@ namespace Task_Manager_System.Services
 
             DataSet ds = await getDataSet(query);
 
-            DataTable dt = ds.Tables["tasks"];
+            DataTable dt = ds.Tables[0];
 
             if (dt.Rows.Count == 0)
                 return tasks;
@@ -220,10 +220,10 @@ namespace Task_Manager_System.Services
             {
                 tasks.Add(new TMS_BLL.Models.Task()
                 {
-                    Id = (int)row["TaskId"],
-                    Name = (string)row["Name"],
-                    Description = (string)row["Description"],
-                    StartDate = (DateTime)row["StartDate"],
+                    Id = row.Field<short>(0),
+                    Name = row.Field<string>(1),
+                    Description = row.Field<string>(2),
+                    StartDate = row.Field<DateTime>(3),
                     Hours = (int)row["Hours"],
                     Status = (Status)row["Status"],
                     Priority = (Priority)row["Priority"],
