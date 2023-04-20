@@ -158,7 +158,6 @@
     <Compile Include="Services\TaskService.cs" />
     <Compile Include="Services\Validators\ProjectValidator.cs" />
     <Compile Include="Services\Validators\TaskValidator.cs" />
-    <Compile Include="TasksDb.cs" />
     <Compile Include="TasksForms\frmTaskAdd.cs">
       <SubType>Form</SubType>
     </Compile>

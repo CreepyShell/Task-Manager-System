@@ -9,13 +9,11 @@ namespace Task_Manager_System.ProjectForms
     public partial class frmProjectComplete : Form
     {
         private readonly frmMenu MainMenu;
-        private readonly TasksDb db;
         private readonly IProjectService projectService;
         public frmProjectComplete(frmMenu menu, IProjectService projectService)
         {
             InitializeComponent();
             MainMenu = menu;
-            db = TasksDb.GetTasksDb();
             this.projectService = projectService;
         }
 
@@ -53,16 +51,7 @@ namespace Task_Manager_System.ProjectForms
             catch (Exception)
             {
                 MessageBox.Show("Smt went wrong");
-            }
-
-            Developer[] developers = db.Developers.Where(d => d.Project != null).ToArray();
-            foreach (Developer developer in developers)
-            {
-                db.Developers.Remove(developer);
-                developer.Project = null;
-                db.Developers.Add(developer);
-            }    
-
+            } 
         }
 
         private async void frmProjectComplete_Load(object sender, EventArgs e)

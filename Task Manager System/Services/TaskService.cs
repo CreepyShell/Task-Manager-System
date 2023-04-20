@@ -84,7 +84,6 @@ namespace Task_Manager_System.Services
 
             return true;
         }
-        //SELECT * FROM TASKS LEFT JOIN PROJECTS ON TASKS.TASKID = PROJECTS.PROJID;
         public async Task<List<TMS_BLL.Models.Task>> GetAll()
         {
             string selectQuery = "SELECT * FROM tasks";

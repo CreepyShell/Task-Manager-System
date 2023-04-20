@@ -25,8 +25,9 @@ namespace Task_Manager_System.AdminForms
 
         private async void btnFindDeveloper_Click(object sender, EventArgs e)
         {
+            //SELECT * FROM DEVELOPERS LEFT JOIN PROJECTS ON DEVELOPERS.PROJECTID = PROJECTS.PROJID LEFT JOIN TASKS ON DEVELOPERS.DEVID = TASKS.DEVELOPERID WHERE DEVELOPERS.DEVID = 1;
             txtProjectInfo.Clear();
-            txtTasksInfo.Items.Clear();
+            dgvTasks.Rows.Clear();
             if (cboDev.Items.Count == 0)
             {
                 MessageBox.Show("No developers available now");
@@ -41,8 +42,17 @@ namespace Task_Manager_System.AdminForms
             }
             List<Task> tasks = await _taskService.GetDeveloperTasks(devId);
             foreach (Task task in tasks)
-                txtTasksInfo.Items.Add($"{task.Name}--{task.Hours}--{task.Status}--{task.Project?.Id}");
-            if(developer.Project != null)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Name });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Description });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.StartDate.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Hours });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Status });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Priority });
+                dgvTasks.Rows.Add(row);
+            }
+            if (developer.Project != null)
             {
                 Project project = await _projectService.GetById(developer.Project.Id);
                 txtProjectInfo.Text = $"{project.Name}--{project.Status}--{project.StartDate}--{project.EndDate}";
@@ -53,7 +63,6 @@ namespace Task_Manager_System.AdminForms
 
         private async void frmAdminDeveloperProfile_Load(object sender, EventArgs e)
         {
-            txtTasksInfo.DropDownStyle = ComboBoxStyle.DropDownList;
             cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Developer developer in await _devService.GetAll())
                 cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}");
@@ -65,7 +74,7 @@ namespace Task_Manager_System.AdminForms
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
-            MainMenu.Show(); 
+            MainMenu.Show();
         }
     }
 }

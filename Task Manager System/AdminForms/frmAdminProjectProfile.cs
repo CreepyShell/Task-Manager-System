@@ -25,6 +25,7 @@ namespace Task_Manager_System.AdminForms
 
         private async void btnFindProject_Click(object sender, EventArgs e)
         {
+            //
             if (cboProject.Items.Count == 0)
             {
                 MessageBox.Show("No projects available");
@@ -42,15 +43,27 @@ namespace Task_Manager_System.AdminForms
             txtDuration.Text = (project.EndDate - project.StartDate).ToString();
             txtCost.Text = project.ExpectedCost.ToString();
             Developer[] developers = (await _devService.GetAll()).Where(d => d.Project?.Id == project.Id).ToArray();
-            cboDevelopers.Items.Clear();
             dgvDevs.Rows.Clear();
             foreach (Developer developer in developers)
             {
-                cboDevelopers.Items.Add(developer.FirstName + " " + developer.LastName);
                 DataGridViewRow row = new DataGridViewRow();
                 row.Cells.Add(new DataGridViewTextBoxCell() {Value = developer.FirstName });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = developer.LastName });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = developer.Specialization });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = developer.Age });
                 dgvDevs.Rows.Add(row);
+            }
+            dgvTasks.Rows.Clear();
+            foreach (Task task in tasks)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Name });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Description });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.StartDate.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Hours });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Status });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = task.Priority });
+                dgvTasks.Rows.Add(row);
             }
         }
 
@@ -59,20 +72,14 @@ namespace Task_Manager_System.AdminForms
             this.Close();
             MainMenu.Show();
         }
-
+        //SELECT * FROM PROJECTS LEFT JOIN DEVELOPERS ON PROJECTS.PROJID=DEVELOPERS.PROJECTID LEFT JOIN TASKS ON PROJECTS.PROJID = TASKS.PROJECTID WHERE PROJECTS.PROJID = 2;
         private async void frmAdminProjectProfile_Load(object sender, EventArgs e)
         {
-            cboDevelopers.DropDownStyle = ComboBoxStyle.DropDownList;
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Project project in await _projectService.GetAll())
                 cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
             if (cboProject.Items.Count > 0)
                 cboProject.SelectedItem = cboProject.Items[0];
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

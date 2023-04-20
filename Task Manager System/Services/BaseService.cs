@@ -18,6 +18,7 @@ namespace Task_Manager_System.Services
                 OracleTransaction transaction = connection.BeginTransaction();
                 transaction.Commit();
 
+                transaction.Dispose();
                 command.Dispose();
                 connection.Close();
             }
@@ -34,6 +35,7 @@ namespace Task_Manager_System.Services
                 DataSet ds = new DataSet(); 
                 adapter.Fill(ds);
 
+                adapter.Dispose();
                 connection.Close();
                 return ds;
             }

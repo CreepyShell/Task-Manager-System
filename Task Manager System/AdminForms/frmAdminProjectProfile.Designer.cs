@@ -41,13 +41,21 @@ namespace Task_Manager_System.AdminForms
             this.txtHours = new System.Windows.Forms.TextBox();
             this.txtDuration = new System.Windows.Forms.TextBox();
             this.txtCost = new System.Windows.Forms.TextBox();
-            this.cboDevelopers = new System.Windows.Forms.ComboBox();
             this.cboProject = new System.Windows.Forms.ComboBox();
             this.dgvTasks = new System.Windows.Forms.DataGridView();
-            this.TaskId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvDevs = new System.Windows.Forms.DataGridView();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Specialization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblTasks = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDevs)).BeginInit();
             this.SuspendLayout();
@@ -116,7 +124,7 @@ namespace Task_Manager_System.AdminForms
             // developersLabel
             // 
             this.developersLabel.AutoSize = true;
-            this.developersLabel.Location = new System.Drawing.Point(78, 292);
+            this.developersLabel.Location = new System.Drawing.Point(76, 307);
             this.developersLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.developersLabel.Name = "developersLabel";
             this.developersLabel.Size = new System.Drawing.Size(172, 13);
@@ -170,15 +178,6 @@ namespace Task_Manager_System.AdminForms
             this.txtCost.Size = new System.Drawing.Size(102, 20);
             this.txtCost.TabIndex = 14;
             // 
-            // cboDevelopers
-            // 
-            this.cboDevelopers.FormattingEnabled = true;
-            this.cboDevelopers.Location = new System.Drawing.Point(314, 289);
-            this.cboDevelopers.Margin = new System.Windows.Forms.Padding(2);
-            this.cboDevelopers.Name = "cboDevelopers";
-            this.cboDevelopers.Size = new System.Drawing.Size(174, 21);
-            this.cboDevelopers.TabIndex = 15;
-            // 
             // cboProject
             // 
             this.cboProject.FormattingEnabled = true;
@@ -192,29 +191,64 @@ namespace Task_Manager_System.AdminForms
             // 
             this.dgvTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTasks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TaskId});
-            this.dgvTasks.Location = new System.Drawing.Point(708, 142);
+            this.TaskName,
+            this.description,
+            this.startDate,
+            this.hours,
+            this.status,
+            this.priority});
+            this.dgvTasks.Location = new System.Drawing.Point(288, 437);
             this.dgvTasks.Name = "dgvTasks";
-            this.dgvTasks.Size = new System.Drawing.Size(240, 120);
+            this.dgvTasks.Size = new System.Drawing.Size(643, 120);
             this.dgvTasks.TabIndex = 17;
-            this.dgvTasks.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // TaskId
+            // TaskName
             // 
-            this.TaskId.HeaderText = "Task id";
-            this.TaskId.Name = "TaskId";
-            this.TaskId.ReadOnly = true;
-            this.TaskId.Visible = false;
+            this.TaskName.HeaderText = "Task name";
+            this.TaskName.Name = "TaskName";
+            this.TaskName.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.HeaderText = "Description";
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            // 
+            // startDate
+            // 
+            this.startDate.HeaderText = "Start date";
+            this.startDate.Name = "startDate";
+            this.startDate.ReadOnly = true;
+            // 
+            // hours
+            // 
+            this.hours.HeaderText = "Hours";
+            this.hours.Name = "hours";
+            this.hours.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Status";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            // 
+            // priority
+            // 
+            this.priority.HeaderText = "Priority";
+            this.priority.Name = "priority";
+            this.priority.ReadOnly = true;
             // 
             // dgvDevs
             // 
             this.dgvDevs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDevs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FirstName,
-            this.LastName});
-            this.dgvDevs.Location = new System.Drawing.Point(708, 316);
+            this.LastName,
+            this.Specialization,
+            this.Age});
+            this.dgvDevs.Location = new System.Drawing.Point(288, 292);
             this.dgvDevs.Name = "dgvDevs";
-            this.dgvDevs.Size = new System.Drawing.Size(240, 120);
+            this.dgvDevs.Size = new System.Drawing.Size(423, 120);
             this.dgvDevs.TabIndex = 18;
             // 
             // FirstName
@@ -228,15 +262,48 @@ namespace Task_Manager_System.AdminForms
             this.LastName.HeaderText = "Last name";
             this.LastName.Name = "LastName";
             // 
+            // Specialization
+            // 
+            this.Specialization.HeaderText = "Specialization";
+            this.Specialization.Name = "Specialization";
+            this.Specialization.ReadOnly = true;
+            this.Specialization.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Age
+            // 
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            // 
+            // lblTasks
+            // 
+            this.lblTasks.AutoSize = true;
+            this.lblTasks.Location = new System.Drawing.Point(76, 447);
+            this.lblTasks.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTasks.Name = "lblTasks";
+            this.lblTasks.Size = new System.Drawing.Size(147, 13);
+            this.lblTasks.TabIndex = 19;
+            this.lblTasks.Text = "Tasks assigned to this project";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(79, 127);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "label1";
+            // 
             // frmAdminProjectProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1161, 583);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTasks);
             this.Controls.Add(this.dgvDevs);
             this.Controls.Add(this.dgvTasks);
             this.Controls.Add(this.cboProject);
-            this.Controls.Add(this.cboDevelopers);
             this.Controls.Add(this.txtCost);
             this.Controls.Add(this.txtDuration);
             this.Controls.Add(this.txtHours);
@@ -274,12 +341,20 @@ namespace Task_Manager_System.AdminForms
         private System.Windows.Forms.TextBox txtHours;
         private System.Windows.Forms.TextBox txtDuration;
         private System.Windows.Forms.TextBox txtCost;
-        private System.Windows.Forms.ComboBox cboDevelopers;
         private System.Windows.Forms.ComboBox cboProject;
         private System.Windows.Forms.DataGridView dgvTasks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaskId;
         private System.Windows.Forms.DataGridView dgvDevs;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Specialization;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Age;
+        private System.Windows.Forms.Label lblTasks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaskName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hours;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priority;
+        private System.Windows.Forms.Label label1;
     }
 }

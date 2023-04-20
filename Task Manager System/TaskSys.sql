@@ -54,7 +54,7 @@ INSERT INTO PROJECTS (ProjId, ProjectName, ProjectDescription, StartDate, EndDat
 
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (1, 'John', 'Doe', 'Java', 30, 1);
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (2, 'Jane', 'Smith', 'Python', 25, 2);
-INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (3, 'Bob', 'Johnson', 'C#', 35, 2);
+INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (3, 'Bob', 'Johnson', 'C#', 35, NULL);
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (4, 'Alice', 'Williams', 'JavaScript', 28, 1);
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (5, 'David', 'Brown', 'PHP', 30, 3);
 INSERT INTO DEVELOPERS (DevId, FirstName, LastName, Specialization, Age, ProjectId) VALUES (6, 'John', 'Selby', 'PHP', 25, NULL);
