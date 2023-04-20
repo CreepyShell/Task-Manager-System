@@ -48,10 +48,10 @@ namespace Task_Manager_System.TasksForms
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Error: smt went wrong");
-            }
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Error: smt went wrong");
+            //}
         }
 
         private async void frmTaskComplete_Load(object sender, EventArgs e)

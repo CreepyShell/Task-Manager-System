@@ -43,8 +43,15 @@ namespace Task_Manager_System.AdminForms
             txtCost.Text = project.ExpectedCost.ToString();
             Developer[] developers = (await _devService.GetAll()).Where(d => d.Project?.Id == project.Id).ToArray();
             cboDevelopers.Items.Clear();
+            dgvDevs.Rows.Clear();
             foreach (Developer developer in developers)
+            {
                 cboDevelopers.Items.Add(developer.FirstName + " " + developer.LastName);
+                DataGridViewRow row = new DataGridViewRow();
+                row.Cells.Add(new DataGridViewTextBoxCell() {Value = developer.FirstName });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = developer.LastName });
+                dgvDevs.Rows.Add(row);
+            }
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -61,6 +68,11 @@ namespace Task_Manager_System.AdminForms
                 cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}");
             if (cboProject.Items.Count > 0)
                 cboProject.SelectedItem = cboProject.Items[0];
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

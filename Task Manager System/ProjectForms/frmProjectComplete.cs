@@ -30,9 +30,8 @@ namespace Task_Manager_System.ProjectForms
             try
             {
                 int projectId = int.Parse(new string(cboProject.Text.TakeWhile(c => c != ':').ToArray()));
-                await projectService.CompleteProject(projectId);
-
-                if (await projectService.CompleteProject(projectId))
+                bool res = await projectService.CompleteProject(projectId);
+                if (res)
                 {
                     MessageBox.Show("Project was finished successfully");
                     return;
@@ -51,10 +50,10 @@ namespace Task_Manager_System.ProjectForms
             {
                 MessageBox.Show("Error: Project has unfinished tasks");
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Smt went wrong");
-            }
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Smt went wrong");
+            //}
 
             Developer[] developers = db.Developers.Where(d => d.Project != null).ToArray();
             foreach (Developer developer in developers)

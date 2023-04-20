@@ -49,14 +49,14 @@ namespace Task_Manager_System.Services
             if (task.Status == Status.Finished)
                 throw new ArgumentException("Task is finished");
 
-            if (developer.Project != null && developer.Project.Id == task.Project.Id)
+            if (developer.Project != null && developer.Project.Id != task.Project.Id)
                 throw new InvalidOperationException("Developer is assigned to a project and this project does not include a chosen task");
 
             if (task.Developer != null)
                 return false;
 
             string updateQuery = "UPDATE tasks " +
-                    $"SET developerId = '{devId}', " +
+                    $"SET developerId = '{devId}' " +
                     $" WHERE TaskId = {taskId}";
 
             await insertQuery(updateQuery);
@@ -77,14 +77,14 @@ namespace Task_Manager_System.Services
                 return false;
 
             string updateQuery = "UPDATE tasks " +
-                   $"SET Status = '{Status.Finished}', " +
+                   $"SET Status = '{Status.Finished}' " +
                    $" WHERE TaskId = {task.Id}";
 
             await insertQuery(updateQuery);
 
             return true;
         }
-
+        //SELECT * FROM TASKS LEFT JOIN PROJECTS ON TASKS.TASKID = PROJECTS.PROJID;
         public async Task<List<TMS_BLL.Models.Task>> GetAll()
         {
             string selectQuery = "SELECT * FROM tasks";
@@ -115,7 +115,7 @@ namespace Task_Manager_System.Services
 
         public async Task<List<TMS_BLL.Models.Task>> GetUnassignedAndUnfinishedTasks(int projId)
         {
-            string selectQuery = $"SELECT * FROM tasks WHERE ProjectId = {projId} AND DeveloperId = NULL AND Status != 'finished'";
+            string selectQuery = $"SELECT * FROM tasks WHERE ProjectId = {projId} AND DeveloperId = NULL AND Status != '{Status.Finished}'";
             return await GetAllTasksByQuery(selectQuery);
         }
 
@@ -136,7 +136,7 @@ namespace Task_Manager_System.Services
                 return false;
 
             string updateQuery = "UPDATE tasks " +
-                    $"SET developerId = NULL, " +
+                    $"SET developerId = NULL " +
                     $" WHERE TaskId = {taskId}";
 
             await insertQuery(updateQuery);
@@ -170,11 +170,11 @@ namespace Task_Manager_System.Services
 
             string updateQuery = $"UPDATE tasks " +
                    $"SET Name = '{updatedTask.Name}', " +
-                   $" Description = {updatedTask.Description}," +
-                   $" Hours = '{updatedTask.Description}'," +
-                   $" status = '{updatedTask.Status}'" +
-                   $"Priority = '{updatedTask.Priority}'" +
-                   $" WHERE projId = {idUpdatedTask}";
+                   $" Description = '{updatedTask.Description}'," +
+                   $" Hours = '{updatedTask.Hours}'," +
+                   $" status = '{updatedTask.Status}'," +
+                   $" Priority = '{updatedTask.Priority}'" +
+                   $" WHERE TaskId = {idUpdatedTask}";
 
             await insertQuery(updateQuery);
             return await GetById(idUpdatedTask);

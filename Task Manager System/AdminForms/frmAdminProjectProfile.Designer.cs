@@ -43,6 +43,13 @@ namespace Task_Manager_System.AdminForms
             this.txtCost = new System.Windows.Forms.TextBox();
             this.cboDevelopers = new System.Windows.Forms.ComboBox();
             this.cboProject = new System.Windows.Forms.ComboBox();
+            this.dgvTasks = new System.Windows.Forms.DataGridView();
+            this.TaskId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvDevs = new System.Windows.Forms.DataGridView();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDevs)).BeginInit();
             this.SuspendLayout();
             // 
             // projIdLabel
@@ -58,7 +65,7 @@ namespace Task_Manager_System.AdminForms
             // btnFindProject
             // 
             this.btnFindProject.Location = new System.Drawing.Point(442, 91);
-            this.btnFindProject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFindProject.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindProject.Name = "btnFindProject";
             this.btnFindProject.Size = new System.Drawing.Size(106, 26);
             this.btnFindProject.TabIndex = 1;
@@ -119,7 +126,7 @@ namespace Task_Manager_System.AdminForms
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(728, 3);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(56, 19);
             this.btnBack.TabIndex = 10;
@@ -131,7 +138,7 @@ namespace Task_Manager_System.AdminForms
             // 
             this.txtTasks.Enabled = false;
             this.txtTasks.Location = new System.Drawing.Point(301, 155);
-            this.txtTasks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTasks.Margin = new System.Windows.Forms.Padding(2);
             this.txtTasks.Name = "txtTasks";
             this.txtTasks.Size = new System.Drawing.Size(76, 20);
             this.txtTasks.TabIndex = 11;
@@ -140,7 +147,7 @@ namespace Task_Manager_System.AdminForms
             // 
             this.txtHours.Enabled = false;
             this.txtHours.Location = new System.Drawing.Point(301, 190);
-            this.txtHours.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHours.Margin = new System.Windows.Forms.Padding(2);
             this.txtHours.Name = "txtHours";
             this.txtHours.Size = new System.Drawing.Size(76, 20);
             this.txtHours.TabIndex = 12;
@@ -149,7 +156,7 @@ namespace Task_Manager_System.AdminForms
             // 
             this.txtDuration.Enabled = false;
             this.txtDuration.Location = new System.Drawing.Point(314, 226);
-            this.txtDuration.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDuration.Margin = new System.Windows.Forms.Padding(2);
             this.txtDuration.Name = "txtDuration";
             this.txtDuration.Size = new System.Drawing.Size(108, 20);
             this.txtDuration.TabIndex = 13;
@@ -158,7 +165,7 @@ namespace Task_Manager_System.AdminForms
             // 
             this.txtCost.Enabled = false;
             this.txtCost.Location = new System.Drawing.Point(301, 255);
-            this.txtCost.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCost.Margin = new System.Windows.Forms.Padding(2);
             this.txtCost.Name = "txtCost";
             this.txtCost.Size = new System.Drawing.Size(102, 20);
             this.txtCost.TabIndex = 14;
@@ -167,7 +174,7 @@ namespace Task_Manager_System.AdminForms
             // 
             this.cboDevelopers.FormattingEnabled = true;
             this.cboDevelopers.Location = new System.Drawing.Point(314, 289);
-            this.cboDevelopers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboDevelopers.Margin = new System.Windows.Forms.Padding(2);
             this.cboDevelopers.Name = "cboDevelopers";
             this.cboDevelopers.Size = new System.Drawing.Size(174, 21);
             this.cboDevelopers.TabIndex = 15;
@@ -176,16 +183,58 @@ namespace Task_Manager_System.AdminForms
             // 
             this.cboProject.FormattingEnabled = true;
             this.cboProject.Location = new System.Drawing.Point(149, 37);
-            this.cboProject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboProject.Margin = new System.Windows.Forms.Padding(2);
             this.cboProject.Name = "cboProject";
             this.cboProject.Size = new System.Drawing.Size(496, 21);
             this.cboProject.TabIndex = 16;
+            // 
+            // dgvTasks
+            // 
+            this.dgvTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTasks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TaskId});
+            this.dgvTasks.Location = new System.Drawing.Point(708, 142);
+            this.dgvTasks.Name = "dgvTasks";
+            this.dgvTasks.Size = new System.Drawing.Size(240, 120);
+            this.dgvTasks.TabIndex = 17;
+            this.dgvTasks.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // TaskId
+            // 
+            this.TaskId.HeaderText = "Task id";
+            this.TaskId.Name = "TaskId";
+            this.TaskId.ReadOnly = true;
+            this.TaskId.Visible = false;
+            // 
+            // dgvDevs
+            // 
+            this.dgvDevs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDevs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FirstName,
+            this.LastName});
+            this.dgvDevs.Location = new System.Drawing.Point(708, 316);
+            this.dgvDevs.Name = "dgvDevs";
+            this.dgvDevs.Size = new System.Drawing.Size(240, 120);
+            this.dgvDevs.TabIndex = 18;
+            // 
+            // FirstName
+            // 
+            this.FirstName.HeaderText = "First name";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            // 
+            // LastName
+            // 
+            this.LastName.HeaderText = "Last name";
+            this.LastName.Name = "LastName";
             // 
             // frmAdminProjectProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 413);
+            this.ClientSize = new System.Drawing.Size(1161, 583);
+            this.Controls.Add(this.dgvDevs);
+            this.Controls.Add(this.dgvTasks);
             this.Controls.Add(this.cboProject);
             this.Controls.Add(this.cboDevelopers);
             this.Controls.Add(this.txtCost);
@@ -200,10 +249,12 @@ namespace Task_Manager_System.AdminForms
             this.Controls.Add(this.numTasksLabel);
             this.Controls.Add(this.btnFindProject);
             this.Controls.Add(this.projIdLabel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmAdminProjectProfile";
             this.Text = "frmAdminProjectProfile";
             this.Load += new System.EventHandler(this.frmAdminProjectProfile_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDevs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,5 +276,10 @@ namespace Task_Manager_System.AdminForms
         private System.Windows.Forms.TextBox txtCost;
         private System.Windows.Forms.ComboBox cboDevelopers;
         private System.Windows.Forms.ComboBox cboProject;
+        private System.Windows.Forms.DataGridView dgvTasks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaskId;
+        private System.Windows.Forms.DataGridView dgvDevs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
     }
 }

@@ -69,13 +69,13 @@ namespace Task_Manager_System.TasksForms
         {
             cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Task task in await _taskService.GetAll())
-                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}");
+                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}   Developer: {task.Developer?.Id}  Project: {task.Project?.Id}");
             if (cboTask.Items.Count > 0)
                 cboTask.SelectedItem = cboTask.Items[0];
 
             cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Developer developer in await _devService.GetAll())
-                cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}");
+                cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}    Project: {developer.Project?.Id}");
             if (cboDev.Items.Count > 0)
                 cboDev.SelectedItem = cboDev.Items[0];
         }

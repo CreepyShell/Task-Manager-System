@@ -49,10 +49,10 @@ namespace Task_Manager_System.TasksForms
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Error: smt went wrong");
-            }
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Error: smt went wrong");
+            //}
         }
 
         private async void frmTaskRemoveDeveloper_Load(object sender, EventArgs e)
@@ -60,12 +60,12 @@ namespace Task_Manager_System.TasksForms
             cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Task task in await _taskService.GetAll())
             {
-                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}");
+                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}    Developer: {task.Developer?.Id}    Project: {task.Project?.Id}");
             }
             cboDev.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Developer developer in await _devService.GetAll())
             {
-                cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}");
+                cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}  Project: {developer.Project?.Id}");
             }
         }
     }
