@@ -134,8 +134,37 @@ namespace Task_Manager_System.Services
 
         public async Task<Project> GetByName(string name)
         {
-            string selectQuery = $"SELECT * FROM projects WHERE ProjectName = {name}";
+            string selectQuery = $"SELECT * FROM projects WHERE ProjectName = '{name}'";
             return await GetProject(selectQuery);
+        }
+
+        public async Task<List<Project>> GetUnfinishedProject()
+        {
+            List<Project> projects = new List<Project>();
+            string selectQuery = "SELECT * FROM projects WHERE Status != 'Finished'";
+
+            DataSet ds = await getDataSet(selectQuery);
+
+            DataTable dt = ds.Tables[0];
+
+            if (dt.Rows.Count == 0)
+                return projects;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                projects.Add(new Project()
+                {
+                    Id = row.Field<short>(0),
+                    Name = row.Field<string>(1),
+                    Description = row.Field<string>(2),
+                    StartDate = row.Field<DateTime>(3),
+                    EndDate = row.Field<DateTime>(4),
+                    Status = (Status)Enum.Parse(typeof(Status), row.Field<string>(5)),
+                    ExpectedCost = (decimal)row.Field<double>(6)
+                });
+            }
+            ds.Dispose();
+            return projects;
         }
 
         public async Task<Project> UpdateProject(int idOldProject, Project newProject)

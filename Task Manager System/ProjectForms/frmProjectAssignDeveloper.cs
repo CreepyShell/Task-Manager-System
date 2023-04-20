@@ -24,13 +24,13 @@ namespace Task_Manager_System.ProjectForms
         {
             cmbDev.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Developer developer in await this._devService.GetAll())
-                cmbDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}" +
-                    $"    Developer: {developer.Project?.Id}");
+                if (developer.Project == null)
+                    cmbDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}");
             if (cmbDev.Items.Count > 0)
                 cmbDev.SelectedItem = cmbDev.Items[0];
 
             cmbProject.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (Project project in await _projectService.GetAll())
+            foreach (Project project in await _projectService.GetUnfinishedProject())
                 cmbProject.Items.Add($"{project.Id}: {project.Name}  Deadline: {project.EndDate:dd-MM-yyyy}   Status:{project.Status} ");
             if (cmbProject.Items.Count > 0)
                 cmbProject.SelectedItem = cmbProject.Items[0];
@@ -46,7 +46,7 @@ namespace Task_Manager_System.ProjectForms
         {
             if (cmbDev.Items.Count == 0 || cmbProject.Items.Count == 0)
             {
-                MessageBox.Show("No developers or tasks available");
+                MessageBox.Show("No developers or projects available");
                 return;
             }
             try
@@ -58,6 +58,7 @@ namespace Task_Manager_System.ProjectForms
                 if (await _projectService.AssignDeveloperToProject(projectId, developerId))
                 {
                     MessageBox.Show("Developer was assigned successfully");
+                    this.dtnBack_Click(sender, e);
                     return;
                 }
                 MessageBox.Show("Developer is already assigned to a project or has some tasks to do");

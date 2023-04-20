@@ -44,25 +44,30 @@ namespace Task_Manager_System.TasksForms
                 MessageBox.Show("No project available");
                 return;
             }
-            Project project = await projectService.GetById(int.Parse(new string(cboProjects.Text.TakeWhile(c => c != ':').ToArray())));
-            if (project == null)
-            {
-                MessageBox.Show("Project was not found");
-                return;
-            }
-
-            Developer developer = null;
-            if(cboDev.SelectedItem != null)
-                developer = await devService.GetDeveloperById(int.Parse(new string(cboProjects.Text.TakeWhile(c => c != ':').ToArray())));
-
-            task.Project = project;
-            task.Developer = developer;
-           
-            task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
-            task.Status = (Status)Enum.Parse(typeof(Status), cboStatus.Text);
 
             try
             {
+                if(await taskService.GetByName(txtName.Text) != null)
+                {
+                    MessageBox.Show("There is a task with this name, use another name");
+                    return;
+                }
+                Project project = await projectService.GetById(int.Parse(new string(cboProjects.Text.TakeWhile(c => c != ':').ToArray())));
+                if (project == null)
+                {
+                    MessageBox.Show("Project was not found");
+                    return;
+                }
+
+                Developer developer = null;
+                if (cboDev.SelectedItem != null)
+                    developer = await devService.GetDeveloperById(int.Parse(new string(cboProjects.Text.TakeWhile(c => c != ':').ToArray())));
+
+                task.Project = project;
+                task.Developer = developer;
+
+                task.Priority = (Priority)Enum.Parse(typeof(Priority), cmbPriority.Text);
+                task.Status = (Status)Enum.Parse(typeof(Status), cboStatus.Text);
                 int hours = int.Parse(txtTaskHours.Text);
                 task.Hours = hours;
                 await taskService.AddTaskToProject(task);

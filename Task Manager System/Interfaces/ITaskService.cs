@@ -11,7 +11,7 @@ namespace TMS_BLL.Interfaces
         Task<bool> AssignDeveloperToTask(int taskId, int devId);
         Task<bool> RemoveDeveloperFromTask(int taskId, int devId);
         Task<bool> CompleteTask(int task);
-        Task<List<Models.Task>> GetUnassignedAndUnfinishedTasks(int projId);
+        Task<List<Models.Task>> GetUnassignedAndUnfinishedTasks();
         Task<List<Models.Task>> GetAllProjectTasks(int projId);
         Task<List<Models.Task>> GetDeveloperTasks(int devId);
     }

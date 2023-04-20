@@ -24,7 +24,7 @@ namespace Task_Manager_System.TasksForms
         {
             cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Task task in await _taskService.GetAll())
-                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}");
+                cboTask.Items.Add($"{task.Id}: {task.Name}  StartDate: {task.StartDate:dd-MM-yyyy}    Hours: {task.Hours}     Priority: {task.Priority}       Status: {task.Status}");
 
             if (cboTask.Items.Count > 0)
                 cboTask.SelectedItem = cboTask.Items[0];
@@ -72,6 +72,11 @@ namespace Task_Manager_System.TasksForms
 
             try
             {
+                if (await _taskService.GetByName(txtTaskName.Text) != null)
+                {
+                    MessageBox.Show("There is a task with this name, use another name");
+                    return;
+                }
                 task.Name = txtTaskName.Text;
                 task.Description = txtTaskDescription.Text;
                 task.Hours = int.Parse(txtTaskHours.Text);

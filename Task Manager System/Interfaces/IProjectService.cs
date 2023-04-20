@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMS_BLL.Models;
 
 namespace TMS_BLL.Interfaces
@@ -9,5 +10,6 @@ namespace TMS_BLL.Interfaces
         Task<Project> UpdateProject(int idOldProject, Project newProject);
         Task<bool> CompleteProject(int projectId);
         Task<bool> AssignDeveloperToProject(int projId, int devId);
+        Task<List<Project>> GetUnfinishedProject();
     }
 }

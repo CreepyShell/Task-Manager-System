@@ -79,7 +79,7 @@ namespace Task_Manager_System.TasksForms
             // 
             this.cboTask.FormattingEnabled = true;
             this.cboTask.Location = new System.Drawing.Point(201, 125);
-            this.cboTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboTask.Margin = new System.Windows.Forms.Padding(2);
             this.cboTask.Name = "cboTask";
             this.cboTask.Size = new System.Drawing.Size(438, 21);
             this.cboTask.TabIndex = 6;
@@ -88,10 +88,11 @@ namespace Task_Manager_System.TasksForms
             // 
             this.cboDev.FormattingEnabled = true;
             this.cboDev.Location = new System.Drawing.Point(201, 76);
-            this.cboDev.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboDev.Margin = new System.Windows.Forms.Padding(2);
             this.cboDev.Name = "cboDev";
             this.cboDev.Size = new System.Drawing.Size(438, 21);
             this.cboDev.TabIndex = 7;
+            this.cboDev.SelectedIndexChanged += new System.EventHandler(this.cboDev_SelectedIndexChanged);
             // 
             // frmTaskRemoveDeveloper
             // 

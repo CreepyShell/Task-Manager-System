@@ -34,7 +34,7 @@ namespace Task_Manager_System.ProjectForms
                 if (res)
                 {
                     MessageBox.Show("Project was finished successfully");
-                    return;
+                    this.btnBack_Click(sender, e);
                 }
                 MessageBox.Show("Deadline is expired");
             }
@@ -50,10 +50,10 @@ namespace Task_Manager_System.ProjectForms
             {
                 MessageBox.Show("Error: Project has unfinished tasks");
             }
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Smt went wrong");
-            //}
+            catch (Exception)
+            {
+                MessageBox.Show("Smt went wrong");
+            }
 
             Developer[] developers = db.Developers.Where(d => d.Project != null).ToArray();
             foreach (Developer developer in developers)
@@ -68,9 +68,9 @@ namespace Task_Manager_System.ProjectForms
         private async void frmProjectComplete_Load(object sender, EventArgs e)
         {
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach(Project project in await this.projectService.GetAll())
+            foreach(Project project in await this.projectService.GetUnfinishedProject())
             {
-                cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy} Status: {project.Status}");
+                cboProject.Items.Add($"{project.Id}: {project.Name}  EndDate: {project.EndDate:dd-MM-yyyy} Status: {project.Status}");
             }
         }
     }

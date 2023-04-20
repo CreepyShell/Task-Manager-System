@@ -108,14 +108,14 @@ namespace Task_Manager_System.Services
         public async Task<TMS_BLL.Models.Task> GetByName(string name)
         {
             string selectQuery = "SELECT * FROM tasks" +
-                                    $" Where Name = {name}";
+                                    $" Where Name = '{name}'";
 
             return await GetTask(selectQuery);
         }
 
-        public async Task<List<TMS_BLL.Models.Task>> GetUnassignedAndUnfinishedTasks(int projId)
+        public async Task<List<TMS_BLL.Models.Task>> GetUnassignedAndUnfinishedTasks()
         {
-            string selectQuery = $"SELECT * FROM tasks WHERE ProjectId = {projId} AND DeveloperId = NULL AND Status != '{Status.Finished}'";
+            string selectQuery = $"SELECT * FROM tasks WHERE DeveloperId = NULL AND Status != '{Status.Finished}'";
             return await GetAllTasksByQuery(selectQuery);
         }
 

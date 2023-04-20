@@ -41,6 +41,10 @@ namespace Task_Manager_System.TasksForms
                 }
                 MessageBox.Show("Task has no developer assigned to it or developer was not assigned to this task");
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("No task or developer chosen");
+            }
             catch (ArgumentNullException ex)
             {
                 MessageBox.Show("Data not found:" + ex.Message);
@@ -49,10 +53,10 @@ namespace Task_Manager_System.TasksForms
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Error: smt went wrong");
-            //}
+            catch (Exception)
+            {
+                MessageBox.Show("Error: smt went wrong");
+            }
         }
 
         private async void frmTaskRemoveDeveloper_Load(object sender, EventArgs e)
@@ -66,6 +70,15 @@ namespace Task_Manager_System.TasksForms
             foreach (Developer developer in await _devService.GetAll())
             {
                 cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}  Project: {developer.Project?.Id}");
+            }
+        }
+
+        private async void cboDev_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cboTask.Items.Clear();
+            foreach (Task task in await _taskService.GetDeveloperTasks(int.Parse(new string(cboDev.Text.TakeWhile(c => c != ':').ToArray()))))
+            {
+                cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}    Developer: {task.Developer?.Id}    Project: {task.Project?.Id}");
             }
         }
     }

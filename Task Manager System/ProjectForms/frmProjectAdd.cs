@@ -46,6 +46,11 @@ namespace Task_Manager_System.ProjectForms
         {
             try
             {
+                if (await _projectService.GetByName(txtName.Text) != null)
+                {
+                    MessageBox.Show("There is a project with this name");
+                    return;
+                }
                 Project project = new Project();
                 project.Id = int.Parse(txtProjId.Text);
                 project.Name = txtName.Text;
@@ -67,10 +72,10 @@ namespace Task_Manager_System.ProjectForms
             {
                 MessageBox.Show("Expected cost must be numeric");
             }
-            catch (OracleException ex)
-            {
-                MessageBox.Show("Smt went wrong:" + ex.Message);
-            }
+            //catch (OracleException ex)
+            //{
+            //    MessageBox.Show("Smt went wrong:" + ex.Message);
+            //}
 
         }
 

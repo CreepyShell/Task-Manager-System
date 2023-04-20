@@ -8,7 +8,6 @@ namespace Task_Manager_System.ProjectForms
 {
     public partial class frmProjectUpdate : Form
     {
-        private readonly TasksDb db;
         private readonly frmMenu MainMenu;
         private readonly IProjectService projectService;
 
@@ -16,14 +15,12 @@ namespace Task_Manager_System.ProjectForms
         public frmProjectUpdate()
         {
             InitializeComponent();
-            db = TasksDb.GetTasksDb();
         }
 
         public frmProjectUpdate(frmMenu menu, IProjectService _projectService)
         {
             MainMenu = menu;
             InitializeComponent();
-            db = TasksDb.GetTasksDb();
             projectService = _projectService;
         }
 
@@ -32,7 +29,7 @@ namespace Task_Manager_System.ProjectForms
             cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cboStatus.SelectedItem = cboStatus.Items[0];
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
-            Project[] projects = (await projectService.GetAll()).ToArray();
+            Project[] projects = (await projectService.GetUnfinishedProject()).ToArray();
             foreach (Project project in projects)
             {
                 cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}  Status:{project.Status}");
@@ -80,6 +77,11 @@ namespace Task_Manager_System.ProjectForms
         private async void btnSaveProj_Click(object sender, EventArgs e)
         {
 
+            if (await projectService.GetByName(txtName.Text) != null)
+            {
+                MessageBox.Show("There is a project with this name, try another name");
+                return;
+            }
             if (project.Status == Status.Extended)
             {
                 cboStatus.Enabled = false;

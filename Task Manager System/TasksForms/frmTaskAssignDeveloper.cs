@@ -28,9 +28,9 @@ namespace Task_Manager_System.TasksForms
 
         private async void btnTaskAssignDeveloper_Click(object sender, EventArgs e)
         {
-            if(cboTask.Items.Count==0 || cboTask.Items.Count==0)
+            if (cboTask.Items.Count == 0 || cboTask.Items.Count == 0)
             {
-                MessageBox.Show("Mp developers or tasks are available");
+                MessageBox.Show("No developers or tasks are available");
                 return;
             }
             try
@@ -68,7 +68,7 @@ namespace Task_Manager_System.TasksForms
         private async void frmTaskAssignDeveloper_Load(object sender, EventArgs e)
         {
             cboTask.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (Task task in await _taskService.GetAll())
+            foreach (Task task in await _taskService.GetUnassignedAndUnfinishedTasks())
                 cboTask.Items.Add($"{task.Id}: {task.Name} {task.StartDate:dd-MM-yyyy} {task.Hours} {task.Priority}   Developer: {task.Developer?.Id}  Project: {task.Project?.Id}");
             if (cboTask.Items.Count > 0)
                 cboTask.SelectedItem = cboTask.Items[0];
