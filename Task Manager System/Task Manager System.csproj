@@ -116,7 +116,6 @@
     <Compile Include="frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IAdminInterface.cs" />
     <Compile Include="Interfaces\IBasicInterface.cs" />
     <Compile Include="Interfaces\IDevService.cs" />
     <Compile Include="Interfaces\IProjectService.cs" />

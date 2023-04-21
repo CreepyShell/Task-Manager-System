@@ -25,11 +25,11 @@ namespace Task_Manager_System.Services
             if (newTask == null)
                 throw new ArgumentNullException(nameof(newTask), "Task is null");
 
-            taskValidator.Validate(newTask, options => options.ThrowOnFailures());
+            taskValidator.Validate(newTask, options => options.ThrowOnFailures());//if failed a Validation exception is thrown
 
             string devId = newTask.Developer == null ? "NULL" : newTask.Developer.Id.ToString();
             string sqlQuery = "INSERT INTO TASKS (TaskId, Name, Description, StartDate, Hours, Status, Priority, ProjectId, DeveloperId) " +
-                    $"VALUES ({newTask.Id}, '{newTask.Name}', '{newTask.Description}', TO_DATE('{newTask.StartDate.ToString("dd/MM/yyyy")}','DD/MM/YYYY')," +
+                    $"VALUES ({newTask.Id}, '{newTask.Name}', '{newTask.Description}', TO_DATE('{newTask.StartDate.ToString("dd/MM/yyyy HH:mm")}','DD/MM/YYYY:HH24:MI')," +
                     $" {newTask.Hours}, '{newTask.Status}', '{newTask.Priority}', {newTask.Project.Id}, {devId})";
 
             await ExecuteNonQuery(sqlQuery);
@@ -40,19 +40,20 @@ namespace Task_Manager_System.Services
         {
             Developer developer = await _devService.GetDeveloperById(devId);
             if (developer == null)
-                throw new ArgumentNullException(nameof(Developer), "Developer is null");
+                throw new ArgumentNullException(nameof(Developer), "Developer is null");//developer is not found
 
-            TMS_BLL.Models.Task task = await GetById(taskId);
+            TMS_BLL.Models.Task task = await GetById(taskId);//task is not found
             if (task == null)
-                throw new ArgumentNullException(nameof(TMS_BLL.Models.Task), "Task in null");
+                throw new ArgumentNullException(nameof(TMS_BLL.Models.Task), "Task in null");//task is not found
 
             if (task.Status == Status.Finished)
-                throw new ArgumentException("Task is finished");
+                throw new ArgumentException("Task is finished");//if task is finished, it can not be assigned to a developer
 
-            if (developer.Project != null && developer.Project.Id != task.Project.Id)
+            //check if developer is assinged to a project and the chosen task also belongs this project
+            if (developer.Project != null && developer.Project.Id != task.Project.Id)//if developer is assigned to a project, a task from other project can not be assigned to this developer
                 throw new InvalidOperationException("Developer is assigned to a project and this project does not include a chosen task");
 
-            if (task.Developer != null)
+            if (task.Developer != null)//if task is already assigned to a developer, it can not be assigned to other developer
                 return false;
 
             string updateQuery = "UPDATE tasks " +
@@ -68,12 +69,12 @@ namespace Task_Manager_System.Services
         {
             TMS_BLL.Models.Task task = await GetById(taskId);
             if (task == null)
-                throw new ArgumentNullException(nameof(TMS_BLL.Models.Task), "Task is null");
+                throw new ArgumentNullException(nameof(TMS_BLL.Models.Task), "Task is null");//task is not found
 
             if (task.StartDate.AddHours(task.Hours) < DateTime.Now)
-                throw new ArgumentException("Task deadline is failed, a task can not be finished");
+                throw new ArgumentException("Task deadline is failed, a task can not be finished");//deadline is expired
 
-            if (task.Status == Status.Finished)
+            if (task.Status == Status.Finished)//check if task is already finished
                 return false;
 
             string updateQuery = "UPDATE tasks " +
@@ -92,7 +93,7 @@ namespace Task_Manager_System.Services
 
         public async Task<List<TMS_BLL.Models.Task>> GetAllProjectTasks(int projId)
         {
-            string selectQuery = $"SELECT * FROM tasks WHERE ProjectId={projId}";
+            string selectQuery = $"SELECT * FROM tasks WHERE ProjectId={projId}";//get all tasks from one project
             return await GetAllTasksByQuery(selectQuery);
         }
 
@@ -112,7 +113,7 @@ namespace Task_Manager_System.Services
             return await GetTask(selectQuery);
         }
 
-        public async Task<List<TMS_BLL.Models.Task>> GetUnassignedAndUnfinishedTasks()
+        public async Task<List<TMS_BLL.Models.Task>> GetUnassignedAndUnfinishedTasks()//get all tasks with no developer assinged to it and do not have finished statuses
         {
             string selectQuery = $"SELECT * FROM tasks WHERE DeveloperId IS NULL AND Status != '{Status.Finished}'";
             return await GetAllTasksByQuery(selectQuery);
@@ -122,16 +123,16 @@ namespace Task_Manager_System.Services
         {
             TMS_BLL.Models.Task task = await GetById(taskId);
             if (task == null)
-                throw new ArgumentNullException(nameof(task), "Task is null");
+                throw new ArgumentNullException(nameof(task), "Task is null");//task is not found
 
             Developer developer = await _devService.GetDeveloperById(devId);
             if (developer == null)
-                throw new ArgumentNullException(nameof(developer), "Developer is null");
+                throw new ArgumentNullException(nameof(developer), "Developer is null");//developer is not found
 
-            if (task.Status == Status.Finished)
+            if (task.Status == Status.Finished)//check if task is finished
                 throw new ArgumentException("Task is finished");
 
-            if (task.Developer == null || task.Developer.Id != devId)
+            if (task.Developer == null || task.Developer.Id != devId)//check if task has any developer assigned to it and this task was assigned to the chosen developer
                 return false;
 
             string updateQuery = "UPDATE tasks " +
@@ -147,9 +148,9 @@ namespace Task_Manager_System.Services
         {
             TMS_BLL.Models.Task task = await this.GetById(taskId);
             if (task == null)
-                throw new ArgumentNullException(nameof(TMS_BLL.Models.Task), "Task is null");
+                throw new ArgumentNullException(nameof(TMS_BLL.Models.Task), "Task is null");//task is not found
 
-            if (task.Developer != null)
+            if (task.Developer != null && task.Status != Status.Finished)//check if developer is working on a task and task is not finished
                 return false;
 
             string updateQuery = "DELETE FROM tasks " +
@@ -165,7 +166,7 @@ namespace Task_Manager_System.Services
             if (updatedTask == null || await GetById(idUpdatedTask) == null)
                 throw new ArgumentNullException(nameof(updatedTask), "New task is null or old task was not found");
 
-            taskValidator.Validate(updatedTask, options => options.ThrowOnFailures());
+            taskValidator.Validate(updatedTask, options => options.ThrowOnFailures());//ValidationException is thrown if task is invalid
 
             string updateQuery = $"UPDATE tasks " +
                    $"SET Name = '{updatedTask.Name}', " +
@@ -234,7 +235,7 @@ namespace Task_Manager_System.Services
             return tasks;
         }
 
-        public async Task<List<TMS_BLL.Models.Task>> GetDeveloperTasks(int devId)
+        public async Task<List<TMS_BLL.Models.Task>> GetDeveloperTasks(int devId)//get all tasks that were assigned to a developer with id devId
         {
             string selectQuery = "SELECT * FROM tasks" +
                                    $" Where DeveloperId = {devId}";

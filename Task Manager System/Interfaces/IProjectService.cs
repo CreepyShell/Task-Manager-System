@@ -28,20 +28,20 @@ namespace TMS_BLL.Interfaces
         /// <summary>
         /// Assign developer to a project
         /// </summary>
-        /// <param name="projId"></param>
-        /// <param name="devId"></param>
-        /// <returns></returns>
+        /// <param name="projId">Project id</param>
+        /// <param name="devId">Developer id</param>
+        /// <returns>True, if operation was succsessful, false if developer is already assigned to a project or has tasks to do</returns>
         Task<bool> AssignDeveloperToProject(int projId, int devId);
         /// <summary>
         /// Get all projects with unfinished status
         /// </summary>
-        /// <returns></returns>
-        Task<List<Project>> GetUnfinishedProject();
+        /// <returns>Projects that do not have finish status</returns>
+        Task<List<Project>> GetUnfinishedProjects();
         /// <summary>
         /// Get project with developer
         /// </summary>
-        /// <param name="projectId"></param>
-        /// <returns></returns>
+        /// <param name="projectId">Project id</param>
+        /// <returns>Project with developer assigned to it</returns>
         Task<Project> GetProjectWithDevelopers(int projectId);
     }
 }

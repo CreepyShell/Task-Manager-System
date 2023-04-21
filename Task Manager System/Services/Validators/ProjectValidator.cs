@@ -3,7 +3,8 @@ using TMS_BLL.Models;
 
 namespace Task_Manager_System.Services.Validators
 {
-    public class ProjectValidator : AbstractValidator<Project>
+    //https://docs.fluentvalidation.net/en/latest/
+    public class ProjectValidator : AbstractValidator<Project>//library for the project validation 
     {
         public ProjectValidator()
         {

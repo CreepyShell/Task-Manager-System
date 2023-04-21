@@ -3,8 +3,10 @@ using TMS_BLL.Models;
 
 namespace Task_Manager_System.Services.Validators
 {
+    //https://docs.fluentvalidation.net/en/latest/
     public class TaskValidator : AbstractValidator<Task>
     {
+        //validation for a task entity
         public TaskValidator()
         {
             RuleFor(c => c.Name).MinimumLength(5).MaximumLength(30).WithMessage("Task name must be greater than 5 symbols and less than 20 symbols");

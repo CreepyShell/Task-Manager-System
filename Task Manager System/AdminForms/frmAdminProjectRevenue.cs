@@ -34,8 +34,10 @@ namespace Task_Manager_System.AdminForms
 
         private async void btnFindProject_Click(object sender, EventArgs e)
         {
-            Project[] projects = (await _projectService.GetAll()).Where(p => p.Status == Status.Finished && p.EndDate < dtpEndDate.Value).ToArray();
-            decimal revenue = 0;
+            Project[] projects = (await _projectService.GetAll()).Where(p => p.Status == Status.Finished && p.EndDate < dtpEndDate.Value)
+                .ToArray();//find all projects that was finished before the seleted end date
+
+            decimal revenue = 0;//total revenue
             if (projects.Length == 0)
             {
                 MessageBox.Show("No projects found");
@@ -44,19 +46,20 @@ namespace Task_Manager_System.AdminForms
             foreach (Project project in projects)
             {
                 cmbProjects.Items.Add($"Name:{project.Name}    Total cost: {project.ExpectedCost}$   StartDate: {project.StartDate}    FinishedDay:  {project.EndDate}");
-                if (project.StartDate > dtpStartDate.Value)
+                if (project.StartDate > dtpStartDate.Value)//if project was started before the selected day add it cost to the total revenue
                     revenue += project.ExpectedCost;
                 else
                 {
                     TimeSpan projDuration = project.EndDate - project.StartDate;
                     TimeSpan projDurationInChosenPeriod = dtpStartDate.Value - project.StartDate;
-                    revenue += projDurationInChosenPeriod.Days / projDuration.Days * project.ExpectedCost;
+                    revenue += projDurationInChosenPeriod.Days / projDuration.Days * project.ExpectedCost;//else add to the total revenue only project cost that was earn during period from
+                    //the selected start day and project finished day
                 }
             }
             TimeSpan duration = dtpEndDate.Value - dtpStartDate.Value;
             try
             {
-                txtMonthRevenue.Text = Math.Round((revenue * 30 / duration.Days), 2).ToString();
+                txtMonthRevenue.Text = Math.Round((revenue * 30 / duration.Days), 2).ToString();//calculate mounthly revenue
             }
             catch (DivideByZeroException)
             {

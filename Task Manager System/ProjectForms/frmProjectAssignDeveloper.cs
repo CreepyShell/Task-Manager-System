@@ -30,7 +30,7 @@ namespace Task_Manager_System.ProjectForms
                 cmbDev.SelectedItem = cmbDev.Items[0];
 
             cmbProject.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (Project project in await _projectService.GetUnfinishedProject())
+            foreach (Project project in await _projectService.GetUnfinishedProjects())
                 cmbProject.Items.Add($"{project.Id}: {project.Name}  Deadline: {project.EndDate:dd-MM-yyyy}   Status:{project.Status} ");
             if (cmbProject.Items.Count > 0)
                 cmbProject.SelectedItem = cmbProject.Items[0];
@@ -51,9 +51,9 @@ namespace Task_Manager_System.ProjectForms
             }
             try
             {
-                int projectId = int.Parse(new string(cmbProject.Text.TakeWhile(c => c != ':').ToArray()));
+                int projectId = int.Parse(new string(cmbProject.Text.TakeWhile(c => c != ':').ToArray()));//get project id
 
-                int developerId = int.Parse(new string(cmbDev.Text.TakeWhile(c => c != ':').ToArray()));
+                int developerId = int.Parse(new string(cmbDev.Text.TakeWhile(c => c != ':').ToArray()));//get developer
 
                 if (await _projectService.AssignDeveloperToProject(projectId, developerId))
                 {

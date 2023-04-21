@@ -73,7 +73,7 @@ namespace Task_Manager_System.TasksForms
             }
         }
 
-        private async void cboDev_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cboDev_SelectedIndexChanged(object sender, EventArgs e)//when developer is changed, the system shows all tasks assigned to this developer
         {
             cboTask.Items.Clear();
             foreach (Task task in await _taskService.GetDeveloperTasks(int.Parse(new string(cboDev.Text.TakeWhile(c => c != ':').ToArray()))))

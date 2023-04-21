@@ -31,7 +31,7 @@ namespace Task_Manager_System.ProjectForms
             cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cboStatus.SelectedItem = cboStatus.Items[0];
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
-            Project[] projects = (await projectService.GetUnfinishedProject()).ToArray();
+            Project[] projects = (await projectService.GetUnfinishedProjects()).ToArray();
             foreach (Project project in projects)
             {
                 cboProject.Items.Add($"{project.Id}: {project.Name} {project.EndDate:dd-MM-yyyy}  Status:{project.Status}");

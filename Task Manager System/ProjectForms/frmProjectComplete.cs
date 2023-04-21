@@ -57,7 +57,7 @@ namespace Task_Manager_System.ProjectForms
         private async void frmProjectComplete_Load(object sender, EventArgs e)
         {
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach(Project project in await this.projectService.GetUnfinishedProject())
+            foreach(Project project in await this.projectService.GetUnfinishedProjects())
             {
                 cboProject.Items.Add($"{project.Id}: {project.Name}  EndDate: {project.EndDate:dd-MM-yyyy} Status: {project.Status}");
             }

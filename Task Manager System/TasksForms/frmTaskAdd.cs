@@ -61,7 +61,7 @@ namespace Task_Manager_System.TasksForms
 
                 Developer developer = null;
                 if (cboDev.SelectedItem != null)
-                    developer = await devService.GetDeveloperById(int.Parse(new string(cboProjects.Text.TakeWhile(c => c != ':').ToArray())));
+                    developer = await devService.GetDeveloperById(int.Parse(new string(cboDev.Text.TakeWhile(c => c != ':').ToArray())));
 
                 task.Project = project;
                 task.Developer = developer;

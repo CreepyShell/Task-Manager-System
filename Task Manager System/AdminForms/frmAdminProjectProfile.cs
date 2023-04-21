@@ -37,10 +37,11 @@ namespace Task_Manager_System.AdminForms
             }
             List<Task> tasks = await _taskService.GetAllProjectTasks(project.Id);
             txtTasks.Text = tasks.Count.ToString();
-            txtHours.Text = tasks.Select(t => t.Hours).Sum().ToString();
-            txtDuration.Text = (project.EndDate - project.StartDate).ToString();
+            txtHours.Text = tasks.Select(t => t.Hours).Sum().ToString();//find the sum of hours needed to complete all tasks assigned to a project
+            txtDuration.Text = (project.EndDate - project.StartDate).TotalDays.ToString();//find the project duration in days
             txtCost.Text = project.ExpectedCost.ToString();
             txtStatus.Text = project.Status.ToString();
+
             Developer[] developers = project.Developers.ToArray();
             dgvDevs.Rows.Clear();
             foreach (Developer developer in developers)

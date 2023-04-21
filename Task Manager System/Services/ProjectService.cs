@@ -27,7 +27,7 @@ namespace Task_Manager_System.Services
             if (newProject == null)
                 throw new ArgumentNullException(nameof(newProject));
 
-            _projectValidator.Validate(newProject, op => op.ThrowOnFailures());
+            _projectValidator.Validate(newProject, op => op.ThrowOnFailures());//if validation is failed Validation exception is thrown
 
             string sqlQuery = "INSERT INTO Projects Values (" +
                   newProject.Id + ",'" +
@@ -47,16 +47,17 @@ namespace Task_Manager_System.Services
         {
             Project project = await GetById(projId);
             if (project == null)
-                throw new ArgumentNullException(nameof(Project), "Project is null");
+                throw new ArgumentNullException(nameof(Project), "Project is null");//project is not found
 
             Developer developer = await _developerService.GetDeveloperById(devId);
             if (developer == null)
-                throw new ArgumentNullException(nameof(Developer), "Developer is null");
+                throw new ArgumentNullException(nameof(Developer), "Developer is null");//developer is not found
 
             if (project.Status == Status.Finished)
-                throw new ArgumentException("Project is finished");
+                throw new ArgumentException("Project is finished");//check if project is not finished
 
-            if (developer.Project != null || (await _taskService.GetDeveloperTasks(devId)).Count != 0)
+            //check if developer was not assinged to other project and does not have any tasks to do
+            if (developer.Project != null || (await _taskService.GetDeveloperTasks(devId)).Any(t => t.Status != Status.Finished))
                 return false;
 
             string updateQuery = "UPDATE DEVELOPERS " +
@@ -72,24 +73,24 @@ namespace Task_Manager_System.Services
         {
             Project project = await GetById(projectId);
             if (project == null)
-                throw new ArgumentNullException(nameof(Project), "Project was not found or just null");
+                throw new ArgumentNullException(nameof(Project), "Project was not found or just null");//project is not found
 
-            if ((await _taskService.GetAllProjectTasks(project.Id)).Any(t => t.Status != Status.Finished))
+            if ((await _taskService.GetAllProjectTasks(project.Id)).Any(t => t.Status != Status.Finished))//check if project has any unfinished tasks
                 throw new ArgumentException("Project has unfinished tasks");
 
-            if (project.EndDate < DateTime.Now)
+            if (project.EndDate < DateTime.Now)//check if deadline was not expired
                 return false;
 
             string updateProject = "UPDATE projects " +
                    "SET status = 'Finished'," +
                    "EndDate =  TO_DATE('" + DateTime.Now.ToString("dd/MM/yyyy") + "', 'DD/MM/YYYY')" +
-                   $" WHERE projId = {project.Id}";
+                   $" WHERE projId = {project.Id}";//set project status finished
 
             await ExecuteNonQuery(updateProject);
 
             string updateDeveloper = "UPDATE developers " +
                    "SET ProjectId = NULL" +
-                   $" WHERE ProjectId = {project.Id}";
+                   $" WHERE ProjectId = {project.Id}";//remove all developers from the finished project
 
             await ExecuteNonQuery(updateDeveloper);
 
@@ -138,7 +139,7 @@ namespace Task_Manager_System.Services
             return await GetProject(selectQuery);
         }
 
-        public async Task<Project> GetProjectWithDevelopers(int projectId)
+        public async Task<Project> GetProjectWithDevelopers(int projectId)//get project with a developer assigned to it
         {
             string query = "SELECT * FROM PROJECTS LEFT JOIN DEVELOPERS ON PROJECTS.PROJID = DEVELOPERS.PROJECTID WHERE PROJECTS.PROJID = " + projectId;
             DataSet dataSet = await ExecuteQuery(query);
@@ -159,7 +160,7 @@ namespace Task_Manager_System.Services
                 ExpectedCost = (decimal)row.Field<double>(6),
                 Developers = new List<Developer>()
             };
-            foreach(DataRow row_dev in projects.Rows)
+            foreach (DataRow row_dev in projects.Rows)
             {
                 if (!row_dev.IsNull(7))
                 {
@@ -177,7 +178,7 @@ namespace Task_Manager_System.Services
             return project;
         }
 
-        public async Task<List<Project>> GetUnfinishedProject()
+        public async Task<List<Project>> GetUnfinishedProjects()//get all projects that do not have finished status
         {
             List<Project> projects = new List<Project>();
             string selectQuery = "SELECT * FROM projects WHERE Status != 'Finished'";
