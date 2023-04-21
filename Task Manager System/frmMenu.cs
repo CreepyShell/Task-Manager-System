@@ -121,7 +121,7 @@ namespace Task_Manager_System
         private void showDeveloperProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this, container.Resolve<IDevService>(), container.Resolve<ITaskService>(), container.Resolve<IProjectService>());
+            frmAdminDeveloperProfile frmAdminDeveloperProfile = new frmAdminDeveloperProfile(this, container.Resolve<IDevService>(), container.Resolve<ITaskService>());
             frmAdminDeveloperProfile.Show();
         }
 

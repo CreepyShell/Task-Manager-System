@@ -32,7 +32,7 @@ namespace Task_Manager_System.Services
                     $"VALUES ({newTask.Id}, '{newTask.Name}', '{newTask.Description}', TO_DATE('{newTask.StartDate.ToString("dd/MM/yyyy")}','DD/MM/YYYY')," +
                     $" {newTask.Hours}, '{newTask.Status}', '{newTask.Priority}', {newTask.Project.Id}, {devId})";
 
-            await insertQuery(sqlQuery);
+            await ExecuteNonQuery(sqlQuery);
             return true;
         }
 
@@ -59,7 +59,7 @@ namespace Task_Manager_System.Services
                     $"SET developerId = '{devId}' " +
                     $" WHERE TaskId = {taskId}";
 
-            await insertQuery(updateQuery);
+            await ExecuteNonQuery(updateQuery);
 
             return true;
         }
@@ -80,7 +80,7 @@ namespace Task_Manager_System.Services
                    $"SET Status = '{Status.Finished}' " +
                    $" WHERE TaskId = {task.Id}";
 
-            await insertQuery(updateQuery);
+            await ExecuteNonQuery(updateQuery);
 
             return true;
         }
@@ -138,7 +138,7 @@ namespace Task_Manager_System.Services
                     $"SET developerId = NULL " +
                     $" WHERE TaskId = {taskId}";
 
-            await insertQuery(updateQuery);
+            await ExecuteNonQuery(updateQuery);
 
             return true;
         }
@@ -155,7 +155,7 @@ namespace Task_Manager_System.Services
             string updateQuery = "DELETE FROM tasks " +
                     $" WHERE TaskId = {taskId}";
 
-            await insertQuery(updateQuery);
+            await ExecuteNonQuery(updateQuery);
 
             return true;
         }
@@ -175,13 +175,13 @@ namespace Task_Manager_System.Services
                    $" Priority = '{updatedTask.Priority}'" +
                    $" WHERE TaskId = {idUpdatedTask}";
 
-            await insertQuery(updateQuery);
+            await ExecuteNonQuery(updateQuery);
             return await GetById(idUpdatedTask);
         }
 
         private async Task<TMS_BLL.Models.Task> GetTask(string query)
         {
-            DataSet dataSet = await getDataSet(query);
+            DataSet dataSet = await ExecuteQuery(query);
             DataTable tasks = dataSet.Tables[0];
 
             if (tasks.Rows.Count == 0)
@@ -208,7 +208,7 @@ namespace Task_Manager_System.Services
         {
             List<TMS_BLL.Models.Task> tasks = new List<TMS_BLL.Models.Task>();
 
-            DataSet ds = await getDataSet(query);
+            DataSet ds = await ExecuteQuery(query);
 
             DataTable dt = ds.Tables[0];
 

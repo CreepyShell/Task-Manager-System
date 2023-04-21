@@ -6,7 +6,7 @@ namespace Task_Manager_System.Services
 {
     public class BaseService
     {
-        protected async Task insertQuery(string sqlQuery)
+        protected async Task ExecuteNonQuery(string sqlQuery)
         {
             using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
             {
@@ -24,7 +24,7 @@ namespace Task_Manager_System.Services
             }
         }
 
-        protected async Task<DataSet> getDataSet(string sqlQuery)
+        protected async Task<DataSet> ExecuteQuery(string sqlQuery)
         {
             using (OracleConnection connection = new OracleConnection(DbConnect.oradb))
             {

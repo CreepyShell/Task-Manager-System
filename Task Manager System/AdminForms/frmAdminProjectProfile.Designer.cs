@@ -55,7 +55,8 @@ namespace Task_Manager_System.AdminForms
             this.Specialization = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTasks = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.txtStatus = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDevs)).BeginInit();
             this.SuspendLayout();
@@ -63,19 +64,18 @@ namespace Task_Manager_System.AdminForms
             // projIdLabel
             // 
             this.projIdLabel.AutoSize = true;
-            this.projIdLabel.Location = new System.Drawing.Point(45, 44);
-            this.projIdLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.projIdLabel.Location = new System.Drawing.Point(60, 54);
             this.projIdLabel.Name = "projIdLabel";
-            this.projIdLabel.Size = new System.Drawing.Size(78, 13);
+            this.projIdLabel.Size = new System.Drawing.Size(98, 16);
             this.projIdLabel.TabIndex = 0;
             this.projIdLabel.Text = "Choose project";
             // 
             // btnFindProject
             // 
-            this.btnFindProject.Location = new System.Drawing.Point(442, 91);
-            this.btnFindProject.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFindProject.Location = new System.Drawing.Point(589, 112);
+            this.btnFindProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFindProject.Name = "btnFindProject";
-            this.btnFindProject.Size = new System.Drawing.Size(106, 26);
+            this.btnFindProject.Size = new System.Drawing.Size(141, 32);
             this.btnFindProject.TabIndex = 1;
             this.btnFindProject.Text = "Find project";
             this.btnFindProject.UseVisualStyleBackColor = true;
@@ -84,59 +84,54 @@ namespace Task_Manager_System.AdminForms
             // numTasksLabel
             // 
             this.numTasksLabel.AutoSize = true;
-            this.numTasksLabel.Location = new System.Drawing.Point(76, 161);
-            this.numTasksLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.numTasksLabel.Location = new System.Drawing.Point(102, 172);
             this.numTasksLabel.Name = "numTasksLabel";
-            this.numTasksLabel.Size = new System.Drawing.Size(149, 13);
+            this.numTasksLabel.Size = new System.Drawing.Size(184, 16);
             this.numTasksLabel.TabIndex = 5;
             this.numTasksLabel.Text = "Number of tasks in this project";
             // 
             // tasksHoursLabel
             // 
             this.tasksHoursLabel.AutoSize = true;
-            this.tasksHoursLabel.Location = new System.Drawing.Point(78, 196);
-            this.tasksHoursLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.tasksHoursLabel.Location = new System.Drawing.Point(104, 241);
             this.tasksHoursLabel.Name = "tasksHoursLabel";
-            this.tasksHoursLabel.Size = new System.Drawing.Size(154, 13);
+            this.tasksHoursLabel.Size = new System.Drawing.Size(192, 16);
             this.tasksHoursLabel.TabIndex = 6;
             this.tasksHoursLabel.Text = "Hours needed to finish all tasks";
             // 
             // projectDurationLabel
             // 
             this.projectDurationLabel.AutoSize = true;
-            this.projectDurationLabel.Location = new System.Drawing.Point(78, 232);
-            this.projectDurationLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.projectDurationLabel.Location = new System.Drawing.Point(104, 286);
             this.projectDurationLabel.Name = "projectDurationLabel";
-            this.projectDurationLabel.Size = new System.Drawing.Size(81, 13);
+            this.projectDurationLabel.Size = new System.Drawing.Size(100, 16);
             this.projectDurationLabel.TabIndex = 7;
             this.projectDurationLabel.Text = "Project duration";
             // 
             // expectedCostLabel
             // 
             this.expectedCostLabel.AutoSize = true;
-            this.expectedCostLabel.Location = new System.Drawing.Point(78, 261);
-            this.expectedCostLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.expectedCostLabel.Location = new System.Drawing.Point(104, 321);
             this.expectedCostLabel.Name = "expectedCostLabel";
-            this.expectedCostLabel.Size = new System.Drawing.Size(75, 13);
+            this.expectedCostLabel.Size = new System.Drawing.Size(92, 16);
             this.expectedCostLabel.TabIndex = 8;
             this.expectedCostLabel.Text = "Expected cost";
             // 
             // developersLabel
             // 
             this.developersLabel.AutoSize = true;
-            this.developersLabel.Location = new System.Drawing.Point(76, 307);
-            this.developersLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.developersLabel.Location = new System.Drawing.Point(101, 378);
             this.developersLabel.Name = "developersLabel";
-            this.developersLabel.Size = new System.Drawing.Size(172, 13);
+            this.developersLabel.Size = new System.Drawing.Size(218, 16);
             this.developersLabel.TabIndex = 9;
             this.developersLabel.Text = "Developers assigned to this project";
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(728, 3);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBack.Location = new System.Drawing.Point(971, 4);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(56, 19);
+            this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 10;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -145,46 +140,46 @@ namespace Task_Manager_System.AdminForms
             // txtTasks
             // 
             this.txtTasks.Enabled = false;
-            this.txtTasks.Location = new System.Drawing.Point(301, 155);
-            this.txtTasks.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTasks.Location = new System.Drawing.Point(401, 169);
+            this.txtTasks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTasks.Name = "txtTasks";
-            this.txtTasks.Size = new System.Drawing.Size(76, 20);
+            this.txtTasks.Size = new System.Drawing.Size(100, 22);
             this.txtTasks.TabIndex = 11;
             // 
             // txtHours
             // 
             this.txtHours.Enabled = false;
-            this.txtHours.Location = new System.Drawing.Point(301, 190);
-            this.txtHours.Margin = new System.Windows.Forms.Padding(2);
+            this.txtHours.Location = new System.Drawing.Point(401, 234);
+            this.txtHours.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtHours.Name = "txtHours";
-            this.txtHours.Size = new System.Drawing.Size(76, 20);
+            this.txtHours.Size = new System.Drawing.Size(100, 22);
             this.txtHours.TabIndex = 12;
             // 
             // txtDuration
             // 
             this.txtDuration.Enabled = false;
-            this.txtDuration.Location = new System.Drawing.Point(314, 226);
-            this.txtDuration.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDuration.Location = new System.Drawing.Point(419, 278);
+            this.txtDuration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDuration.Name = "txtDuration";
-            this.txtDuration.Size = new System.Drawing.Size(108, 20);
+            this.txtDuration.Size = new System.Drawing.Size(143, 22);
             this.txtDuration.TabIndex = 13;
             // 
             // txtCost
             // 
             this.txtCost.Enabled = false;
-            this.txtCost.Location = new System.Drawing.Point(301, 255);
-            this.txtCost.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCost.Location = new System.Drawing.Point(401, 314);
+            this.txtCost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCost.Name = "txtCost";
-            this.txtCost.Size = new System.Drawing.Size(102, 20);
+            this.txtCost.Size = new System.Drawing.Size(135, 22);
             this.txtCost.TabIndex = 14;
             // 
             // cboProject
             // 
             this.cboProject.FormattingEnabled = true;
-            this.cboProject.Location = new System.Drawing.Point(149, 37);
-            this.cboProject.Margin = new System.Windows.Forms.Padding(2);
+            this.cboProject.Location = new System.Drawing.Point(199, 46);
+            this.cboProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboProject.Name = "cboProject";
-            this.cboProject.Size = new System.Drawing.Size(496, 21);
+            this.cboProject.Size = new System.Drawing.Size(660, 24);
             this.cboProject.TabIndex = 16;
             // 
             // dgvTasks
@@ -197,46 +192,60 @@ namespace Task_Manager_System.AdminForms
             this.hours,
             this.status,
             this.priority});
-            this.dgvTasks.Location = new System.Drawing.Point(288, 437);
+            this.dgvTasks.Location = new System.Drawing.Point(384, 538);
+            this.dgvTasks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvTasks.Name = "dgvTasks";
-            this.dgvTasks.Size = new System.Drawing.Size(643, 120);
+            this.dgvTasks.RowHeadersWidth = 51;
+            this.dgvTasks.Size = new System.Drawing.Size(857, 148);
             this.dgvTasks.TabIndex = 17;
             // 
             // TaskName
             // 
             this.TaskName.HeaderText = "Task name";
+            this.TaskName.MinimumWidth = 6;
             this.TaskName.Name = "TaskName";
             this.TaskName.ReadOnly = true;
+            this.TaskName.Width = 125;
             // 
             // description
             // 
             this.description.HeaderText = "Description";
+            this.description.MinimumWidth = 6;
             this.description.Name = "description";
             this.description.ReadOnly = true;
+            this.description.Width = 125;
             // 
             // startDate
             // 
             this.startDate.HeaderText = "Start date";
+            this.startDate.MinimumWidth = 6;
             this.startDate.Name = "startDate";
             this.startDate.ReadOnly = true;
+            this.startDate.Width = 125;
             // 
             // hours
             // 
             this.hours.HeaderText = "Hours";
+            this.hours.MinimumWidth = 6;
             this.hours.Name = "hours";
             this.hours.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.hours.Width = 125;
             // 
             // status
             // 
             this.status.HeaderText = "Status";
+            this.status.MinimumWidth = 6;
             this.status.Name = "status";
             this.status.ReadOnly = true;
+            this.status.Width = 125;
             // 
             // priority
             // 
             this.priority.HeaderText = "Priority";
+            this.priority.MinimumWidth = 6;
             this.priority.Name = "priority";
             this.priority.ReadOnly = true;
+            this.priority.Width = 125;
             // 
             // dgvDevs
             // 
@@ -246,60 +255,78 @@ namespace Task_Manager_System.AdminForms
             this.LastName,
             this.Specialization,
             this.Age});
-            this.dgvDevs.Location = new System.Drawing.Point(288, 292);
+            this.dgvDevs.Location = new System.Drawing.Point(384, 359);
+            this.dgvDevs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvDevs.Name = "dgvDevs";
-            this.dgvDevs.Size = new System.Drawing.Size(423, 120);
+            this.dgvDevs.RowHeadersWidth = 51;
+            this.dgvDevs.Size = new System.Drawing.Size(564, 148);
             this.dgvDevs.TabIndex = 18;
             // 
             // FirstName
             // 
             this.FirstName.HeaderText = "First name";
+            this.FirstName.MinimumWidth = 6;
             this.FirstName.Name = "FirstName";
             this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 125;
             // 
             // LastName
             // 
             this.LastName.HeaderText = "Last name";
+            this.LastName.MinimumWidth = 6;
             this.LastName.Name = "LastName";
+            this.LastName.Width = 125;
             // 
             // Specialization
             // 
             this.Specialization.HeaderText = "Specialization";
+            this.Specialization.MinimumWidth = 6;
             this.Specialization.Name = "Specialization";
             this.Specialization.ReadOnly = true;
             this.Specialization.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Specialization.Width = 125;
             // 
             // Age
             // 
             this.Age.HeaderText = "Age";
+            this.Age.MinimumWidth = 6;
             this.Age.Name = "Age";
             this.Age.ReadOnly = true;
+            this.Age.Width = 125;
             // 
             // lblTasks
             // 
             this.lblTasks.AutoSize = true;
-            this.lblTasks.Location = new System.Drawing.Point(76, 447);
-            this.lblTasks.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTasks.Location = new System.Drawing.Point(101, 550);
             this.lblTasks.Name = "lblTasks";
-            this.lblTasks.Size = new System.Drawing.Size(147, 13);
+            this.lblTasks.Size = new System.Drawing.Size(185, 16);
             this.lblTasks.TabIndex = 19;
             this.lblTasks.Text = "Tasks assigned to this project";
             // 
-            // label1
+            // lblStatus
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(79, 127);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "label1";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(101, 204);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(87, 16);
+            this.lblStatus.TabIndex = 20;
+            this.lblStatus.Text = "Project status";
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(401, 204);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(135, 22);
+            this.txtStatus.TabIndex = 21;
             // 
             // frmAdminProjectProfile
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1161, 583);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1548, 718);
+            this.Controls.Add(this.txtStatus);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblTasks);
             this.Controls.Add(this.dgvDevs);
             this.Controls.Add(this.dgvTasks);
@@ -316,7 +343,7 @@ namespace Task_Manager_System.AdminForms
             this.Controls.Add(this.numTasksLabel);
             this.Controls.Add(this.btnFindProject);
             this.Controls.Add(this.projIdLabel);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmAdminProjectProfile";
             this.Text = "frmAdminProjectProfile";
             this.Load += new System.EventHandler(this.frmAdminProjectProfile_Load);
@@ -355,6 +382,7 @@ namespace Task_Manager_System.AdminForms
         private System.Windows.Forms.DataGridViewTextBoxColumn hours;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn priority;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.TextBox txtStatus;
     }
 }

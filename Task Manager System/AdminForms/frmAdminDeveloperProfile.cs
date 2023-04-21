@@ -12,20 +12,17 @@ namespace Task_Manager_System.AdminForms
     {
         private readonly IDevService _devService;
         private readonly ITaskService _taskService;
-        private readonly IProjectService _projectService;
         private readonly frmMenu MainMenu;
-        public frmAdminDeveloperProfile(frmMenu menu, IDevService devService, ITaskService taskService, IProjectService projectService)
+        public frmAdminDeveloperProfile(frmMenu menu, IDevService devService, ITaskService taskService)
         {
             _devService = devService;
             _taskService = taskService;
-            _projectService = projectService;
             InitializeComponent();
             MainMenu = menu;
         }
 
         private async void btnFindDeveloper_Click(object sender, EventArgs e)
         {
-            //SELECT * FROM DEVELOPERS LEFT JOIN PROJECTS ON DEVELOPERS.PROJECTID = PROJECTS.PROJID LEFT JOIN TASKS ON DEVELOPERS.DEVID = TASKS.DEVELOPERID WHERE DEVELOPERS.DEVID = 1;
             txtProjectInfo.Clear();
             dgvTasks.Rows.Clear();
             if (cboDev.Items.Count == 0)
@@ -34,7 +31,7 @@ namespace Task_Manager_System.AdminForms
                 return;
             }
             int devId = int.Parse(new string(cboDev.Text.TakeWhile(c => c != ':').ToArray()));
-            Developer developer = await _devService.GetDeveloperById(devId);
+            Developer developer = await _devService.GetDeveloperWithProject(devId);
             if (developer == null)
             {
                 MessageBox.Show("Developer was not found");
@@ -54,7 +51,7 @@ namespace Task_Manager_System.AdminForms
             }
             if (developer.Project != null)
             {
-                Project project = await _projectService.GetById(developer.Project.Id);
+                Project project = developer.Project;
                 txtProjectInfo.Text = $"{project.Name}--{project.Status}--{project.StartDate}--{project.EndDate}";
                 return;
             }

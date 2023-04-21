@@ -38,7 +38,7 @@ namespace Task_Manager_System.Services
                   newProject.Status + "'," +
                   newProject.ExpectedCost + ")";
 
-            await insertQuery(sqlQuery);
+            await ExecuteNonQuery(sqlQuery);
 
             return true;
         }
@@ -63,7 +63,7 @@ namespace Task_Manager_System.Services
                     $"SET ProjectId = {projId} " +
                     $" WHERE DevId = {devId}";
 
-            await insertQuery(updateQuery);
+            await ExecuteNonQuery(updateQuery);
 
             return true;
         }
@@ -85,13 +85,13 @@ namespace Task_Manager_System.Services
                    "EndDate =  TO_DATE('" + DateTime.Now.ToString("dd/MM/yyyy") + "', 'DD/MM/YYYY')" +
                    $" WHERE projId = {project.Id}";
 
-            await insertQuery(updateProject);
+            await ExecuteNonQuery(updateProject);
 
             string updateDeveloper = "UPDATE developers " +
                    "SET ProjectId = NULL" +
                    $" WHERE ProjectId = {project.Id}";
 
-            await insertQuery(updateDeveloper);
+            await ExecuteNonQuery(updateDeveloper);
 
             return true;
         }
@@ -101,7 +101,7 @@ namespace Task_Manager_System.Services
             List<Project> projects = new List<Project>();
             string selectQuery = "SELECT * FROM projects";
 
-            DataSet ds = await getDataSet(selectQuery);
+            DataSet ds = await ExecuteQuery(selectQuery);
 
             DataTable dt = ds.Tables[0];
 
@@ -138,12 +138,48 @@ namespace Task_Manager_System.Services
             return await GetProject(selectQuery);
         }
 
+        public async Task<Project> GetProjectWithDevelopers(int projectId)
+        {
+            string query = "SELECT * FROM PROJECTS LEFT JOIN DEVELOPERS ON PROJECTS.PROJID = DEVELOPERS.PROJECTID WHEREPROJECTS.PROJID = " + projectId;
+            DataSet dataSet = await ExecuteQuery(query);
+            DataTable projects = dataSet.Tables[0];
+
+            if (projects.Rows.Count == 0)
+                return null;
+
+            DataRow row = projects.Rows[0];
+            Project project = new Project()
+            {
+                Id = row.Field<short>(0),
+                Name = row.Field<string>(1),
+                Description = row.Field<string>(2),
+                StartDate = row.Field<DateTime>(3),
+                EndDate = row.Field<DateTime>(4),
+                Status = (Status)Enum.Parse(typeof(Status), row.Field<string>(5)),
+                ExpectedCost = (decimal)row.Field<double>(6),
+                Developers = new List<Developer>()
+            };
+            foreach(DataRow row_dev in projects.Rows)
+            {
+                project.Developers.Add(new Developer()
+                {
+                    Id = row_dev.Field<short>(7),
+                    FirstName = row_dev.Field<string>(8),
+                    LastName = row_dev.Field<string>(9),
+                    Specialization = row_dev.Field<string>(10),
+                    Age = row_dev.Field<short>(11)
+                });
+            }
+            dataSet.Dispose();
+            return project;
+        }
+
         public async Task<List<Project>> GetUnfinishedProject()
         {
             List<Project> projects = new List<Project>();
             string selectQuery = "SELECT * FROM projects WHERE Status != 'Finished'";
 
-            DataSet ds = await getDataSet(selectQuery);
+            DataSet ds = await ExecuteQuery(selectQuery);
 
             DataTable dt = ds.Tables[0];
 
@@ -182,13 +218,13 @@ namespace Task_Manager_System.Services
                    $" status = '{newProject.Status}'" +
                    $" WHERE projId = {idOldProject}";
 
-            await insertQuery(updateQuery);
+            await ExecuteNonQuery(updateQuery);
             return await GetById(idOldProject);
         }
 
         private async Task<Project> GetProject(string query)
         {
-            DataSet dataSet = await getDataSet(query);
+            DataSet dataSet = await ExecuteQuery(query);
             DataTable projects = dataSet.Tables[0];
 
             if (projects.Rows.Count == 0)

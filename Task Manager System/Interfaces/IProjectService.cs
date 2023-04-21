@@ -11,5 +11,6 @@ namespace TMS_BLL.Interfaces
         Task<bool> CompleteProject(int projectId);
         Task<bool> AssignDeveloperToProject(int projId, int devId);
         Task<List<Project>> GetUnfinishedProject();
+        Task<Project> GetProjectWithDevelopers(int projectId);
     }
 }

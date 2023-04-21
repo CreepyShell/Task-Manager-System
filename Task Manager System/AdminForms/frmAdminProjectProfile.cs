@@ -13,12 +13,10 @@ namespace Task_Manager_System.AdminForms
         private readonly frmMenu MainMenu;
         private readonly IProjectService _projectService;
         private readonly ITaskService _taskService;
-        private readonly IDevService _devService;
-        public frmAdminProjectProfile(frmMenu menu, IProjectService projectService, ITaskService taskService, IDevService devService)
+        public frmAdminProjectProfile(frmMenu menu, IProjectService projectService, ITaskService taskService)
         {
             _projectService = projectService;
             _taskService = taskService;
-            _devService = devService;
             InitializeComponent();
             MainMenu = menu;
         }
@@ -42,7 +40,8 @@ namespace Task_Manager_System.AdminForms
             txtHours.Text = tasks.Select(t => t.Hours).Sum().ToString();
             txtDuration.Text = (project.EndDate - project.StartDate).ToString();
             txtCost.Text = project.ExpectedCost.ToString();
-            Developer[] developers = (await _devService.GetAll()).Where(d => d.Project?.Id == project.Id).ToArray();
+            txtStatus.Text = project.Status.ToString();
+            Developer[] developers = project.Developers.ToArray();
             dgvDevs.Rows.Clear();
             foreach (Developer developer in developers)
             {
@@ -72,7 +71,6 @@ namespace Task_Manager_System.AdminForms
             this.Close();
             MainMenu.Show();
         }
-        //SELECT * FROM PROJECTS LEFT JOIN DEVELOPERS ON PROJECTS.PROJID=DEVELOPERS.PROJECTID LEFT JOIN TASKS ON PROJECTS.PROJID = TASKS.PROJECTID WHERE PROJECTS.PROJID = 2;
         private async void frmAdminProjectProfile_Load(object sender, EventArgs e)
         {
             cboProject.DropDownStyle = ComboBoxStyle.DropDownList;
