@@ -15,7 +15,7 @@ namespace Task_Manager_System.TasksForms
         private Task task;
         public frmTaskUpdate(frmMenu menu, ITaskService taskService)
         {
-            _taskService = taskService; 
+            _taskService = taskService;
             InitializeComponent();
             MainMenu = menu;
         }
@@ -72,7 +72,7 @@ namespace Task_Manager_System.TasksForms
 
             try
             {
-                if (await _taskService.GetByName(txtTaskName.Text) != null)
+                if (txtTaskName.Text != task.Name && await _taskService.GetByName(txtTaskName.Text) != null)
                 {
                     MessageBox.Show("There is a task with this name, use another name");
                     return;
@@ -90,17 +90,17 @@ namespace Task_Manager_System.TasksForms
                 MessageBox.Show("Invalid hours format");
                 return;
             }
-            catch(ArgumentNullException ex)
+            catch (ArgumentNullException ex)
             {
                 MessageBox.Show("Data not found: " + ex.Message);
                 return;
             }
-            catch(ValidationException ex)
+            catch (ValidationException ex)
             {
                 MessageBox.Show("Data invalid: " + ex.Message);
                 return;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Smt went wrong: " + ex.Message);
                 return;

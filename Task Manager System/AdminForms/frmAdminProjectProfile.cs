@@ -29,7 +29,7 @@ namespace Task_Manager_System.AdminForms
                 MessageBox.Show("No projects available");
                 return;
             }
-            Project project = await _projectService.GetById(int.Parse(new string(cboProject.Text.TakeWhile(c => c != ':').ToArray())));
+            Project project = await _projectService.GetProjectWithDevelopers(int.Parse(new string(cboProject.Text.TakeWhile(c => c != ':').ToArray())));
             if (project == null)
             {
                 MessageBox.Show("Project was not found");

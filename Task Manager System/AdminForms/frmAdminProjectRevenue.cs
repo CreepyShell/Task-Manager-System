@@ -43,7 +43,7 @@ namespace Task_Manager_System.AdminForms
             }
             foreach (Project project in projects)
             {
-                cmbProjects.Items.Add($"{project.Name}--{project.ExpectedCost}$");
+                cmbProjects.Items.Add($"Name:{project.Name}    Total cost: {project.ExpectedCost}$   StartDate: {project.StartDate}    FinishedDay:  {project.EndDate}");
                 if (project.StartDate > dtpStartDate.Value)
                     revenue += project.ExpectedCost;
                 else
@@ -54,7 +54,14 @@ namespace Task_Manager_System.AdminForms
                 }
             }
             TimeSpan duration = dtpEndDate.Value - dtpStartDate.Value;
-            txtMonthRevenue.Text = (revenue * 30 / duration.Days).ToString();
+            try
+            {
+                txtMonthRevenue.Text = Math.Round((revenue * 30 / duration.Days), 2).ToString();
+            }
+            catch (DivideByZeroException)
+            {
+                txtMonthRevenue.Text = "0";
+            }
 
         }
 

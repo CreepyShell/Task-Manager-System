@@ -41,6 +41,7 @@ namespace Task_Manager_System.TasksForms
 
                 await _taskService.AssignDeveloperToTask(taskId, developerId);
                 MessageBox.Show("Developer was assigned");
+                this.btnBack_Click(sender, e);
             }
             catch (FormatException)
             {
@@ -78,6 +79,11 @@ namespace Task_Manager_System.TasksForms
                 cboDev.Items.Add($"{developer.Id}: {developer.FirstName} {developer.LastName}, {developer.Age} years. {developer.Specialization}    Project: {developer.Project?.Id}");
             if (cboDev.Items.Count > 0)
                 cboDev.SelectedItem = cboDev.Items[0];
+        }
+
+        private void cboTask_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

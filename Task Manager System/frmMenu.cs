@@ -109,7 +109,7 @@ namespace Task_Manager_System
         private void showProjectProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmAdminProjectProfile frmAdminProjectProfile = new frmAdminProjectProfile(this, container.Resolve<IProjectService>(), container.Resolve<ITaskService>(), container.Resolve<IDevService>());
+            frmAdminProjectProfile frmAdminProjectProfile = new frmAdminProjectProfile(this, container.Resolve<IProjectService>(), container.Resolve<ITaskService>());
             frmAdminProjectProfile.Show();
         }
 

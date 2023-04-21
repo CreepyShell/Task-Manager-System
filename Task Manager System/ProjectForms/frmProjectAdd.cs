@@ -72,9 +72,9 @@ namespace Task_Manager_System.ProjectForms
             {
                 MessageBox.Show("Expected cost must be numeric");
             }
-            //catch (OracleException ex)
+            //catch (OracleException)
             //{
-            //    MessageBox.Show("Smt went wrong:" + ex.Message);
+            //    MessageBox.Show("Smt went wrong with databases");
             //}
 
         }

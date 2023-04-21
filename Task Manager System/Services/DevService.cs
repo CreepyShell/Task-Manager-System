@@ -76,10 +76,10 @@ namespace Task_Manager_System.Services
                 Project = row.IsNull(5) ? null : new Project()
                 {
                     Id = row.Field<short>(5),
-                    Name = row.Field<string>(6),
-                    Status = (Status)Enum.Parse(typeof(Status), row.Field<string>(7)),
-                    StartDate = row.Field<DateTime>(8),
-                    EndDate = row.Field<DateTime>(9),
+                    Name = row.Field<string>(7),
+                    Status = (Status)Enum.Parse(typeof(Status), row.Field<string>(11)),
+                    StartDate = row.Field<DateTime>(9),
+                    EndDate = row.Field<DateTime>(10),
                 }
             };
             dataSet.Dispose();

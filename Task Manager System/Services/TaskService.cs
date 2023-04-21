@@ -114,7 +114,7 @@ namespace Task_Manager_System.Services
 
         public async Task<List<TMS_BLL.Models.Task>> GetUnassignedAndUnfinishedTasks()
         {
-            string selectQuery = $"SELECT * FROM tasks WHERE DeveloperId = NULL AND Status != '{Status.Finished}'";
+            string selectQuery = $"SELECT * FROM tasks WHERE DeveloperId IS NULL AND Status != '{Status.Finished}'";
             return await GetAllTasksByQuery(selectQuery);
         }
 

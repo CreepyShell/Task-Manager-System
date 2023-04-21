@@ -140,7 +140,7 @@ namespace Task_Manager_System.Services
 
         public async Task<Project> GetProjectWithDevelopers(int projectId)
         {
-            string query = "SELECT * FROM PROJECTS LEFT JOIN DEVELOPERS ON PROJECTS.PROJID = DEVELOPERS.PROJECTID WHEREPROJECTS.PROJID = " + projectId;
+            string query = "SELECT * FROM PROJECTS LEFT JOIN DEVELOPERS ON PROJECTS.PROJID = DEVELOPERS.PROJECTID WHERE PROJECTS.PROJID = " + projectId;
             DataSet dataSet = await ExecuteQuery(query);
             DataTable projects = dataSet.Tables[0];
 
@@ -161,14 +161,17 @@ namespace Task_Manager_System.Services
             };
             foreach(DataRow row_dev in projects.Rows)
             {
-                project.Developers.Add(new Developer()
+                if (!row_dev.IsNull(7))
                 {
-                    Id = row_dev.Field<short>(7),
-                    FirstName = row_dev.Field<string>(8),
-                    LastName = row_dev.Field<string>(9),
-                    Specialization = row_dev.Field<string>(10),
-                    Age = row_dev.Field<short>(11)
-                });
+                    project.Developers.Add(new Developer()
+                    {
+                        Id = row_dev.Field<short>(7),
+                        FirstName = row_dev.Field<string>(8),
+                        LastName = row_dev.Field<string>(9),
+                        Specialization = row_dev.Field<string>(10),
+                        Age = row_dev.Field<short>(11)
+                    });
+                }
             }
             dataSet.Dispose();
             return project;

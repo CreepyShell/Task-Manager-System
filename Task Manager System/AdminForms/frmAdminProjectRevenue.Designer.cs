@@ -43,7 +43,7 @@
             // txtMonthRevenue
             // 
             this.txtMonthRevenue.Location = new System.Drawing.Point(195, 226);
-            this.txtMonthRevenue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMonthRevenue.Margin = new System.Windows.Forms.Padding(2);
             this.txtMonthRevenue.Name = "txtMonthRevenue";
             this.txtMonthRevenue.ReadOnly = true;
             this.txtMonthRevenue.Size = new System.Drawing.Size(143, 20);
@@ -52,12 +52,12 @@
             // projectLabel
             // 
             this.projectLabel.AutoSize = true;
-            this.projectLabel.Location = new System.Drawing.Point(40, 280);
+            this.projectLabel.Location = new System.Drawing.Point(11, 281);
             this.projectLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.projectLabel.Name = "projectLabel";
-            this.projectLabel.Size = new System.Drawing.Size(94, 13);
+            this.projectLabel.Size = new System.Drawing.Size(99, 13);
             this.projectLabel.TabIndex = 12;
-            this.projectLabel.Text = "Project information";
+            this.projectLabel.Text = "Projects information";
             // 
             // startDateLabel
             // 
@@ -72,7 +72,7 @@
             // btnFindProjects
             // 
             this.btnFindProjects.Location = new System.Drawing.Point(308, 162);
-            this.btnFindProjects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFindProjects.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindProjects.Name = "btnFindProjects";
             this.btnFindProjects.Size = new System.Drawing.Size(96, 32);
             this.btnFindProjects.TabIndex = 10;
@@ -83,7 +83,7 @@
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(535, 20);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(56, 19);
             this.btnBack.TabIndex = 9;
@@ -104,7 +104,7 @@
             // dtpStartDate
             // 
             this.dtpStartDate.Location = new System.Drawing.Point(187, 65);
-            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(151, 20);
             this.dtpStartDate.TabIndex = 16;
@@ -113,7 +113,7 @@
             // dtpEndDate
             // 
             this.dtpEndDate.Location = new System.Drawing.Point(187, 110);
-            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(151, 20);
             this.dtpEndDate.TabIndex = 17;
@@ -121,10 +121,10 @@
             // cmbProjects
             // 
             this.cmbProjects.FormattingEnabled = true;
-            this.cmbProjects.Location = new System.Drawing.Point(178, 273);
-            this.cmbProjects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbProjects.Location = new System.Drawing.Point(109, 273);
+            this.cmbProjects.Margin = new System.Windows.Forms.Padding(2);
             this.cmbProjects.Name = "cmbProjects";
-            this.cmbProjects.Size = new System.Drawing.Size(357, 21);
+            this.cmbProjects.Size = new System.Drawing.Size(480, 21);
             this.cmbProjects.TabIndex = 18;
             // 
             // monthRevenueLabel
@@ -152,7 +152,7 @@
             this.Controls.Add(this.startDateLabel);
             this.Controls.Add(this.btnFindProjects);
             this.Controls.Add(this.btnBack);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmAdminProjectRevenue";
             this.Text = "frmAdminProjectRevenue";
             this.Load += new System.EventHandler(this.frmAdminProjectRevenue_Load);

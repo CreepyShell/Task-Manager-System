@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 using TMS_BLL.Interfaces;
@@ -77,7 +79,7 @@ namespace Task_Manager_System.ProjectForms
         private async void btnSaveProj_Click(object sender, EventArgs e)
         {
 
-            if (await projectService.GetByName(txtName.Text) != null)
+            if (txtName.Text != project.Name && await projectService.GetByName(txtName.Text) != null)
             {
                 MessageBox.Show("There is a project with this name, try another name");
                 return;
@@ -103,17 +105,22 @@ namespace Task_Manager_System.ProjectForms
                 project.Status = (Status)Enum.Parse(typeof(Status), cboStatus.Text);
                 project.ExpectedCost = Convert.ToDecimal(txtExpectedCost.Text);
                 await this.projectService.UpdateProject(project.Id, project);
+                MessageBox.Show("Project successfully was updated");
+                this.grpProject.Visible = false;
             }
             catch (FormatException)
             {
                 MessageBox.Show("Excepted cost must be numeric");
                 return;
             }
-
-            
-           
-
-            this.grpProject.Visible = false;
+            catch (ValidationException ex)
+            {
+                MessageBox.Show("Invalid project: " + ex.Message);
+            }
+            catch (OracleException)
+            {
+                MessageBox.Show("Smt went wrong with databases");
+            }
         }
     }
 }
